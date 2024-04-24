@@ -1,0 +1,62 @@
+C251 COMPILER V5.60.0,  flag                                                               24/01/24  00:35:52  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE flag
+OBJECT MODULE PLACED IN flag.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE flag.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "flag.h"
+    2          #include "OLED.h"
+    3          #include "IO.h"
+    4          
+    5          extern u16 xdata dat00[System_data_num];
+    6          extern u16 xdata dat00_low[System_data_num];
+    7          extern u8 xdata dat00_flag[System_data_num];
+    8          extern u16 xdata dat00_max[System_data_num];
+    9          
+   10          
+   11          
+   12          void flag_handle()
+   13          {
+   14   1         if(dat00_flag[0x0051])
+   15   1         {
+   16   2            OLED_WrCmd(0x81);//--set contrast control register   设置对比度控制寄存器
+   17   2            OLED_WrCmd((u8)dat00[0x0051]); // Set SEG Output Current Brightness 设置SEG输出电流亮度
+   18   2            dat00_flag[0x0051] = 0;
+   19   2         }
+   20   1         if(dat00_flag[0x0052])
+   21   1         {
+   22   2      
+   23   2            OLED_POW((u8)dat00[0x0052]);
+   24   2            dat00_flag[0x0052] = 0;
+   25   2         }  
+   26   1      }
+   27          
+   28          
+   29          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        46     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

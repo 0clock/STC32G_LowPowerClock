@@ -1,0 +1,632 @@
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE TV_Mode
+OBJECT MODULE PLACED IN TV_Mode.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE TV_Mode.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "TV_Mode.h"
+    2          #include "OLED.h"
+    3          #include "DATA.h"
+    4          #include "ADC.h"
+    5          
+    6          extern u16 xdata dat00[System_data_num];
+    7          extern u16 xdata dat00_low[System_data_num];
+    8          extern u8 xdata dat00_flag[System_data_num];
+    9          
+   10          extern u8 xdata Time_New[7];
+   11          extern u8 xdata Time_Low[7];
+   12          
+   13          extern u32 xdata JCQ06_00[10];
+   14          
+   15          u16 Low_wendu = 0;
+   16          
+   17          
+   18          void time_show_s()
+   19          {
+   20   1          ZF_8X16(0,0,(u8)(Time_New[2]/16));
+   21   1          ZF_8X16(8,0,(u8)(Time_New[2]%16));
+   22   1          ZF_8X16(16,0,20);
+   23   1          ZF_8X16(24,0,(u8)(Time_New[1]/16));
+   24   1          ZF_8X16(32,0,(u8)(Time_New[1]%16));
+   25   1          ZF_8X16(40,0,20);
+   26   1          ZF_8X16(48,0,(u8)(Time_New[0]/16));
+   27   1          ZF_8X16(56,0,(u8)(Time_New[0]%16));
+   28   1      }
+   29          
+   30          
+   31          
+   32          
+   33          
+   34          
+   35          void UI_humidity()
+   36          {
+   37   1          ZF_8X16(88,2,(u8)(dat00[0x0042]/1000));
+   38   1          ZF_8X16(96,2,(u8)((dat00[0x0042]%1000)/100));
+   39   1          ZF_8X16(112,2,(u8)((dat00[0x0042]%100)/10));
+   40   1      }
+   41          
+   42          
+   43          void UI_pressure()
+   44          {
+   45   1          u16 k = 0;
+   46   1      
+   47   1          k = JCQ06_00[4]/10;
+   48   1      
+   49   1      
+   50   1          ZF_8X8(120,5,(u8)(k % 10));
+   51   1      
+   52   1          ZF_8X8(108,5,(u8)((k % 100)/10));
+   53   1          ZF_8X8(100,5,(u8)((k % 1000)/100));
+   54   1          ZF_8X8(92,5,(u8)((k % 10000)/1000));
+   55   1          k = k / 10000;
+   56   1          if(k)
+   57   1          {
+   58   2              ZF_8X8(84,5,(u8)(k));
+   59   2          }
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 2   
+
+   60   1          else
+   61   1          {
+   62   2              ZF_8X8(84,5,10);
+   63   2          }
+   64   1      }
+   65          
+   66          
+   67          
+   68          
+   69          u8 Week_conversion()
+   70          {
+   71   1          u8 p = 0;
+   72   1          if(Time_New[3] & 0x01)
+   73   1          {
+   74   2              p=13;
+   75   2          }
+   76   1          else if(Time_New[3] & 0x02)
+   77   1          {
+   78   2              p=14;
+   79   2          }
+   80   1          else if(Time_New[3] & 0x04)
+   81   1          {
+   82   2              p=15;
+   83   2          }
+   84   1          else if(Time_New[3] & 0x08)
+   85   1          {
+   86   2              p=16;
+   87   2          }
+   88   1          else if(Time_New[3] & 0x10)
+   89   1          {
+   90   2              p=17;
+   91   2          }
+   92   1          else if(Time_New[3] & 0x20)
+   93   1          {
+   94   2              p=18;
+   95   2          }
+   96   1          else if(Time_New[3] & 0x40)
+   97   1          {
+   98   2              p=19;
+   99   2          }
+  100   1          return p;
+  101   1      
+  102   1      
+  103   1      
+  104   1      }
+  105          
+  106          
+  107          
+  108          
+  109          
+  110          u16 Time_comparison()
+  111          {
+  112   1          u16 j = 0;
+  113   1      
+  114   1          if(Time_New[0] != Time_Low[0])
+  115   1          {
+  116   2              if(Time_New[0]/16 != Time_Low[0]/16)  j |= 0x0002;
+  117   2              if(Time_New[0]%16 != Time_Low[0]%16)  j |= 0x0001;
+  118   2          }
+  119   1      
+  120   1          if(Time_New[1] != Time_Low[1])
+  121   1          {
+  122   2              if(Time_New[1]/16 != Time_Low[1]/16)  j |= 0x0008;
+  123   2              if(Time_New[1]%16 != Time_Low[1]%16)  j |= 0x0004;
+  124   2          }
+  125   1      
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 3   
+
+  126   1          if(Time_New[2] != Time_Low[2])
+  127   1          {
+  128   2              if(Time_New[2]/16 != Time_Low[2]/16)  j |= 0x0020;
+  129   2              if(Time_New[2]%16 != Time_Low[2]%16)  j |= 0x0010;
+  130   2          }
+  131   1          if(Time_New[3] != Time_Low[3]) j |= 0x0040;
+  132   1          if(Time_New[4] != Time_Low[4]) j |= 0x0080;
+  133   1          if(Time_New[5] != Time_Low[5]) j |= 0x0100;
+  134   1          if(Time_New[6] != Time_Low[6]) j |= 0x0200;
+  135   1      
+  136   1          return j;
+  137   1      }
+  138          
+  139          
+  140          
+  141          void time_synchronization()
+  142          {
+  143   1          u8 i = 0;
+  144   1          for(i=0; i<7; i++)
+  145   1          {
+  146   2              Time_Low[i] = Time_New[i];
+  147   2          }
+  148   1      }
+  149          
+  150          
+  151          void TVMode_int()
+  152          {
+  153   1          //ADC_Get_V1();
+  154   1          IU_Battery_Icon_S(80,0);
+  155   1        
+  156   1        
+  157   1          yue_ri(0,20,0);//
+  158   1          yue_ri(16,(u8)((Time_New[6]/16*10) + (Time_New[6]%16)),0);//
+  159   1      
+  160   1          ZF_8X16(32,0,22);
+  161   1      
+  162   1          yue_ri(37,(u8)((Time_New[5]/16*10) + (Time_New[5]%16)),0);//
+  163   1      
+  164   1          ZF_8X16(53,0,22);
+  165   1      
+  166   1          yue_ri(59,(u8)((Time_New[4]/16*10) + (Time_New[4]%16)),0);//
+  167   1      
+  168   1          ZF_8X16(112,1,Week_conversion());
+  169   1        
+  170   1          ZF_8X16(100,1,29);
+  171   1        
+  172   1          ZF_8X16(88,1,28);
+  173   1        
+  174   1      
+  175   1          shifen(12,40);
+  176   1          shifen(12,80);
+  177   1      
+  178   1          shifen_dh(8,3,(Time_New[2]/16)<<5,40);
+  179   1          shifen_dh(24,3,(Time_New[2]%16)<<5,40);
+  180   1          shifen_dh(48,3,(Time_New[1]/16)<<5,40);
+  181   1          shifen_dh(64,3,(Time_New[1]%16)<<5,40);
+  182   1          shifen_dh(88,3,(Time_New[0]/16)<<5,40);
+  183   1          shifen_dh(104,3,(Time_New[0]%16)<<5,40);
+  184   1          //shifen_dh(8,3,13<<5,100);
+  185   1          time_synchronization();
+  186   1      }
+  187          
+  188          
+  189          
+  190          
+  191          void TVMode2_int()
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 4   
+
+  192          {
+  193   1          //ADC_Get_V1();
+  194   1          IU_Battery_Icon_S(80,0);
+  195   1          time_show_s();
+  196   1          shifen_dh(4,3,(dat00[0x0041]/1000)<<5,40);
+  197   1          shifen_dh(20,3,((dat00[0x0041]%1000)/100)<<5,40);
+  198   1          shifen_dh(36,3,11<<5,100);
+  199   1          shifen_dh(44,3,((dat00[0x0041]%100)/10)<<5,40);
+  200   1          shifen_dh(60,3,13<<5,100);
+  201   1      
+  202   1          UI_humidity();
+  203   1          ZF_8X16(104,2,11);
+  204   1          ZF_8X16(120,2,21);
+  205   1          ZF_8X8(116,5,15);
+  206   1          ZF_8X8(120,6,14);
+  207   1          ZF_8X8(112,6,13);
+  208   1          ZF_8X8(104,6,12);
+  209   1          UI_pressure();
+  210   1      
+  211   1          time_synchronization();
+  212   1      }
+  213          
+  214          
+  215          
+  216          void TVMode3_int()
+  217          {
+  218   1          //ADC_Get_V1();
+  219   1          time_show_s();
+  220   1          IU_Battery_cheek();
+  221   1      //    UI_humidity();
+  222   1      //    ZF_8X16(104,2,11);
+  223   1      //    ZF_8X16(120,2,21);
+  224   1      //    ZF_8X8(116,5,15);
+  225   1      //    ZF_8X8(120,6,14);
+  226   1      //    ZF_8X8(112,6,13);
+  227   1      //    ZF_8X8(104,6,12);
+  228   1      //    UI_pressure();
+  229   1          IU_Battery_cheek_renovate();
+  230   1          time_synchronization();
+  231   1      }
+  232          
+  233          
+  234          
+  235          
+  236          
+  237          
+  238          
+  239          
+  240          
+  241          
+  242          
+  243          
+  244          
+  245          
+  246          
+  247          
+  248          
+  249          
+  250          
+  251          
+  252          
+  253          
+  254          
+  255          
+  256          
+  257          
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 5   
+
+  258          
+  259          
+  260          
+  261          
+  262          
+  263          
+  264          void TVMode_1()
+  265          {
+  266   1          u16 dat = 0;
+  267   1          dat  = Time_comparison();
+  268   1          if(dat & 0x0001)
+  269   1          {
+  270   2              //秒刷新
+  271   2              shifen_dh(104,3,(33 - dat00[0x12] + (Time_Low[0]%16)*32),40);
+  272   2              if(dat00[0x0004] & 0x0001)
+  273   2              {
+  274   3                  //ADC_Get_V1();
+  275   3                  IU_Battery_Icon_S(80,0);
+  276   3                  dat00[0x0004] &= ~0x0001;
+  277   3              }
+  278   2      
+  279   2          }
+  280   1          if(dat & 0x0002)
+  281   1          {
+  282   2              shifen_dh(88,3,(33 - dat00[0x12] + (Time_Low[0]/16)*32),24);
+  283   2          }
+  284   1          if(dat & 0x0004)
+  285   1          {
+  286   2              shifen_dh(64,3,(33 - dat00[0x12] + (Time_Low[1]%16)*32),40);
+  287   2          }
+  288   1          if(dat & 0x0008)
+  289   1          {
+  290   2              shifen_dh(48,3,(33 - dat00[0x12] + (Time_Low[1]/16)*32),24);
+  291   2          }
+  292   1          if(dat & 0x0010)
+  293   1          {
+  294   2              if((u8)(Time_Low[2]/16) == 2)
+  295   2              {
+  296   3                  shifen_dh(24,3,(33 - dat00[0x12] + (Time_Low[2]%16)*32),16);
+  297   3              }
+  298   2              else
+  299   2              {
+  300   3                  shifen_dh(24,3,(33 - dat00[0x12] + (Time_Low[2]%16)*32),40);
+  301   3              }
+  302   2          }
+  303   1          if(dat & 0x0020)
+  304   1          {
+  305   2                  shifen_dh(8,3,(33 - dat00[0x12] + (Time_Low[2]/16)*32),12);
+  306   2          }
+  307   1          if(dat & 0x0040)
+  308   1          {
+  309   2              ZF_8X16(112,1,Week_conversion());
+  310   2          }
+  311   1          if(dat & 0x0080)
+  312   1          {
+  313   2              yue_ri(59,(u8)((Time_New[4]/16*10) + (Time_New[4]%16)),0);//
+  314   2          }
+  315   1          if(dat & 0x0100)
+  316   1          {
+  317   2              yue_ri(37,(u8)((Time_New[5]/16*10) + (Time_New[5]%16)),0);//
+  318   2          }
+  319   1          if(dat & 0x0200)
+  320   1          {
+  321   2              yue_ri(16,(u8)((Time_New[6]/16*10) + (Time_New[6]%16)),0);//
+  322   2          }
+  323   1          //time_synchronization();
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 6   
+
+  324   1      }
+  325          
+  326          
+  327          
+  328          
+  329          
+  330          
+  331          void TVMode_2()
+  332          {
+  333   1          u16 dat = 0;
+  334   1          dat  = Time_comparison();
+  335   1          //ADC_Get_V1();
+  336   1          IU_Battery_Icon_S(80,0);
+  337   1          if(dat & 0x0001)//秒刷新
+  338   1          {
+  339   2              ZF_8X16(56,0,(u8)(Time_New[0]%16));
+  340   2          }
+  341   1          if(dat & 0x0002)
+  342   1          {
+  343   2              ZF_8X16(48,0,(u8)(Time_New[0]/16));
+  344   2          }
+  345   1      
+  346   1      
+  347   1          if(dat & 0x0004)
+  348   1          {
+  349   2              ZF_8X16(32,0,(u8)(Time_New[1]%16));
+  350   2          }
+  351   1          if(dat & 0x0008)
+  352   1          {
+  353   2              ZF_8X16(24,0,(u8)(Time_New[1]/16));
+  354   2          }
+  355   1      
+  356   1      
+  357   1          if(dat & 0x0010)
+  358   1          {
+  359   2              ZF_8X16(8,0,(u8)(Time_New[2]%16));
+  360   2      
+  361   2          }
+  362   1          if(dat & 0x0020)
+  363   1          {
+  364   2              ZF_8X16(0,0,(u8)(Time_New[2]/16));
+  365   2          }
+  366   1      
+  367   1      
+  368   1          dat = dat00[0x0041]/1000;
+  369   1          if(dat != (Low_wendu/1000))
+  370   1          {
+  371   2              shifen_dh(4,3,dat<<5,40);
+  372   2          }
+  373   1      
+  374   1      
+  375   1          dat = (dat00[0x0041]%1000)/100;
+  376   1          if(dat != (Low_wendu%1000)/100)
+  377   1          {
+  378   2              shifen_dh(20,3,((dat00[0x0041]%1000)/100)<<5,40);
+  379   2          }
+  380   1      
+  381   1      
+  382   1          dat = (dat00[0x0041]%100)/10;
+  383   1          if(dat != (Low_wendu % 100)/10)
+  384   1          {
+  385   2              shifen_dh(44,3,dat<<5,40);
+  386   2          }
+  387   1          //**************温湿度*****************************
+  388   1      
+  389   1          UI_humidity();
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 7   
+
+  390   1          UI_pressure();
+  391   1      
+  392   1          Low_wendu = dat00[0x0041];
+  393   1          time_synchronization();
+  394   1      }
+  395          
+  396          
+  397          
+  398          void TVMode_3()
+  399          {
+  400   1          u16 dat = 0;
+  401   1          dat  = Time_comparison();
+  402   1          //ADC_Get_V1();
+  403   1          if(dat & 0x0001)//秒刷新
+  404   1          {
+  405   2              ZF_8X16(56,0,(u8)(Time_New[0]%16));
+  406   2          }
+  407   1          if(dat & 0x0002)
+  408   1          {
+  409   2              ZF_8X16(48,0,(u8)(Time_New[0]/16));
+  410   2          }
+  411   1      
+  412   1      
+  413   1          if(dat & 0x0004)
+  414   1          {
+  415   2              ZF_8X16(32,0,(u8)(Time_New[1]%16));
+  416   2          }
+  417   1          if(dat & 0x0008)
+  418   1          {
+  419   2              ZF_8X16(24,0,(u8)(Time_New[1]/16));
+  420   2          }
+  421   1      
+  422   1      
+  423   1          if(dat & 0x0010)
+  424   1          {
+  425   2              ZF_8X16(8,0,(u8)(Time_New[2]%16));
+  426   2      
+  427   2          }
+  428   1          if(dat & 0x0020)
+  429   1          {
+  430   2              ZF_8X16(0,0,(u8)(Time_New[2]/16));
+  431   2          }
+  432   1      
+  433   1          IU_Battery_cheek_renovate();
+  434   1      
+  435   1      
+  436   1      
+  437   1      
+  438   1      
+  439   1      
+  440   1          time_synchronization();
+  441   1      }
+  442          
+  443          
+  444          
+  445          //    dat00[0x10]=0x0020;
+  446          //    dat00_flag[0x10]=1;
+  447          
+  448          
+  449          void IU_TVMode()//线程处理
+  450          {
+  451   1          u8 a = 0;
+  452   1          if(dat00[0x10] == 0x0020 && dat00[0x1A] == 0 && dat00[0x002E] > 0)//TV时钟模式
+  453   1          {
+  454   2              if((dat00[0x002E] & 0x0001) && !(dat00[0x002E] & 0x0002))
+  455   2              {
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 8   
+
+  456   3                  dat00[0x002E] |= 0x0002;
+  457   3              }
+  458   2              if((dat00[0x002E] & 0x0001) && (dat00[0x002E] & 0x0002))
+  459   2              {
+  460   3                  if(dat00[0x12] == 0x0000 && !(dat00[0x002E] & 0x0004))
+  461   3                  {
+  462   4                      dat00[0x12] = 32;
+  463   4                      fast_SleepQueue_aheadW1(8,1,32);
+  464   4                      dat00[0x002E] |= 0x0004;
+  465   4                  }
+  466   3                  if(dat00[0x12] != 0x0000 && (dat00[0x002E] & 0x0004))
+  467   3                  {
+  468   4                      TVMode_1();
+  469   4                      dat00[0x12]--;
+  470   4                  }
+  471   3                  if(dat00[0x12] == 0x0000 && (dat00[0x002E] & 0x0004))
+  472   3                  {
+  473   4                      dat00[0x002E] = 0;
+  474   4                      time_synchronization();
+  475   4                  }
+  476   3              }
+  477   2      
+  478   2      
+  479   2          }
+  480   1          else if(dat00[0x10] == 0x0021 && dat00[0x1A] == 0 && dat00[0x002E] > 0)//TV时钟模式
+  481   1          {
+  482   2              TVMode_2();
+  483   2              dat00[0x002E] = 0;
+  484   2              time_synchronization();
+  485   2          }
+  486   1          else if(dat00[0x10] == 0x0022 && dat00[0x1A] == 0 && dat00[0x002E] > 0)//TV时钟模式
+  487   1          {
+  488   2              TVMode_3();
+  489   2              dat00[0x002E] = 0;
+  490   2              time_synchronization();
+  491   2          }
+  492   1      
+  493   1      
+  494   1          a = (u8)P45 + (u8)P46 + (u8)P27;
+  495   1      
+  496   1          if((a == 3) && (dat00[0x0010] >= 0x0020 &&  dat00[0x0010] <= 0x0022) && dat00[0x1A] == 0 && (dat00[0x
+             -0005] & 0x0001))
+  497   1          {
+  498   2              dat00[0x002D]++;
+  499   2              if(dat00[0x0010] == 0x0020)
+  500   2              {
+  501   3                  if(dat00[0x002D] >= dat00[0x0022])
+  502   3                  {
+  503   4                      if(dat00[0x0023] > 0)
+  504   4                      {
+  505   5                          dat00[0x10]=0x0021;
+  506   5                          dat00_flag[0x10]=1;
+  507   5                      }
+  508   4                      else if(dat00[0x0024] > 0)
+  509   4                      {
+  510   5                          dat00[0x10]=0x0022;
+  511   5                          dat00_flag[0x10]=1;
+  512   5                      }
+  513   4                      dat00[0x002D]=0;
+  514   4                  }
+  515   3              }
+  516   2              else if(dat00[0x0010] == 0x0021)
+  517   2              {
+  518   3                  if(dat00[0x002D] >= dat00[0x0023])
+  519   3                  {
+  520   4                      if(dat00[0x0024] > 0)
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 9   
+
+  521   4                      {
+  522   5                          dat00[0x10]=0x0022;
+  523   5                          dat00_flag[0x10]=1;
+  524   5                      }
+  525   4                      else if(dat00[0x0022] > 0)
+  526   4                      {
+  527   5                          dat00[0x10]=0x0020;
+  528   5                          dat00_flag[0x10]=1;
+  529   5                      }
+  530   4                      dat00[0x002D]=0;
+  531   4                  }
+  532   3              }
+  533   2              else if(dat00[0x0010] == 0x0022)
+  534   2              {
+  535   3                  if(dat00[0x002D] >= dat00[0x0024])
+  536   3                  {
+  537   4                      dat00[0x10]=0x0020;
+  538   4                      dat00_flag[0x10]=1;
+  539   4                      dat00[0x002D]=0;
+  540   4                  }
+  541   3              }
+  542   2              dat00[0x0005] &= ~0x0001;
+  543   2          }
+  544   1      
+  545   1          
+  546   1      
+  547   1      
+  548   1      
+  549   1      
+  550   1      
+  551   1      
+  552   1      
+  553   1      
+  554   1      
+  555   1      
+  556   1      
+  557   1      
+  558   1      }
+  559          
+  560          
+  561          
+  562          
+  563          
+  564          
+  565          
+  566          
+  567          
+  568          
+  569          
+  570          
+  571          
+  572          
+  573          
+  574          
+  575          
+  576          
+  577          
+  578          
+  579          
+  580          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      3049     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 10  
+
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         2     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         6     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

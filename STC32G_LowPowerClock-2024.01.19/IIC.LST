@@ -1,0 +1,333 @@
+C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE IIC
+OBJECT MODULE PLACED IN IIC.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE IIC.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          
+    3          void IIC_int()
+    4          {
+    5   1          P_SW2 |= 0x80 + 0x00;
+    6   1          I2CCFG = 0xC0+20;    //满速400K 35M 设定20
+    7   1          I2CMSST = 0x00;
+    8   1      
+    9   1      }
+   10          
+   11          u8 Wait()
+   12          {
+   13   1          u8 k=0;
+   14   1          u16 i =100;
+   15   1          while ((!(I2CMSST & 0x40))&(i>0))
+   16   1          {
+   17   2              i--;
+   18   2          }
+   19   1          if(I2CMSST & 0x02)
+   20   1          {
+   21   2            k=1;
+   22   2          }
+   23   1          I2CMSST &= ~0x40;
+   24   1          return k;
+   25   1      }
+   26          
+   27          void Start()
+   28          {
+   29   1          I2CMSCR = 0x01;                             //发送START命令
+   30   1          Wait();
+   31   1      }
+   32          
+   33          void SendData(char dat)
+   34          {
+   35   1          I2CTXD = dat;                               //写数据到数据缓冲区
+   36   1          I2CMSCR = 0x02;                             //发送SEND命令
+   37   1          Wait();
+   38   1      }
+   39          
+   40          u8 RecvACK()
+   41          {
+   42   1          u8 p=0;
+   43   1          I2CMSCR = 0x03;                             //发送读ACK命令
+   44   1          p = Wait();
+   45   1          return p;
+   46   1      }
+   47          
+   48          u8 RecvData()
+   49          {
+   50   1          I2CMSCR = 0x04;                             //发送RECV命令
+   51   1          Wait();
+   52   1          return I2CRXD;
+   53   1      }
+   54          
+   55          void SendACK()
+   56          {
+   57   1          I2CMSST = 0x00;                             //设置ACK信号
+   58   1          I2CMSCR = 0x05;                             //发送ACK命令
+   59   1          Wait();
+C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 2   
+
+   60   1      }
+   61          
+   62          void SendNAK()
+   63          {
+   64   1          I2CMSST = 0x01;                             //设置NAK信号
+   65   1          I2CMSCR = 0x05;                             //发送ACK命令
+   66   1          Wait();
+   67   1      }
+   68          
+   69          void Stop()
+   70          {
+   71   1          I2CMSCR = 0x06;                             //发送STOP命令
+   72   1          Wait();
+   73   1      }
+   74          
+   75          
+   76          
+   77          
+   78          
+   79          
+   80          
+   81          /*
+   82          
+   83          void    I2C_Delay(void) //for normal MCS51, delay (2 * dly + 4) T, for STC12Cxxxx delay (4 * dly + 10) T
+   84          {
+   85            unsigned long i;
+   86            _nop_();
+   87            _nop_();
+   88            i = 7UL;
+   89            while (i) i--;
+   90          }
+   91          
+   92          bit RecvACK()
+   93          {
+   94              bit p=0;
+   95              SDA = 1;
+   96              I2C_Delay();
+   97              SCL = 1;
+   98              I2C_Delay();
+   99              p  = SDA;
+  100              SCL = 0;
+  101              I2C_Delay();
+  102              return p;
+  103          }
+  104          
+  105          
+  106          
+  107          
+  108          void Start()               //start the I2C, SDA High-to-low when SCL is high
+  109          {
+  110              SDA = 1;
+  111              I2C_Delay();
+  112              SCL = 1;
+  113              I2C_Delay();
+  114              SDA = 0;
+  115              I2C_Delay();
+  116              SCL = 0;
+  117              I2C_Delay();
+  118          }       
+  119          
+  120          
+  121          void Stop()                 //STOP the I2C, SDA Low-to-high when SCL is high
+  122          {
+  123              SDA = 0;
+  124              I2C_Delay();
+  125              SCL = 1;
+C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 3   
+
+  126              I2C_Delay();
+  127              SDA = 1;
+  128              I2C_Delay();
+  129          }
+  130          
+  131          void SendACK()              //Send ACK (LOW)
+  132          {
+  133              SDA = 0;
+  134              I2C_Delay();
+  135              SCL = 1;
+  136              I2C_Delay();
+  137              SCL = 0;
+  138              I2C_Delay();
+  139          }
+  140          
+  141          void SendNAK()           //Send No ACK (High)
+  142          {
+  143              SDA = 1;
+  144              I2C_Delay();
+  145              SCL = 1;
+  146              I2C_Delay();
+  147              SCL = 0;
+  148              I2C_Delay();
+  149          }
+  150                  
+  151          void I2C_Check_ACK(void)         //Check ACK, If F0=0, then right, if F0=1, then error
+  152          {
+  153              SDA = 1;
+  154              I2C_Delay();
+  155              SCL = 1;
+  156              I2C_Delay();
+  157              F0  = SDA;
+  158              SCL = 0;
+  159              I2C_Delay();
+  160          }
+  161          
+  162          
+  163          void SendData(u8 dat)     //write a byte to I2C
+  164          {
+  165              u8 i;
+  166              i = 8;
+  167              do
+  168              {
+  169                  if(dat & 0x80)  SDA = 1;
+  170                  else            SDA = 0;
+  171                  dat <<= 1;
+  172                  I2C_Delay();
+  173                  SCL = 1;
+  174                  I2C_Delay();
+  175                  SCL = 0;
+  176                  I2C_Delay();
+  177              }
+  178              while(--i);
+  179          }
+  180          
+  181          u8 RecvData()          //read A byte from I2C
+  182          {
+  183              u8 i,dat;
+  184              i = 0;
+  185              SDA = 1;
+  186              for(i=0;i<8;i++)
+  187            {
+  188                  dat = dat<<1;  
+  189                  I2C_Delay();
+  190                  SCL = 1;
+  191                  I2C_Delay();
+C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 4   
+
+  192                  if(SDA)
+  193                  {
+  194                     dat |= 0x01;
+  195                  }
+  196                  
+  197                  SCL  = 0;
+  198                  I2C_Delay();
+  199             }
+  200              return(dat);
+  201          }
+  202          
+  203          
+  204          */
+  205          
+  206          
+  207          
+  208          
+  209          
+  210          
+  211          
+  212          
+  213          
+  214          
+  215          u8 IIC_W2bit(u8 addre,u8 MSB,u8 LSB)
+  216          {
+  217   1            u8 ACK = 0;
+  218   1        
+  219   1            Start(); //发送起始命令
+  220   1            SendData(addre);//发送设备地址+写命令
+  221   1            ACK |= RecvACK();
+  222   1            SendData(MSB);//发送设备地址+写命令
+  223   1            ACK |= RecvACK();
+  224   1            SendData(LSB);//发送设备地址+写命令
+  225   1            ACK |= RecvACK();
+  226   1            Stop(); 
+  227   1            return ACK; 
+  228   1      }
+  229          
+  230          u8 IIC_W1bit(u8 addre,u8 LSB)
+  231          {
+  232   1            u8 ACK = 0;
+  233   1            Start(); //发送起始命令
+  234   1            SendData(addre);//发送设备地址+写命令
+  235   1            ACK |= RecvACK();
+  236   1            SendData(LSB);//发送设备地址+写命令
+  237   1            ACK |= RecvACK();
+  238   1            Stop(); 
+  239   1            return ACK; 
+  240   1      }
+  241          
+  242          
+  243          u8 IIC_R1bit(u8 nam,u8 adds)
+  244          {
+  245   1            u8 a= 0;
+  246   1            Start(); //发送起始命令
+  247   1            SendData(nam);                             //发送设备地址+写命令
+  248   1            RecvACK();
+  249   1            SendData(adds);                             //发送设备地址+写命令
+  250   1            RecvACK();
+  251   1            Start(); //发送起始命令
+  252   1            SendData((u8)(nam + 1));                             //发送设备地址+写命令
+  253   1            RecvACK();
+  254   1            a = RecvData();                            //读取数据2
+  255   1            SendNAK();  
+  256   1            Stop(); 
+  257   1            return a; 
+C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 5   
+
+  258   1        
+  259   1      }
+  260          
+  261          
+  262          u8 IIC_ResponseText_1bit(u8 addre)
+  263          {
+  264   1            u8 ACK = 0;
+  265   1            Start(); //发送起始命令
+  266   1            SendData(addre);//发送设备地址+写命令
+  267   1            ACK = RecvACK();
+  268   1            Stop(); 
+  269   1            return ACK; 
+  270   1      }
+  271          
+  272          u8 IIC_ResponseText()
+  273          {
+  274   1            u8 ACK = 0;
+  275   1            ACK |= IIC_ResponseText_1bit(BH1745_W);
+  276   1            ACK = ACK<<1;
+  277   1            ACK |= IIC_ResponseText_1bit(SHT41_W);
+  278   1            ACK = ACK<<1;     
+  279   1            ACK |= IIC_ResponseText_1bit(SPL06_W);
+  280   1            ACK = ACK<<1; 
+  281   1            ACK |= IIC_ResponseText_1bit(INS5699_W);
+  282   1            ACK = ACK<<1;   
+  283   1            ACK |= IIC_ResponseText_1bit(0x22);
+  284   1            ACK = ACK<<1;   
+  285   1            ACK |= IIC_ResponseText_1bit(0x32);     
+  286   1            return ACK; 
+  287   1      }
+  288          
+  289          
+  290          
+  291          
+  292          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       471     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,210 @@
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE CompassMenu
+OBJECT MODULE PLACED IN CompassMenu.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE CompassMenu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "CompassMenu.h"
+    2          #include "OLED.h"
+    3          #include "DATA.h"
+    4          #include "BMC050.h"
+    5          
+    6          extern u16 xdata dat00[System_data_num];
+    7          extern u16 xdata dat00_low[System_data_num];
+    8          extern u8 xdata dat00_flag[System_data_num];
+    9          extern u16 xdata dat00_max[System_data_num];
+   10          
+   11          /****************************** 睡眠寄存器组 ***********************************/
+   12          extern u16 Sleep_Queue[Sleep_queue_num];
+   13          extern u16 Sleep_Queue_count;
+   14          extern u16 Sleep_Queue_count_target;
+   15          
+   16          
+   17          u8 Compass_Scale[5]= {0,0,0,0,0};
+   18          
+   19          u16 Compass_data[5]= {0,0,0,0,0};
+   20          
+   21          u16 start_X_low = 0;
+   22          
+   23          u8 test1=0;
+   24          
+   25          void UI_Compass_Animation_1(u8 a,bit clear)
+   26          {
+   27   1          if(Compass_Scale[a] >127) return;
+   28   1          OLED_Set_Pos(Compass_Scale[a],5);
+   29   1          if(clear)
+   30   1          {
+   31   2              OLED_WrDat(0x18);
+   32   2              if((Compass_data[a] % 90) == 0)
+   33   2              {
+   34   3                OLED_16X16_MOV((u8)(Compass_Scale[a]-8),3,4,0,(u8)(135-Compass_Scale[a]));        
+   35   3              }
+   36   2              else
+   37   2              {
+   38   3                OLED_8X8X3_MOV((u8)(Compass_Scale[a]-12),4,0xFFFF,0,(u8)(139-Compass_Scale[a]));
+   39   3              }
+   40   2          }
+   41   1          else
+   42   1          {
+   43   2              if((Compass_data[a] % 90) == 0)
+   44   2              {        
+   45   3                  OLED_WrDat(0xFF);
+   46   3                  OLED_16X16_MOV((u8)(Compass_Scale[a]-8),3,(u8)((Compass_data[a]%360)/90),0,(u8)(135-Compass_Scale[
+             -a]));//  135是127+8
+   47   3              }
+   48   2              else
+   49   2              { 
+   50   3                  OLED_WrDat(0x3C);
+   51   3                  OLED_8X8X3_MOV((u8)(Compass_Scale[a]-12),4,Compass_data[a],0,(u8)(139-Compass_Scale[a]));//  139�
+             -�127+12
+   52   3              }
+   53   2          }
+   54   1      }
+   55          
+   56          
+   57          
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 2   
+
+   58          
+   59          
+   60          
+   61          
+   62          
+   63          
+   64          
+   65          
+   66          
+   67          
+   68          
+   69          
+   70          
+   71          void UI_CompassMenu_int()
+   72          {
+   73   1          u8 i = 0;
+   74   1          Magnetometer_OPEN();
+   75   1          OLED_Set_Pos(0,5);
+   76   1          for(i=0; i<128; i++)
+   77   1          {
+   78   2              OLED_WrDat(0x18);
+   79   2          }
+   80   1          OLED_16X16(56,6,65);
+   81   1          SleepQueue_aheadW1(5,0x0080,0);
+   82   1      
+   83   1      
+   84   1      
+   85   1      }
+   86          
+   87          
+   88          void UI_Compass_Animation()//FF  3C
+   89          {
+   90   1          u8 i = 0;
+   91   1          u16 start_X = 0;
+   92   1          u16 b = 0;
+   93   1          u16 c = 0;
+   94   1      
+   95   1          u8 a1= 0;
+   96   1          u8 b1= 0;
+   97   1          u8 c1= 0;
+   98   1          u8 d1= 0;
+   99   1      
+  100   1      
+  101   1          if(dat00_low[0x0068] != dat00[0x0068])
+  102   1          {
+  103   2              for(i=0; i<5; i++)
+  104   2              {
+  105   3                  UI_Compass_Animation_1(i,1);
+  106   3              }
+  107   2      
+  108   2              if(dat00[0x0068] < 64)
+  109   2              {
+  110   3                  start_X = dat00[0x0068] + 296;
+  111   3              }
+  112   2              else
+  113   2              {
+  114   3                  start_X = dat00[0x0068] - 64;
+  115   3              } 
+  116   2              i = start_X/30;
+  117   2              i = i+1;
+  118   2              b = i*30;
+  119   2              for(i=0; i<5; i++)
+  120   2              {
+  121   3                  Compass_Scale[i] = b- start_X;
+  122   3                  Compass_data[i] = (b % 360);
+  123   3                  b += 30;
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 3   
+
+  124   3              }
+  125   2              for(i=0; i<5; i++)
+  126   2              {
+  127   3                  UI_Compass_Animation_1(i,0);
+  128   3              }
+  129   2              dat00_low[0x0068] = dat00[0x0068];
+  130   2          }
+  131   1      }
+  132          
+  133          
+  134          
+  135          
+  136          
+  137          
+  138          
+  139          
+  140          void UI_CompassMenu_time()
+  141          {
+  142   1          if(dat00[0x10] == 0x0005)
+  143   1          {
+  144   2      //    IU_Battery_Icon_S(80,0);
+  145   2      //    time_show_s();
+  146   2          }
+  147   1      }
+  148          
+  149          
+  150          
+  151          void UI_CompassMenu()
+  152          {
+  153   1      //    debug_8x8(dat00_low[0x006A],0,3);
+  154   1      //    debug_8x8(dat00_low[0x006B],0,4);
+  155   1      //   debug_8x8(dat00[0x0067],64,3);
+  156   1      //   debug_8x8(dat00_low[0x0067],64,4);
+  157   1          UI_Compass_Animation();
+  158   1          //debug_8x8(test1++,0,1);
+  159   1          debug_8x8(dat00[0x0068],64,1);
+  160   1      }
+  161          
+  162          
+  163          
+  164          
+  165          
+  166          
+  167          
+  168          
+  169          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       445     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        18          2
+  bit size             =    ------          1
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        34     ------
+End of Module Information.
+
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 4   
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

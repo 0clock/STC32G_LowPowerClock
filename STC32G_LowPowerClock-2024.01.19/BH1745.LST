@@ -1,0 +1,142 @@
+C251 COMPILER V5.60.0,  BH1745                                                             24/01/24  00:35:51  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE BH1745
+OBJECT MODULE PLACED IN BH1745.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE BH1745.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "BH1745.h"
+    2          #include "IIC.h"
+    3          #include "time.h"
+    4          #include "DATA.h"
+    5          extern u8 xdata DMABuffer[32];
+    6          extern u32 xdata JCQ06_00[10];
+    7          
+    8          
+    9          extern u16 xdata dat00[System_data_num];
+   10          extern u16 xdata dat00_low[System_data_num];
+   11          extern u8 xdata dat00_flag[System_data_num];
+   12          
+   13          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   14          
+   15          void BH1745_Init()
+   16          {
+   17   1           IIC_W2bit(BH1745_W,0x40,0xCB); 
+   18   1           delay_ms(1);
+   19   1           IIC_W2bit(BH1745_W,0x41,0x00);
+   20   1           delay_ms(1);
+   21   1           IIC_W2bit(BH1745_W,0x42,0x02);   //0x10 活动 0x00 休眠
+   22   1      }
+   23          
+   24          void BH1745_Rdat(u8 adds)
+   25          {
+   26   1            u16 a= 0;
+   27   1            u16 b= 0;
+   28   1            Start(); //发送起始命令
+   29   1            SendData(BH1745_W);                             //发送设备地址+写命令
+   30   1            RecvACK();
+   31   1            SendData(adds);                             //发送设备地址+写命令
+   32   1            RecvACK();
+   33   1            Start(); //发送起始命令
+   34   1            SendData(BH1745_R);                             //发送设备地址+写命令
+   35   1            RecvACK();
+   36   1            a = RecvData();                            //读取数据2
+   37   1            SendACK();
+   38   1            b = RecvData();                            //读取数据2
+   39   1            SendACK();
+   40   1            dat00[0x0045] = ((b<<8) + a);
+   41   1            if(dat00[0x0045] & 0x8000)
+   42   1            {
+   43   2               dat00[0x0045] = (u16)(65536 - dat00[0x0045]);
+   44   2            }
+   45   1            
+   46   1            
+   47   1            //Stop(); 
+   48   1        
+   49   1        
+   50   1            a = RecvData();                            //读取数据2
+   51   1            SendACK();
+   52   1            b = RecvData();                            //读取数据2
+   53   1            SendACK();  
+   54   1            dat00[0x0046] = ((b<<8) + a);
+   55   1            if(dat00[0x0046] & 0x8000)
+   56   1            {
+   57   2               dat00[0x0046] = (u16)(65536 - dat00[0x0046]);
+   58   2            }
+   59   1      
+C251 COMPILER V5.60.0,  BH1745                                                             24/01/24  00:35:51  PAGE 2   
+
+   60   1            a = RecvData();                            //读取数据2
+   61   1            SendACK();
+   62   1            b = RecvData();                            //读取数据2
+   63   1            SendACK();  
+   64   1            dat00[0x0047] = ((b<<8) + a);
+   65   1                if(dat00[0x0047] & 0x8000)
+   66   1            {
+   67   2               dat00[0x0047] = (u16)(65536 - dat00[0x0047]);
+   68   2            }
+   69   1            
+   70   1            a = RecvData();                            //读取数据2
+   71   1            SendACK();
+   72   1            b = RecvData();                            //读取数据2
+   73   1            SendNAK();  
+   74   1            dat00[0x0044] = ((b<<8) + a);
+   75   1            if(dat00[0x0044] & 0x8000)
+   76   1            {
+   77   2               dat00[0x0044] = (u16)(65536 - dat00[0x0044]);
+   78   2            }
+   79   1              
+   80   1                                                //发送停止命令  
+   81   1      }
+   82          
+   83          
+   84          
+   85          void BH1745_RdatX4()
+   86          {
+   87   1             //IIC_W2bit(BH1745_W,0x42,0x10); 
+   88   1             //delay_ms(200); 
+   89   1             BH1745_Rdat(0x50);
+   90   1             BH1745_Rdat(0x52);
+   91   1             BH1745_Rdat(0x54);
+   92   1             BH1745_Rdat(0x56);
+   93   1             //IIC_W2bit(BH1745_W,0x42,0x00);
+   94   1      }
+   95          
+   96          void BH1745R_flag0002()
+   97          {
+   98   1             if(Sleep_Queue_task[0] & 0x0002)
+   99   1           {       
+  100   2            BH1745_Rdat(0x50);       
+  101   2            IIC_W2bit(BH1745_W,0x42,0x02);
+  102   2            Sleep_Queue_task[0] &=~0x0002;
+  103   2           } 
+  104   1      }
+  105          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       361     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+C251 COMPILER V5.60.0,  BH1745                                                             24/01/24  00:35:51  PAGE 3   
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

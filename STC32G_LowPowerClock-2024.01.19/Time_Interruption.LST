@@ -1,0 +1,162 @@
+C251 COMPILER V5.60.0,  Time_Interruption                                                  24/01/24  00:35:54  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE Time_Interruption
+OBJECT MODULE PLACED IN Time_Interruption.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE Time_Interruption.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "Time_Interruption.h"
+    2          #include "IIC.h"
+    3          #include "SHT41.h"
+    4          #include "SPL06.h"
+    5          #include "BH1745.h"
+    6          #include "time.h"
+    7          #include "DATA.h"
+    8          #include "OLED.h"
+    9          #include "INS5699S.h"
+   10          #include "ADC.h"
+   11          #include "SecondaryMenu.h"
+   12          
+   13          extern u16 xdata dat00[System_data_num];
+   14          extern u16 xdata dat00_low[System_data_num];
+   15          extern u8 xdata dat00_flag[System_data_num];
+   16          
+   17          
+   18          
+   19          /*************  本地变量声明  功能寄存器  **************/
+   20          extern u8 xdata DMABuffer[96];
+   21          
+   22          /****************************** 睡眠寄存器组 ***********************************/
+   23          extern u16 Sleep_Queue[Sleep_queue_num];
+   24          
+   25          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   26          
+   27          extern u16 Sleep_Queue_count;
+   28          extern u16 Sleep_Queue_count_target;
+   29          
+   30          extern u8 xdata Time_New[7];
+   31          extern u8 xdata Time_Low[7];
+   32          extern u8 xdata Time_int[7];
+   33          
+   34          extern u32 xdata JCQ06_00[5];
+   35          
+   36          u8 yya=0;
+   37          
+   38          void Time_Interruption_1S()
+   39          {
+   40   1          u8 i = 0;
+   41   1         
+   42   1      //    if(!P26)
+   43   1      //    {
+   44   1      //     _nop_();
+   45   1      //     IAP_CONTR |=0x60;    
+   46   1      //     _nop_();
+   47   1      //    }
+   48   1          //debug_8x8(WDT_CONTR,64,1);
+   49   1        
+   50   1          if(dat00[0] & 0x0002)
+   51   1          {
+   52   2              i = IIC_R1bit(INS5699_W,0x0e);//读标志位寄存器 
+   53   2              
+   54   2            //debug_8x8(i,64,1);
+   55   2            
+   56   2              if(i & 0x20)
+   57   2              {
+   58   3                  dat00[0x0004]  |= 0x0001;
+   59   3                  dat00[0x0005]  |= 0x0001;
+C251 COMPILER V5.60.0,  Time_Interruption                                                  24/01/24  00:35:54  PAGE 2   
+
+   60   3                  INS5699_timeR();
+   61   3                  if(dat00[0x0010] == 0x0020 | dat00[0x0010] == 0x0021 | dat00[0x0010] == 0x0022 | dat00[0x0010] == 0
+             -x0005)
+   62   3                  {
+   63   4                      dat00[0x002E]  |= 0x0001;//秒 刷新标志位
+   64   4                      ADC_Get_V1();
+   65   4                   }
+   66   3              i = i & 0xdf;
+   67   3              IIC_W2bit(INS5699_W,0x0e,i);
+   68   3              if((dat00[0x0010] == 3 && Sleep_Queue_task[0] != 1) | dat00[0x0010] == 0x0021)//
+   69   3              {
+   70   4                  SHT41_R_High();
+   71   4                  dat00[0x0041] = JCQ06_00[0];
+   72   4                  dat00[0x0042] = JCQ06_00[1];
+   73   4                  SPL06_PR_R();
+   74   4                  dat00[0x0043] = JCQ06_00[4]/100;
+   75   4                  IIC_W2bit(BH1745_W,0x42,0x12);
+   76   4                  SleepQueue_aheadW1(400,2,0);
+   77   4      
+   78   4                  if(dat00[0x0010] == 3)
+   79   4                  {
+   80   5                      UI_SecondaryMenu_G();
+   81   5                  }
+   82   4              }
+   83   3      
+   84   3              if((dat00[0x0010] == 0x000D && Sleep_Queue_task[0] != 1) | dat00[0x0010] == 0x0022)
+   85   3              {
+   86   4                  if(dat00[0x0010] == 0x000D)
+   87   4                  {
+   88   5                      ADC_Get_V1();
+   89   5                      UI_SecondaryMenu_G();
+   90   5                  }
+   91   4              }
+   92   3              SleepQueue_aheadW1(6,1,0);
+   93   3              dat00[0] &= ~0x0002;
+   94   3          }
+   95   2              
+   96   2          if(i & 0x10)
+   97   2          {
+   98   3              _nop_();
+   99   3      //        yya++;
+  100   3      
+  101   3              i = i & 0xEF;
+  102   3              
+  103   3      ////        IIC_W2bit(0x64,0x0F,0x71);//配置开启1S定时 0x60
+  104   3      //        _nop_();
+  105   3      //        IIC_W2bit(0x64,0x0B,0x0B+yya);//配置开启1S定时 0x60
+  106   3      ////        _nop_();
+  107   3      //        IIC_W2bit(0x64,0x0C,0x00);//配置开启1S定时 0x60
+  108   3      ////        _nop_();
+  109   3      
+  110   3              IIC_W2bit(INS5699_W,0x0e,i);
+  111   3          }
+  112   2          
+  113   2          
+  114   2        }
+  115   1      }     
+  116                
+  117                
+  118                
+  119                
+  120                
+  121                
+  122                
+  123                
+  124                
+C251 COMPILER V5.60.0,  Time_Interruption                                                  24/01/24  00:35:54  PAGE 3   
+
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       405     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         1     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         5     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

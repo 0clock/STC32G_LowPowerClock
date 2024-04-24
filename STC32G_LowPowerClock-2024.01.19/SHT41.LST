@@ -1,0 +1,139 @@
+C251 COMPILER V5.60.0,  SHT41                                                              24/01/24  00:35:53  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE SHT41
+OBJECT MODULE PLACED IN SHT41.OBJ
+COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE SHT41.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          #include "SHT41.h"
+    3          #include "time.h"
+    4          #include "DATA.h"
+    5          #include "OLED.h"
+    6          #include "UART1.h"
+    7          
+    8          extern u8 xdata DMABuffer[32];
+    9          extern u32 xdata JCQ06_00[10];
+   10          
+   11          
+   12          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   13          
+   14          u8 uuy = 0;
+   15          void SHT41_Init()
+   16          {
+   17   1          IIC_W1bit(SHT41_W,0x94);
+   18   1      }
+   19          
+   20          u16 SHT41_R_16bit(u8 k)
+   21          {
+   22   1            u16 dat = 0;
+   23   1            dat += RecvData();                            //读取数据2
+   24   1            SendACK();
+   25   1            dat = dat <<8;
+   26   1            dat += RecvData();                            //读取数据2
+   27   1            SendACK();
+   28   1            RecvData();                            //读取数据2
+   29   1            if(!k) SendACK();
+   30   1            if(k) SendNAK();
+   31   1            return dat; 
+   32   1      }
+   33          
+   34          void SHT41_R_High()
+   35          {
+   36   1      
+   37   1            IIC_W1bit(SHT41_W,0xFD);
+   38   1            SleepQueue_aheadW1(28,4,0);
+   39   1      //      delay_ms(12);
+   40   1      //  
+   41   1      //      Start(); //发送起始命令
+   42   1      //      SendData(SHT41_R);                             //发送设备地址+写命令
+   43   1      //      RecvACK();
+   44   1      //      a = SHT41_R_16bit(0);
+   45   1      //      b = SHT41_R_16bit(1);
+   46   1      //      Stop();
+   47   1      //      a = a*17500/65535-4500;
+   48   1      //      b = b*12500/65535-600;
+   49   1      //      JCQ06_00[0] = a;
+   50   1      //      JCQ06_00[1] = b;
+   51   1      }
+   52          
+   53          
+   54          void SHT41_R_High1()
+   55          {
+   56   1            u16 a;
+   57   1            u16 b;
+   58   1            IIC_W1bit(SHT41_W,0xFD);
+   59   1            delay_ms(12);
+C251 COMPILER V5.60.0,  SHT41                                                              24/01/24  00:35:53  PAGE 2   
+
+   60   1        
+   61   1            Start(); //发送起始命令
+   62   1            SendData(SHT41_R);//发送设备地址+写命令
+   63   1            RecvACK();
+   64   1            a = SHT41_R_16bit(0);
+   65   1            b = SHT41_R_16bit(1);
+   66   1            Stop();
+   67   1      
+   68   1        
+   69   1      }
+   70          
+   71          
+   72          
+   73          
+   74          
+   75          
+   76          
+   77          
+   78          
+   79          
+   80          
+   81          
+   82          void SHT41_falg_0004()
+   83          {
+   84   1            u32 a = 0;
+   85   1            u32 b = 0;
+   86   1           if(Sleep_Queue_task[0] & 0x0004)
+   87   1           {       
+   88   2            Start(); //发送起始命令
+   89   2            SendData(SHT41_R);                             //发送设备地址+写命令
+   90   2            RecvACK();
+   91   2            a = SHT41_R_16bit(0);
+   92   2            b = SHT41_R_16bit(1);
+   93   2            Stop();
+   94   2            a = a*17500/65535-4500;
+   95   2            b = b*12500/65535-600;  
+   96   2            JCQ06_00[0] = a;
+   97   2            JCQ06_00[1] = b;
+   98   2            Sleep_Queue_task[0] &=~0x0004;
+   99   2           }    
+  100   1           
+  101   1           
+  102   1           
+  103   1           
+  104   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       247     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         1          4
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         5     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
