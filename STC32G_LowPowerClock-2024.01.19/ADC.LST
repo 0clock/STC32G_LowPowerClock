@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  ADC                                                                24/01/24  00:35:51  PAGE 1   
+C251 COMPILER V5.60.0,  ADC                                                                24/04/24  23:59:17  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE ADC
-OBJECT MODULE PLACED IN ADC.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE ADC.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\ADC.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE ADC.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmware
+                    -\ADC.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1        for(i=0;i<7;i++)
    57   1        {
    58   2           BV[i] = BV[i+1];
-   59   2        }
-C251 COMPILER V5.60.0,  ADC                                                                24/01/24  00:35:51  PAGE 2   
+C251 COMPILER V5.60.0,  ADC                                                                24/04/24  23:59:17  PAGE 2   
 
+   59   2        }
    60   1        BV[7] = dat;
    61   1        for(i=0;i<8;i++)
    62   1        {
@@ -133,9 +134,9 @@ stmt  level    source
   122   1      //      adc_dat = Get_ADC12bitResult(0x0B);
   123   1      //      adc_dat = (adc_dat<<16);
   124   1      //      adc_dat = (((adc_dat/adc_rtf*1193)/25)*10)>>16;
-  125   1      //      dat00[0x00E4] = adc_dat;
-C251 COMPILER V5.60.0,  ADC                                                                24/01/24  00:35:51  PAGE 3   
+C251 COMPILER V5.60.0,  ADC                                                                24/04/24  23:59:17  PAGE 3   
 
+  125   1      //      dat00[0x00E4] = adc_dat;
   126   1      //    }
   127   1      //      Battery_percentage(dat00[0x00E3]);
   128   1      //     ADC_CONTR = 0;
@@ -201,9 +202,9 @@ stmt  level    source
   188   1          {
   189   2              b = 900 + (a - 406300)/116;
   190   2          }
-  191   1          else if(a >= 394900)
-C251 COMPILER V5.60.0,  ADC                                                                24/01/24  00:35:51  PAGE 4   
+C251 COMPILER V5.60.0,  ADC                                                                24/04/24  23:59:17  PAGE 4   
 
+  191   1          else if(a >= 394900)
   192   1          {
   193   2              b = 800 + (a - 394900)/114;
   194   2          }
@@ -269,9 +270,9 @@ stmt  level    source
   254   2              dat00_low[0x00E1] = dat00[0x00E1];
   255   2              dat00[0x00E1] = P00;
   256   2              
-  257   2              adc_dat = Get_VB();
-C251 COMPILER V5.60.0,  ADC                                                                24/01/24  00:35:51  PAGE 5   
+C251 COMPILER V5.60.0,  ADC                                                                24/04/24  23:59:17  PAGE 5   
 
+  257   2              adc_dat = Get_VB();
   258   2            
   259   2              if(adc_dat > (dat00[0x00E3]+200) || (adc_dat+200) < dat00[0x00E3] )
   260   2              { 

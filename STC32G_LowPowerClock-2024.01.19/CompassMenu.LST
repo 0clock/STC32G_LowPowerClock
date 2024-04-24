@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/04/24  23:59:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE CompassMenu
-OBJECT MODULE PLACED IN CompassMenu.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE CompassMenu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\CompassMenu.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE CompassMenu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\
+                    -firmware\CompassMenu.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    54   1      }
    55          
    56          
-   57          
-C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 2   
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/04/24  23:59:18  PAGE 2   
 
+   57          
    58          
    59          
    60          
@@ -133,9 +134,9 @@ stmt  level    source
   120   2              {
   121   3                  Compass_Scale[i] = b- start_X;
   122   3                  Compass_data[i] = (b % 360);
-  123   3                  b += 30;
-C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 3   
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/04/24  23:59:18  PAGE 3   
 
+  123   3                  b += 30;
   124   3              }
   125   2              for(i=0; i<5; i++)
   126   2              {
@@ -202,9 +203,9 @@ Module Information          Static   Overlayable
   huge data size       =    ------     ------
   const size           =    ------     ------
   hconst size          =        34     ------
-End of Module Information.
+C251 COMPILER V5.60.0,  CompassMenu                                                        24/04/24  23:59:18  PAGE 4   
 
-C251 COMPILER V5.60.0,  CompassMenu                                                        24/01/24  00:35:52  PAGE 4   
+End of Module Information.
 
 
 C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

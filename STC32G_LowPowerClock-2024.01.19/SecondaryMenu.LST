@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/01/24  00:35:53  PAGE 1   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/04/24  23:59:20  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SecondaryMenu
-OBJECT MODULE PLACED IN SecondaryMenu.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE SecondaryMenu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\SecondaryMenu.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE SecondaryMenu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(.
+                    -.\firmware\SecondaryMenu.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1          {
    57   2              OLED_Mean2_fill2((u8)dat00[a]);//填充开关符号
    58   2          }   
-   59   1          else
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/01/24  00:35:53  PAGE 2   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/04/24  23:59:20  PAGE 2   
 
+   59   1          else
    60   1          {
    61   2              OLED_Mean2_fill_num2(a);//填充数值
    62   2          }
@@ -133,9 +134,9 @@ stmt  level    source
   120          
   121          
   122          
-  123          
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/01/24  00:35:53  PAGE 3   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/04/24  23:59:20  PAGE 3   
 
+  123          
   124           
   125          
   126          
@@ -201,9 +202,9 @@ stmt  level    source
   186   3              }
   187   2          }
   188   1          else
-  189   1          {
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/01/24  00:35:53  PAGE 4   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/04/24  23:59:20  PAGE 4   
 
+  189   1          {
   190   2              if(dat00[0x12] <16)
   191   2              {
   192   3                  yy =(dat00[0x12] - 1);
@@ -269,9 +270,9 @@ stmt  level    source
   252   5                          dat00[0x13] &= 0xFFFD;
   253   5      
   254   5                      }
-  255   4                      dat00[0x12]--;
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/01/24  00:35:53  PAGE 5   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/04/24  23:59:20  PAGE 5   
 
+  255   4                      dat00[0x12]--;
   256   4                      if(dat00[0x12] == 0x0000)
   257   4                      {
   258   5                          dat00[0x13] &= 0xfffe;
@@ -338,9 +339,9 @@ Module Information          Static   Overlayable
   ebit size            =    ------     ------
   bitaddressable size  =    ------     ------
   ebitaddressable size =    ------     ------
-  far data size        =    ------     ------
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/01/24  00:35:53  PAGE 6   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      24/04/24  23:59:20  PAGE 6   
 
+  far data size        =    ------     ------
   huge data size       =    ------     ------
   const size           =    ------     ------
   hconst size          =         5     ------

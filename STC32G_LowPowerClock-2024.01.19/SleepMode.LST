@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  SleepMode                                                          24/01/24  00:35:54  PAGE 1   
+C251 COMPILER V5.60.0,  SleepMode                                                          24/04/24  23:59:22  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SleepMode
-OBJECT MODULE PLACED IN SleepMode.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE SleepMode.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\SleepMode.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE SleepMode.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\fi
+                    -rmware\SleepMode.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    54   1          P0M1 = 0x7f;  
    55   1        
    56   1      //*********************P4区******************************* 
-   57   1      //  P47 DRDYO        P46 KEYSET       P45 KEY+    P44 悬空   P43 悬空   P42 悬空   P41 悬空   P40 
-C251 COMPILER V5.60.0,  SleepMode                                                          24/01/24  00:35:54  PAGE 2   
+C251 COMPILER V5.60.0,  SleepMode                                                          24/04/24  23:59:22  PAGE 2   
 
+   57   1      //  P47 DRDYO        P46 KEYSET       P45 KEY+    P44 悬空   P43 悬空   P42 悬空   P41 悬空   P40 
              -CCP0_EN（蜂鸣器控制）  
    58   1          P4=0xfe;
    59   1          P4M0 = 0x1f; 
@@ -133,9 +134,9 @@ stmt  level    source
   115   1      
   116   1      
   117   1      
-  118   1      
-C251 COMPILER V5.60.0,  SleepMode                                                          24/01/24  00:35:54  PAGE 3   
+C251 COMPILER V5.60.0,  SleepMode                                                          24/04/24  23:59:22  PAGE 3   
 
+  118   1      
   119   1          _nop_();
   120   1          _nop_();
   121   1          _nop_();
@@ -202,9 +203,9 @@ Module Information          Static   Overlayable
   data size            =    ------     ------
   idata size           =    ------     ------
   pdata size           =    ------     ------
-  xdata size           =    ------     ------
-C251 COMPILER V5.60.0,  SleepMode                                                          24/01/24  00:35:54  PAGE 4   
+C251 COMPILER V5.60.0,  SleepMode                                                          24/04/24  23:59:22  PAGE 4   
 
+  xdata size           =    ------     ------
   xdata-const size     =    ------     ------
   edata size           =    ------     ------
   bit size             =    ------     ------

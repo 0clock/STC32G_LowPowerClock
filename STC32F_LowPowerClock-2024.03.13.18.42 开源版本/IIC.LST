@@ -1,0 +1,213 @@
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE IIC
+OBJECT MODULE PLACED IN IIC.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE IIC.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          #include "time.h"
+    3          
+    4          void IIC_int()
+    5          {
+    6   1          P_SW2 |= 0x80 + 0x00;
+    7   1          I2CCFG = 0xC0+35;    //满速400K 35M 设定20
+    8   1          I2CMSST = 0x00;
+    9   1      
+   10   1      }
+   11          
+   12          bit Wait()
+   13          {
+   14   1          bit k=0;
+   15   1          u16 i =100;
+   16   1          while ((!(I2CMSST & 0x40))&(i>0))
+   17   1          {
+   18   2              i--;
+   19   2          }
+   20   1          if(I2CMSST & 0x02)
+   21   1          {
+   22   2              k=1;
+   23   2          }
+   24   1          I2CMSST &= ~0x40;
+   25   1          return k;
+   26   1      }
+   27          
+   28          void Start()
+   29          {
+   30   1          I2CMSCR = 0x01;                             //发送START命令
+   31   1          Wait();
+   32   1      }
+   33          
+   34          void SendData(char dat)
+   35          {
+   36   1          I2CTXD = dat;                               //写数据到数据缓冲区
+   37   1          I2CMSCR = 0x02;                             //发送SEND命令
+   38   1          Wait();
+   39   1      }
+   40          
+   41          bit RecvACK()
+   42          {
+   43   1          bit p=0;
+   44   1          I2CMSCR = 0x03;                             //发送读ACK命令
+   45   1          p = Wait();
+   46   1          return p;
+   47   1      }
+   48          
+   49          u8 RecvData()
+   50          {
+   51   1          I2CMSCR = 0x04;                             //发送RECV命令
+   52   1          Wait();
+   53   1          return I2CRXD;
+   54   1      }
+   55          
+   56          void SendACK()
+   57          {
+   58   1          I2CMSST = 0x00;                             //设置ACK信号
+   59   1          I2CMSCR = 0x05;                             //发送ACK命令
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 2   
+
+   60   1          Wait();
+   61   1      }
+   62          
+   63          void SendNAK()
+   64          {
+   65   1          I2CMSST = 0x01;                             //设置NAK信号
+   66   1          I2CMSCR = 0x05;                             //发送ACK命令
+   67   1          Wait();
+   68   1      }
+   69          
+   70          void Stop()
+   71          {
+   72   1          I2CMSCR = 0x06;                             //发送STOP命令
+   73   1          Wait();
+   74   1      }
+   75          
+   76          
+   77          
+   78          
+   79          
+   80          
+   81          bit IIC_W2bit(u8 addre,u8 MSB,u8 LSB)
+   82          {
+   83   1          bit ACK = 0;
+   84   1      
+   85   1          Start(); //发送起始命令
+   86   1          SendData(addre);//发送设备地址+写命令
+   87   1          ACK |= RecvACK();
+   88   1          SendData(MSB);//发送设备地址+写命令
+   89   1          ACK |= RecvACK();
+   90   1          SendData(LSB);//发送设备地址+写命令
+   91   1          ACK |= RecvACK();
+   92   1          Stop();
+   93   1          return ACK;
+   94   1      }
+   95          
+   96          bit IIC_W1bit(u8 addre,u8 LSB)
+   97          {
+   98   1          bit ACK = 0;
+   99   1          Start(); //发送起始命令
+  100   1          SendData(addre);//发送设备地址+写命令
+  101   1          ACK |= RecvACK();
+  102   1          SendData(LSB);//发送设备地址+写命令
+  103   1          ACK |= RecvACK();
+  104   1          Stop();
+  105   1          return ACK;
+  106   1      }
+  107          
+  108          
+  109          u8 IIC_R1bit(u8 nam,u8 adds)
+  110          {
+  111   1          u8 a= 0;
+  112   1          Start(); //发送起始命令
+  113   1          SendData(nam);                             //发送设备地址+写命令
+  114   1          RecvACK();
+  115   1          SendData(adds);                             //发送设备地址+写命令
+  116   1          RecvACK();
+  117   1          Start(); //发送起始命令
+  118   1          SendData((u8)(nam + 1));                             //发送设备地址+写命令
+  119   1          RecvACK();
+  120   1          a = RecvData();                            //读取数据2
+  121   1          SendNAK();
+  122   1          Stop();
+  123   1          return a;
+  124   1      
+  125   1      }
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 3   
+
+  126          
+  127          //========================================================================
+  128          // 函数: u8 IIC_Query_1(u8 adds)
+  129          // 描述: 检测传感器是否应答
+  130          // 参数: adds ： 从机地址
+  131          // 返回: 返回0正常，1异常
+  132          // 版本: V1.0 2023.02.05
+  133          //========================================================================
+  134          u8 IIC_Query_1(u8 adds)
+  135          {
+  136   1          u8 num = 0;
+  137   1          Start(); //发送起始命令
+  138   1          SendData(adds);//发送设备地址+写命令
+  139   1          num = RecvACK();
+  140   1          Stop();
+  141   1          Delay10us();
+  142   1          return num;
+  143   1      }
+  144          
+  145          
+  146          
+  147          
+  148          //========================================================================
+  149          // 函数: u8 IIC_Query()
+  150          // 描述: 扫描传感器，看是否应答，判断焊接是否正确
+  151          // 参数: 
+  152          // 返回: 返回0则全部支持
+  153          // 版本: V1.0 2023.02.05
+  154          //========================================================================
+  155          
+  156          u8 IIC_Query()
+  157          {
+  158   1          u8 num = 0;
+  159   1          num |= IIC_Query_1(0x22);
+  160   1          num = num<<1;
+  161   1          num |= IIC_Query_1(0x32);
+  162   1          num = num<<1;
+  163   1          num |= IIC_Query_1(INS5699_W);
+  164   1          num = num<<1;
+  165   1          num |= IIC_Query_1(SPL06_W);
+  166   1          num = num<<1;
+  167   1          num |= IIC_Query_1(BH1745_W); 
+  168   1          return num;
+  169   1      }
+  170          
+  171          
+  172          
+  173          
+  174          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       485     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------          4
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 4   
+
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

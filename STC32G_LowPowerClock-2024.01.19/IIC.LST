@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  IIC                                                                24/04/24  23:59:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE IIC
-OBJECT MODULE PLACED IN IIC.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE IIC.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\IIC.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE IIC.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmware
+                    -\IIC.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56          {
    57   1          I2CMSST = 0x00;                             //设置ACK信号
    58   1          I2CMSCR = 0x05;                             //发送ACK命令
-   59   1          Wait();
-C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 2   
+C251 COMPILER V5.60.0,  IIC                                                                24/04/24  23:59:18  PAGE 2   
 
+   59   1          Wait();
    60   1      }
    61          
    62          void SendNAK()
@@ -133,9 +134,9 @@ stmt  level    source
   122          {
   123              SDA = 0;
   124              I2C_Delay();
-  125              SCL = 1;
-C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 3   
+C251 COMPILER V5.60.0,  IIC                                                                24/04/24  23:59:18  PAGE 3   
 
+  125              SCL = 1;
   126              I2C_Delay();
   127              SDA = 1;
   128              I2C_Delay();
@@ -201,9 +202,9 @@ stmt  level    source
   188                  dat = dat<<1;  
   189                  I2C_Delay();
   190                  SCL = 1;
-  191                  I2C_Delay();
-C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 4   
+C251 COMPILER V5.60.0,  IIC                                                                24/04/24  23:59:18  PAGE 4   
 
+  191                  I2C_Delay();
   192                  if(SDA)
   193                  {
   194                     dat |= 0x01;
@@ -269,9 +270,9 @@ stmt  level    source
   254   1            a = RecvData();                            //读取数据2
   255   1            SendNAK();  
   256   1            Stop(); 
-  257   1            return a; 
-C251 COMPILER V5.60.0,  IIC                                                                24/01/24  00:35:52  PAGE 5   
+C251 COMPILER V5.60.0,  IIC                                                                24/04/24  23:59:18  PAGE 5   
 
+  257   1            return a; 
   258   1        
   259   1      }
   260          

@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
-OBJECT MODULE PLACED IN main.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE main.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE main.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwar
+                    -e\main.obj) 
 
 stmt  level    source
 
@@ -34,585 +35,437 @@ stmt  level    source
    25          
    26          /****************************** 用户定义宏 ***********************************/
    27          
-   28          
-   29          /*****************************************************************************/
-   30          
-   31          /*************  本地常量声明    **************/
-   32          //u16 xdata JCQ03_00[32];
-   33          u32 xdata JCQ06_00[5];
-   34          
-   35          //**************JCQ06_00***********************
-   36          //00 温度 ×100 ℃
-   37          //01 湿度 ×100 RH
-   38          //02 SPL06气压 原始值
-   39          //03 SPL06温度 原始值
-   40          //04 气压 ×1   Pa
-   41          //*************************************
-   42          
-   43          
-   44          
+   28          /*****************************************************************************/
+   29          
+   30          /*************  本地常量声明    **************/
+   31          // u16 xdata JCQ03_00[32];
+   32          u32 xdata JCQ06_00[5];
+   33          
+   34          //**************JCQ06_00***********************
+   35          // 00 温度 ×100 ℃
+   36          // 01 湿度 ×100 RH
+   37          // 02 SPL06气压 原始值
+   38          // 03 SPL06温度 原始值
+   39          // 04 气压 ×1   Pa
+   40          //*************************************
+   41          
+   42          extern u16 xdata dat00[System_data_num];
+   43          extern u16 xdata dat00_low[System_data_num];
+   44          extern u8 xdata dat00_flag[System_data_num];
    45          
-   46          extern u16 xdata dat00[System_data_num];
-   47          extern u16 xdata dat00_low[System_data_num];
-   48          extern u8 xdata dat00_flag[System_data_num];
-   49          
-   50          
+   46          /*************  本地变量声明  功能寄存器  **************/
+   47          extern u8 xdata DMABuffer[96];
+   48          
+   49          /*************  中断任务 标志位 专用变量（妈的别优化了）  **************/
+   50          volatile u32 Interrupt_flag = 0;
    51          
-   52          /*************  本地变量声明  功能寄存器  **************/
-   53          extern u8 xdata DMABuffer[96];
+   52          /****************************** 睡眠寄存器组 ***********************************/
+   53          extern u16 Sleep_Queue[Sleep_queue_num];
    54          
-   55          /*************  中断任务 标志位 专用变量（妈的别优化了）  **************/
-   56          volatile u32 Interrupt_flag=0;
-   57          
-   58          
+   55          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   56          
+   57          extern u16 Sleep_Queue_count;
+   58          extern u16 Sleep_Queue_count_target;
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 2   
+
    59          
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 2   
-
-   60          /****************************** 睡眠寄存器组 ***********************************/
-   61          extern u16 Sleep_Queue[Sleep_queue_num];
-   62          
-   63          extern u16 Sleep_Queue_task[Sleep_queue_num];
-   64          
-   65          extern u16 Sleep_Queue_count;
-   66          extern u16 Sleep_Queue_count_target;
-   67          
-   68          
-   69          
-   70          extern u8 xdata Time_New[7];
-   71          extern u8 xdata Time_Low[7];
-   72          extern u8 xdata Time_int[7];
-   73          
-   74          
-   75          
-   76          /********************* 主函数 *************************/
-   77          
-   78          u32 dat1 = 0;
-   79          u32 dat2 = 0;
-   80          u32 dat3 = 0;
-   81          u32 dat4 = 0;
-   82          u32 dat5 = 0;
-   83          
-   84          u32 dat6 = 0;
-   85          u32 dat7 = 0;
-   86          u8 uu=0;
-   87          u16 sleep_dat=0;
-   88          
-   89          u16 gg = 0;
-   90          
-   91          
-   92          
-   93          
-   94          
-   95          
+   60          extern u8 xdata Time_New[7];
+   61          extern u8 xdata Time_Low[7];
+   62          extern u8 xdata Time_int[7];
+   63          
+   64          /********************* 主函数 *************************/
+   65          
+   66          u32 dat1 = 0;
+   67          u32 dat2 = 0;
+   68          u32 dat3 = 0;
+   69          u32 dat4 = 0;
+   70          u32 dat5 = 0;
+   71          
+   72          u32 dat6 = 0;
+   73          u32 dat7 = 0;
+   74          u8 uu = 0;
+   75          u16 sleep_dat = 0;
+   76          
+   77          u16 gg = 0;
+   78          
+   79          // REMOVEUNUSED
+   80          
+   81          void Buzzer_task()
+   82          {
+   83   1          if (dat00[2] & 0x0001)
+   84   1          {
+   85   2              if (dat00[0xC3] == 1)
+   86   2              {
+   87   3                  if (dat00[0xC1] == 1)
+   88   3                  {
+   89   4                      Buzzer_Open();
+   90   4                      SleepQueue_aheadW1(dat00[0xC2], 0x0020, 0);
+   91   4                  }
+   92   3              }
+   93   2              dat00[2] &= ~0x0001;
+   94   2          }
+   95   1      }
    96          
-   97          
-   98          //REMOVEUNUSED
-   99          
-  100          
-  101          
-  102          
-  103          
-  104          void Buzzer_task()
-  105          {
-  106   1          if(dat00[2] & 0x0001)
-  107   1          {
-  108   2              if(dat00[0xC3] == 1)
-  109   2              {
-  110   3                  if(dat00[0xC1] == 1)
-  111   3                  {
-  112   4                      Buzzer_Open();
-  113   4                      SleepQueue_aheadW1(dat00[0xC2],0x0020,0);
-  114   4                  }
-  115   3              }
-  116   2              dat00[2] &= ~0x0001;
-  117   2          }
-  118   1      }
-  119          
-  120          
-  121          
-  122          
-  123          void main(void)
-  124          {
-  125   1          u8 i = 0;
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 3   
-
-  126   1          u8 a = 0;
-  127   1          u8 b = 0;
-  128   1          u16 c = 0;
-  129   1          u32 d = 0;
-  130   1          u8 ii = 0;
-  131   1          u8 datac=0;
-  132   1          u16 kk=0;
-  133   1        
-  134   1          
-  135   1          EAXFR = 1;
-  136   1          CKCON = 0x00;
-  137   1          WTST = 0x00;  //设置程序指令延时参数，赋值为0可将CPU执行指令的速度设置为最
+   97          void main(void)
+   98          {
+   99   1          u8 i = 0;
+  100   1          u8 a = 0;
+  101   1          u8 b = 0;
+  102   1          u16 c = 0;
+  103   1          u32 d = 0;
+  104   1          u8 ii = 0;
+  105   1          u8 datac = 0;
+  106   1          u16 kk = 0;
+  107   1      
+  108   1          EAXFR = 1;
+  109   1          CKCON = 0x00;
+  110   1          WTST = 0x00; // 设置程序指令延时参数，赋值为0可将CPU执行指令的速度设置为最
              -快
-  138   1          P54RST = 1;
-  139   1      
-  140   1        
-  141   1        
-  142   1      //  IRC主时钟30M 
-  143   1          CLKSEL |= 0x80;//选择PLL输出144M
-  144   1          USBCLK &= ~0x60;//PLL输入时钟1分频
-  145   1          USBCLK |= 0x20;//PLL输入时钟2分频
-  146   1          USBCLK |= 0x80;                        //使能PLL倍频
-  147   1          delay_ms(1);                                //等待PLL锁频
-  148   1          //选择HSPWM/HSSPI时钟
-  149   1            CLKSEL |= 0x40;                       //HSPWM/HSSPI选择PLL输出时钟为时钟源       
-  150   1            HSCLKDIV = 6;                           //HSPWM/HSSPI时钟源不分频
-  151   1        
-  152   1          
-  153   1      //    P0 = 0xff;  P1 = 0xff;
-  154   1      //    P2 = 0xff;  P3 = 0xff;
-  155   1      //    P4 = 0xfF;  P5 = 0xff;
-  156   1      //    P6 = 0xff;  P7 = 0xff;
-  157   1      //    
-  158   1      //    P0M0 = 0xff;     P0M1 = 0xff;
-  159   1      //    P1M0 = 0xff;     P1M1 = 0xff;
-  160   1      //    P2M0 = 0xff;     P2M1 = 0xff;
-  161   1      //    P3M0 = 0xff;     P3M1 = 0xff;
-  162   1      //    P4M0 = 0xff;     P4M1 = 0xff;
-  163   1      //    P5M0 = 0xef;     P5M1 = 0xef; 
-  164   1      //    P6M0 = 0xff;     P6M1 = 0xff; 
-  165   1      //    P7M0 = 0xff;     P7M1 = 0xff;
-  166   1      
+  111   1          P54RST = 1;
+  112   1      
+  113   1          //  IRC主时钟30M
+  114   1          CLKSEL |= 0x80;  // 选择PLL输出144M
+  115   1          USBCLK &= ~0x60; // PLL输入时钟1分频
+  116   1          USBCLK |= 0x20;  // PLL输入时钟2分频
+  117   1          USBCLK |= 0x80;  // 使能PLL倍频
+  118   1          delay_ms(1);     // 等待PLL锁频
+  119   1          // 选择HSPWM/HSSPI时钟
+  120   1          CLKSEL |= 0x40; // HSPWM/HSSPI选择PLL输出时钟为时钟源
+  121   1          HSCLKDIV = 6;   // HSPWM/HSSPI时钟源不分频
+  122   1      
+  123   1          //    P0 = 0xff;  P1 = 0xff;
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 3   
+
+  124   1          //    P2 = 0xff;  P3 = 0xff;
+  125   1          //    P4 = 0xfF;  P5 = 0xff;
+  126   1          //    P6 = 0xff;  P7 = 0xff;
+  127   1          //
+  128   1          //    P0M0 = 0xff;     P0M1 = 0xff;
+  129   1          //    P1M0 = 0xff;     P1M1 = 0xff;
+  130   1          //    P2M0 = 0xff;     P2M1 = 0xff;
+  131   1          //    P3M0 = 0xff;     P3M1 = 0xff;
+  132   1          //    P4M0 = 0xff;     P4M1 = 0xff;
+  133   1          //    P5M0 = 0xef;     P5M1 = 0xef;
+  134   1          //    P6M0 = 0xff;     P6M1 = 0xff;
+  135   1          //    P7M0 = 0xff;     P7M1 = 0xff;
+  136   1      
+  137   1          //    P0IE=0x00;  P1IE=0x00;
+  138   1          //    P2IE=0x00;  P3IE=0x10;//0x10
+  139   1          //    P4IE=0x00;  P5IE=0x10;
+  140   1          //    P6IE=0x00;  P7IE=0x00;
+  141   1      
+  142   1          //  SleepMode_ON();
+  143   1      
+  144   1          _nop_();
+  145   1          _nop_();
+  146   1          _nop_();
+  147   1          _nop_();
+  148   1          //    _nop_();
+  149   1      
+  150   1          IO_Init();
+  151   1          OLED_POW(0);
+  152   1          RESET54();
+  153   1      
+  154   1          ADC_init();
+  155   1          Clock_INT();
+  156   1          key_int();
+  157   1          IIC_int();
+  158   1      
+  159   1          Array_Initialization_();
+  160   1      
+  161   1          IIC_W2bit(0x64, 0x21, 0x80); // 关闭芯片K2开关
+  162   1          Delay10us();
+  163   1          IIC_W2bit(0x64, 0x0F, 0x71); // 配置开启1S定时 0x60
+  164   1          Delay10us();
+  165   1          //    IIC_W2bit(0x64,0x0D,0x02);//关闭定时器
+  166   1          //    IIC_W2bit(0x64,0x0E,0x00);//清除警告
   167   1      
-  168   1      //    P0IE=0x00;  P1IE=0x00;
-  169   1      //    P2IE=0x00;  P3IE=0x10;//0x10
-  170   1      //    P4IE=0x00;  P5IE=0x10;
-  171   1      //    P6IE=0x00;  P7IE=0x00;
-  172   1      
-  173   1        
-  174   1        
-  175   1        
-  176   1        
+  168   1          BH1745_Init();
+  169   1          delay_ms(1);
+  170   1          SHT41_Init();
+  171   1          delay_ms(1);
+  172   1          SPL06_Init();
+  173   1          delay_ms(1);
+  174   1          delay_ms(1);
+  175   1          SPI_init();
+  176   1          SPI_DMA_Config();
   177   1      
-  178   1        
-  179   1        
-  180   1        
-  181   1        //  SleepMode_ON();
-  182   1        
-  183   1        
-  184   1        
-  185   1        
-  186   1        
-  187   1        
-  188   1        
-  189   1        
-  190   1          _nop_();  
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 4   
+  178   1          Magnetometer_initi();
+  179   1      
+  180   1          //      delay_ms(1);
+  181   1      
+  182   1          //    IIC_W2bit(0x22,0x4b,0x01);
+  183   1          //    delay_ms(1);
+  184   1          //    IIC_W2bit(0x22,0x4C,0x00);
+  185   1          //    delay_ms(1);
+  186   1          //    IIC_W2bit(0x22,0x4b,0x00);
+  187   1      
+  188   1          i = 1;
+  189   1          delay_ms(1);
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 4   
 
-  191   1          _nop_();
-  192   1          _nop_();
-  193   1          _nop_();
-  194   1      //    _nop_();  
-  195   1          
-  196   1          IO_Init();
-  197   1          OLED_POW(0);
-  198   1          RESET54();  
-  199   1      
-  200   1          
-  201   1          ADC_init();
-  202   1          Clock_INT();
-  203   1          key_int();
-  204   1          IIC_int();
-  205   1          
-  206   1          
-  207   1          Array_Initialization_();
-  208   1          
-  209   1          IIC_W2bit(0x64,0x21,0x80);//关闭芯片K2开关
-  210   1          Delay10us();
-  211   1          IIC_W2bit(0x64,0x0F,0x71);//配置开启1S定时 0x60
-  212   1          Delay10us();
-  213   1      //    IIC_W2bit(0x64,0x0D,0x02);//关闭定时器
-  214   1      //    IIC_W2bit(0x64,0x0E,0x00);//清除警告    
-  215   1        
-  216   1      
-  217   1          BH1745_Init();
-  218   1          delay_ms(1);
-  219   1          SHT41_Init();
-  220   1          delay_ms(1);
-  221   1          SPL06_Init();
-  222   1          delay_ms(1);
-  223   1          delay_ms(1);
-  224   1          SPI_init();
-  225   1          SPI_DMA_Config(); 
-  226   1          
-  227   1          Magnetometer_initi();
-  228   1          
-  229   1      //      delay_ms(1);
-  230   1      
-  231   1      
-  232   1      //    IIC_W2bit(0x22,0x4b,0x01);
-  233   1      //    delay_ms(1);
-  234   1      //    IIC_W2bit(0x22,0x4C,0x00);
-  235   1      //    delay_ms(1);
-  236   1      //    IIC_W2bit(0x22,0x4b,0x00);
-  237   1      
-  238   1      
-  239   1      
-  240   1          
-  241   1      
-  242   1      
-  243   1          i=1;
-  244   1          delay_ms(1);
-  245   1          IIC_W2bit(0x32,0x11,0x5E);
-  246   1          delay_ms(1);
-  247   1          i=IIC_W2bit(0x32,0x11,0x9E);
-  248   1          
-  249   1          
-  250   1      //    Magnetometer_initi();
-  251   1          
-  252   1          
-  253   1      
-  254   1      //    b = IIC_ResponseText();
-  255   1          
-  256   1      //    delay_ms(1);
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 5   
+  190   1          IIC_W2bit(0x32, 0x11, 0x5E);
+  191   1          delay_ms(1);
+  192   1          i = IIC_W2bit(0x32, 0x11, 0x9E);
+  193   1      
+  194   1          //    Magnetometer_initi();
+  195   1      
+  196   1          //    b = IIC_ResponseText();
+  197   1      
+  198   1          //    delay_ms(1);
+  199   1          //    IIC_W2bit(0x32,0x11,0x5E);//低功耗模式
+  200   1          //    delay_ms(1);
+  201   1          //    IIC_W2bit(0x32,0x11,0x9E);//从低功耗切换到挂起模式
+  202   1          //    delay_ms(1);
+  203   1      
+  204   1          P2PU = 0x01; // 打开OLED  RSET上拉电阻
+  205   1          OLED_Init();
+  206   1          OLED_Fill(0x00);
+  207   1      
+  208   1          P2PU = 0x01; // 打开OLED  RSET上拉电阻
+  209   1      
+  210   1          //     TVMode_int();
+  211   1          //    OLED_32X32(0,0,0,0,32);
+  212   1      
+  213   1          //    while(1);
+  214   1      
+  215   1          //         OLED_ED();
+  216   1          //         OLED_POW_LOW();
+  217   1          //          P1PU = 0x00;
+  218   1          //          P1DR = 0x00;
+  219   1          //          P1SR = 0x00;
+  220   1          //          P2PU = 0x00;
+  221   1          //          P2DR = 0x00;
+  222   1          //          P2SR = 0x00;
+  223   1      
+  224   1          //          P0IE = 0;
+  225   1          //          P1IE = 0;
+  226   1          //          P2IE = 0x00;
+  227   1          //          P3IE = 0;
+  228   1          //          P5IE = 0x10;
+  229   1          //          P4IE = 0;
+  230   1          //          P6IE = 0;
+  231   1          //          P7IE = 0;
+  232   1      
+  233   1          //          P1 = 0xf8;
+  234   1          //          P2 = 0xff;
+  235   1          //          P3 = 0xff;
+  236   1          //          P4 = 0xfF;
+  237   1          //          P5 = 0xf3;
+  238   1          //          P6 = 0xff;
+  239   1          //          P7 = 0xff;
+  240   1      
+  241   1          //          I2CCFG &=0x7f;
+  242   1          //          SPCTL &=0xBf;
+  243   1      
+  244   1          //          P0M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
+  245   1          //          P0M1 = 0xff;
+  246   1      
+  247   1          //          P1M0 = 0x07;                                //设置P3.0~P3.7为开漏模式
+  248   1          //          P1M1 = 0x07;
+  249   1      
+  250   1          //          P2M0 = 0x3f;                                //设置P3.0~P3.7为开漏模式
+  251   1          //          P2M1 = 0x3f;
+  252   1      
+  253   1          //          P3M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
+  254   1          //          P3M1 = 0xff;
+  255   1      
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 5   
 
-  257   1      //    IIC_W2bit(0x32,0x11,0x5E);//低功耗模式
-  258   1      //    delay_ms(1);
-  259   1      //    IIC_W2bit(0x32,0x11,0x9E);//从低功耗切换到挂起模式
-  260   1      //    delay_ms(1);
+  256   1          //          P4M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
+  257   1          //          P4M1 = 0xff;
+  258   1      
+  259   1          //          P6M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
+  260   1          //          P6M1 = 0xff;
   261   1      
-  262   1      
-  263   1      
+  262   1          //          P7M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
+  263   1          //          P7M1 = 0xff;
   264   1      
-  265   1          P2PU = 0x01;//打开OLED  RSET上拉电阻
-  266   1          OLED_Init();
-  267   1          OLED_Fill(0x00);
-  268   1          
-  269   1          P2PU = 0x01;//打开OLED  RSET上拉电阻
-  270   1      
-  271   1      
-  272   1      //     TVMode_int();
-  273   1      //    OLED_32X32(0,0,0,0,32);
-  274   1      
-  275   1      //    while(1);
-  276   1      
-  277   1      
-  278   1      
-  279   1      //         OLED_ED();
-  280   1      //         OLED_POW_LOW();
-  281   1      //          P1PU = 0x00;
-  282   1      //          P1DR = 0x00;
-  283   1      //          P1SR = 0x00;
-  284   1      //          P2PU = 0x00;
-  285   1      //          P2DR = 0x00;
-  286   1      //          P2SR = 0x00;
-  287   1      
-  288   1      //          P0IE = 0;
-  289   1      //          P1IE = 0;
-  290   1      //          P2IE = 0x00;
-  291   1      //          P3IE = 0;
-  292   1      //          P5IE = 0x10;
-  293   1      //          P4IE = 0;
-  294   1      //          P6IE = 0;
-  295   1      //          P7IE = 0;
-  296   1      
-  297   1      
-  298   1      //          P1 = 0xf8;
-  299   1      //          P2 = 0xff;
-  300   1      //          P3 = 0xff;
-  301   1      //          P4 = 0xfF;
-  302   1      //          P5 = 0xf3;
-  303   1      //          P6 = 0xff;
-  304   1      //          P7 = 0xff;
+  265   1          //          ADC_POWER = 0;
+  266   1      
+  267   1          //    P0INTE = 0x00;//允许端口中断
+  268   1          //    P0WKUE = 0x00;//允许掉电唤醒
+  269   1          //
+  270   1          //    P3INTE = 0x10;//允许端口中断
+  271   1          //    P3WKUE = 0x10;//允许掉电唤醒
+  272   1          //
+  273   1          //    P5WKUE = 0x00;//允许掉电唤醒
+  274   1          //
+  275   1          //    P4INTE = 0x00;//允许端口中断
+  276   1          //    P4WKUE = 0x00;//允许掉电唤醒
+  277   1          //    P2INTE = 0x00;//允许端口中断
+  278   1          //    P2WKUE = 0x00;//允许掉电唤醒
+  279   1      
+  280   1          //    _nop_();
+  281   1          //    _nop_();
+  282   1          //    _nop_();
+  283   1          //    _nop_();
+  284   1          //    PD = 1;                            //MCU进入掉电模式
+  285   1          //    _nop_();
+  286   1          //    _nop_();
+  287   1          //    _nop_();
+  288   1          //    _nop_();
+  289   1      
+  290   1          INS5699_timeW(Time_int);
+  291   1          delay_ms(1);
+  292   1          INS5699_timeR();
+  293   1          //    INS5699_timer_clean();
+  294   1      
+  295   1          dat00[0] |= 0x0002;
+  296   1          dat00[0x10] = 0x0020;
+  297   1          dat00_flag[0x10] = 1;
+  298   1          SleepQueue_aheadW1(5, 1, 0);
+  299   1      
+  300   1          P0INTE |= 0x02; // 允许端口中断
+  301   1          P0IM1 |= 0xFD;  // 下降沿中断
+  302   1          P0IM0 &= 0xFD;
+  303   1          P0WKUE |= 0x02; // 允许掉电唤醒
+  304   1          EA = 1;
   305   1      
-  306   1      //          I2CCFG &=0x7f;
-  307   1      //          SPCTL &=0xBf;
-  308   1      
-  309   1      //          P0M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
-  310   1      //          P0M1 = 0xff;
+  306   1          //    SleepMode_ON();
+  307   1      
+  308   1          //  P23=1;
+  309   1          //  P25=1;
+  310   1          // while (1);
   311   1      
-  312   1      
-  313   1      //          P1M0 = 0x07;                                //设置P3.0~P3.7为开漏模式
-  314   1      //          P1M1 = 0x07;
-  315   1      
-  316   1      
-  317   1      //          P2M0 = 0x3f;                                //设置P3.0~P3.7为开漏模式
-  318   1      //          P2M1 = 0x3f;
-  319   1      
-  320   1      
-  321   1      //          P3M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
-  322   1      //          P3M1 = 0xff;
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 6   
+  312   1          while (1)
+  313   1          {
+  314   2      
+  315   2              Time_Interruption_1S();
+  316   2              flag_handle();
+  317   2              dat00_Change();
+  318   2              IU_Thread();
+  319   2              key_thread1_new();
+  320   2      
+  321   2              // Buzzer_task();
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 6   
 
-  323   1      
-  324   1      //          P4M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
-  325   1      //          P4M1 = 0xff;
-  326   1      
-  327   1      //          P6M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
-  328   1      //          P6M1 = 0xff;
-  329   1      
-  330   1      //          P7M0 = 0xff;                                //设置P3.0~P3.7为开漏模式
-  331   1      //          P7M1 = 0xff;
-  332   1      
-  333   1      //          ADC_POWER = 0;
-  334   1      
-  335   1      
-  336   1      
-  337   1      
-  338   1      //    P0INTE = 0x00;//允许端口中断
-  339   1      //    P0WKUE = 0x00;//允许掉电唤醒  
-  340   1      //   
-  341   1      //    P3INTE = 0x10;//允许端口中断
-  342   1      //    P3WKUE = 0x10;//允许掉电唤醒 
-  343   1      //  
-  344   1      //    P5WKUE = 0x00;//允许掉电唤醒  
-  345   1      //  
-  346   1      //    P4INTE = 0x00;//允许端口中断
-  347   1      //    P4WKUE = 0x00;//允许掉电唤醒 
-  348   1      //    P2INTE = 0x00;//允许端口中断
-  349   1      //    P2WKUE = 0x00;//允许掉电唤醒  
-  350   1      
-  351   1      
-  352   1      //    _nop_();
-  353   1      //    _nop_();
-  354   1      //    _nop_();
-  355   1      //    _nop_();    
-  356   1      //    PD = 1;                            //MCU进入掉电模式
-  357   1      //    _nop_();
-  358   1      //    _nop_();
-  359   1      //    _nop_();
-  360   1      //    _nop_();
-  361   1      
-  362   1      
-  363   1      
-  364   1      
-  365   1      
-  366   1          INS5699_timeW(Time_int);
-  367   1          delay_ms(1);
-  368   1          INS5699_timeR();
-  369   1      //    INS5699_timer_clean();  
-  370   1      
-  371   1          dat00[0] |= 0x0002;
-  372   1          dat00[0x10]=0x0020;
-  373   1          dat00_flag[0x10]=1;
-  374   1          SleepQueue_aheadW1(5,1,0);
-  375   1      
-  376   1      
-  377   1      
-  378   1      
-  379   1          P0INTE |= 0x02;//允许端口中断
-  380   1          P0IM1 |=  0xFD;//下降沿中断
-  381   1          P0IM0 &=  0xFD;
-  382   1          P0WKUE |= 0x02;//允许掉电唤醒
-  383   1          EA = 1;
-  384   1      
-  385   1      
-  386   1      
-  387   1      
-  388   1      
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 7   
+  322   2      
+  323   2              // debug_8x8(b,64,1);
+  324   2      
+  325   2              if (Sleep_Queue_task[0] == 0)
+  326   2              {
+  327   3                  SleepQueue_MoveLeft(1);
+  328   3              }
+  329   2      
+  330   2              SPI_DMA_delay();
+  331   2              Sleep_Thread();
+  332   2      
+  333   2              UI_switch(); // 1号任务
+  334   2              SHT41_falg_0004();
+  335   2              SPL06_PR_R_flag0008();
+  336   2              SPL06_PR_P_flag0010();
+  337   2              BH1745R_flag0002();
+  338   2              Buzzer_falg_0020();
+  339   2              ADC_falg_0040();
+  340   2              Magnetometer_falg_0080();
+  341   2          }
+  342   1      }
+  343          
+  344          void INT0_Isr() interrupt 0
+  345          {
+  346   1      }
+  347          
+  348          void INT1_Isr() interrupt 2
+  349          {
+  350   1      }
+  351          
+  352          void KZ_isr() interrupt 13
+  353          {
+  354   1          u8 intf = 0;
+  355   1      
+  356   1          intf = P0INTF;
+  357   1          if (intf)
+  358   1          {
+  359   2              // dat00[0] |= 0x0001;
+  360   2              P0INTF = 0;
+  361   2              if (intf & 0x02)
+  362   2              {
+  363   3                  dat00_low[0x00E2]++;
+  364   3                  if (dat00_low[0x00E2] >= 2)
+  365   3                  {
+  366   4                      P0INTE &= ~0x02; // 允许端口中断
+  367   4                      P0WKUE &= ~0x02; // 允许掉电唤醒
+  368   4                  }
+  369   3              }
+  370   2          }
+  371   1      
+  372   1          intf = P4INTF;
+  373   1          if (intf)
+  374   1          {
+  375   2              // dat00[0] |= 0x0001;
+  376   2              P4INTF = 0;
+  377   2              if (intf & 0x20)
+  378   2              {
+  379   3                  dat00[0] |= 0x0001;
+  380   3                  dat00[2] |= 0x0001;
+  381   3                  // Delay10us();
+  382   3                  Add_key(1);
+  383   3                  dat00[1] &= 0x0001;
+  384   3              }
+  385   2              if (intf & 0x40)
+  386   2              {
+  387   3                  dat00[0] |= 0x0001;
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 7   
 
-  389   1          
-  390   1          
-  391   1          
-  392   1      
-  393   1      
+  388   3                  dat00[2] |= 0x0001;
+  389   3                  // Delay10us();
+  390   3                  SET_key(); // 主菜单 按下确认件
+  391   3                  dat00[1] = 0;
+  392   3              }
+  393   2          }
   394   1      
-  395   1      
-  396   1      
-  397   1      
-  398   1      
-  399   1      
-  400   1      
-  401   1      
-  402   1      
-  403   1      
-  404   1      
-  405   1      
-  406   1       //    SleepMode_ON();
-  407   1          
-  408   1      //  P23=1;
-  409   1      //  P25=1;  
-  410   1      //while (1);
-  411   1          
-  412   1          while (1)
-  413   1          {
-  414   2      
-  415   2               
-  416   2              Time_Interruption_1S();
-  417   2              flag_handle();
-  418   2              dat00_Change();
-  419   2              IU_Thread();
-  420   2              key_thread1_new();
-  421   2            
-  422   2            
-  423   2            
-  424   2            
-  425   2            
-  426   2            
-  427   2            
-  428   2            
-  429   2            
-  430   2            
-  431   2              //Buzzer_task();
-  432   2            
-  433   2              //debug_8x8(b,64,1);    
-  434   2            
-  435   2            
-  436   2              if(Sleep_Queue_task[0] == 0)
-  437   2              {
-  438   3                  SleepQueue_MoveLeft(1);
-  439   3              }
-  440   2      
-  441   2      
-  442   2      
-  443   2              
-  444   2              SPI_DMA_delay();
-  445   2              Sleep_Thread();
-  446   2              
-  447   2      
-  448   2              
-  449   2      
-  450   2      
-  451   2              UI_switch();        //1号任务
-  452   2              SHT41_falg_0004();
-  453   2              SPL06_PR_R_flag0008();
-  454   2              SPL06_PR_P_flag0010();
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 8   
-
-  455   2              BH1745R_flag0002();
-  456   2              Buzzer_falg_0020();
-  457   2              ADC_falg_0040();
-  458   2              Magnetometer_falg_0080();
-  459   2      
-  460   2              
-  461   2      
-  462   2          }
-  463   1      }
-  464          
-  465          
-  466          
-  467          
-  468          void INT0_Isr() interrupt 0
-  469          {
-  470   1      
-  471   1      }
-  472          
-  473          void INT1_Isr() interrupt 2
-  474          {
-  475   1      
-  476   1      }
-  477          
-  478          void KZ_isr() interrupt 13
-  479          {
-  480   1          u8 intf = 0;
-  481   1      
-  482   1      
-  483   1      
-  484   1          intf = P0INTF;
-  485   1          if(intf)
-  486   1          {
-  487   2              //dat00[0] |= 0x0001;
-  488   2              P0INTF = 0;
-  489   2              if(intf & 0x02)
-  490   2              {
-  491   3                  dat00_low[0x00E2]++;
-  492   3                  if(dat00_low[0x00E2]>=2)
-  493   3                  {
-  494   4                      P0INTE &= ~0x02;//允许端口中断
-  495   4                      P0WKUE &= ~0x02;//允许掉电唤醒
-  496   4                  }
-  497   3      
-  498   3              }
-  499   2          }
-  500   1      
-  501   1      
-  502   1      
-  503   1      
-  504   1      
-  505   1      
-  506   1      
-  507   1      
-  508   1      
-  509   1      
-  510   1      
-  511   1          intf = P4INTF;
-  512   1          if(intf)
-  513   1          {
-  514   2              //dat00[0] |= 0x0001;
-  515   2              P4INTF = 0;
-  516   2              if(intf & 0x20)
-  517   2              {
-  518   3                  dat00[0] |= 0x0001;
-  519   3                  dat00[2] |= 0x0001;
-  520   3                  //Delay10us();
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 9   
-
-  521   3                  Add_key(1);
-  522   3                  dat00[1] &= 0x0001;
-  523   3              }
-  524   2              if(intf & 0x40)
-  525   2              {
-  526   3                  dat00[0] |= 0x0001;
-  527   3                  dat00[2] |= 0x0001;
-  528   3                  //Delay10us();
-  529   3                  SET_key();     //主菜单 按下确认件
-  530   3                  dat00[1] = 0;
-  531   3              }
-  532   2          }
-  533   1      
-  534   1          intf = P2INTF;
-  535   1          if(intf)
-  536   1          {
-  537   2      
-  538   2              //miao(P2INTF);
-  539   2              P2INTF = 0;
-  540   2              if(intf & 0x80)
-  541   2              {
-  542   3                  
-  543   3                  dat00[0] |= 0x0001;
-  544   3                  dat00[2] |= 0x0001;
-  545   3                  //Delay10us();
-  546   3                  Add_key(0);
-  547   3                  dat00[1] &= 0x0002;
-  548   3              }
-  549   2              if(intf & 0x40)
-  550   2              {
-  551   3                  dat00[0] |= 0x0001;
-  552   3                  dat00[2] |= 0x0001;
-  553   3                  //Delay10us();
-  554   3                  ESC_key();     //二级菜单 按下退出
-  555   3                  dat00[1] = 0;
-  556   3              }
-  557   2          }
-  558   1          intf = P5INTF;
-  559   1          if(intf)
-  560   1          {
-  561   2              P5INTF = 0;
-  562   2              if(intf & 0x01)
-  563   2              {
-  564   3                  dat00[0] |= 0x0002;
-  565   3              }
-  566   2          }
-  567   1          P2INTF=0;
-  568   1          P4INTF=0;
-  569   1          P5INTF=0;
-  570   1          P0INTF=0;
-  571   1          P1INTF=0;
-  572   1          P3INTF=0;
-  573   1          P6INTF=0;
-  574   1          P7INTF=0;
-  575   1      
-  576   1      
-  577   1      //    UART1_DMA();
-  578   1      
-  579   1          //nian(gg++,6);
-  580   1          SPI_DMA();
-  581   1      
-  582   1      }
-  583          
+  395   1          intf = P2INTF;
+  396   1          if (intf)
+  397   1          {
+  398   2      
+  399   2              // miao(P2INTF);
+  400   2              P2INTF = 0;
+  401   2              if (intf & 0x80)
+  402   2              {
+  403   3      
+  404   3                  dat00[0] |= 0x0001;
+  405   3                  dat00[2] |= 0x0001;
+  406   3                  // Delay10us();
+  407   3                  Add_key(0);
+  408   3                  dat00[1] &= 0x0002;
+  409   3              }
+  410   2              if (intf & 0x40)
+  411   2              {
+  412   3                  dat00[0] |= 0x0001;
+  413   3                  dat00[2] |= 0x0001;
+  414   3                  // Delay10us();
+  415   3                  ESC_key(); // 二级菜单 按下退出
+  416   3                  dat00[1] = 0;
+  417   3              }
+  418   2          }
+  419   1          intf = P5INTF;
+  420   1          if (intf)
+  421   1          {
+  422   2              P5INTF = 0;
+  423   2              if (intf & 0x01)
+  424   2              {
+  425   3                  dat00[0] |= 0x0002;
+  426   3              }
+  427   2          }
+  428   1          P2INTF = 0;
+  429   1          P4INTF = 0;
+  430   1          P5INTF = 0;
+  431   1          P0INTF = 0;
+  432   1          P1INTF = 0;
+  433   1          P3INTF = 0;
+  434   1          P6INTF = 0;
+  435   1          P7INTF = 0;
+  436   1      
+  437   1          //    UART1_DMA();
+  438   1      
+  439   1          // nian(gg++,6);
+  440   1          SPI_DMA();
+  441   1      }
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-C251 COMPILER V5.60.0,  main                                                               24/01/24  00:35:52  PAGE 10  
-
   code size            =       908     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
@@ -622,6 +475,8 @@ Module Information          Static   Overlayable
   xdata-const size     =    ------     ------
   edata size           =        37     ------
   bit size             =    ------     ------
+C251 COMPILER V5.60.0,  main                                                               24/04/24  23:59:19  PAGE 8   
+
   ebit size            =    ------     ------
   bitaddressable size  =    ------     ------
   ebitaddressable size =    ------     ------

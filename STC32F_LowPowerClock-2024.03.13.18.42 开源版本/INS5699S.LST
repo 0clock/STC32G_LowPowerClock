@@ -1,0 +1,164 @@
+C251 COMPILER V5.60.0,  INS5699S                                                           25/04/24  00:23:36  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE INS5699S
+OBJECT MODULE PLACED IN INS5699S.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE INS5699S.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "INS5699S.h"
+    2          #include "IIC.h"
+    3          #include "time.h"
+    4          #include "DATA.h"
+    5          
+    6          extern u16 dat00[System_data_num];
+    7          extern u8 Time_New[7];
+    8          extern u8 xdata Time_int[7];
+    9          
+   10          
+   11          //========================================================================
+   12          // 函数: void INS5699_timeR()
+   13          // 描述: 读取时间，秒、分、时、星期、日、月、年
+   14          // 参数: 
+   15          // 返回:
+   16          // 版本: V1.0 2023.02.05
+   17          //========================================================================
+   18          void INS5699_timeR()
+   19          {
+   20   1          u8 i = 0;
+   21   1          Start(); //发送起始命令
+   22   1          SendData(INS5699_W);                             //发送设备地址+写命令
+   23   1          RecvACK();
+   24   1          SendData(0x00);                             //发送设备地址+写命令
+   25   1          RecvACK();
+   26   1          Start(); //发送起始命令
+   27   1          SendData(INS5699_R);                             //发送设备地址+写命令
+   28   1          RecvACK();
+   29   1      
+   30   1          for(i=0; i<7; i++)
+   31   1          {
+   32   2              Time_New[i] = RecvData();                            //读取数据2
+   33   2              if(i == 6)
+   34   2              {
+   35   3                  SendNAK();
+   36   3              }
+   37   2              else
+   38   2              {
+   39   3                  SendACK();
+   40   3              }
+   41   2          }
+   42   1          Stop();
+   43   1      }
+   44          
+   45          
+   46          //========================================================================
+   47          // 函数: void INS5699_timeW(u8 *a)
+   48          // 描述: 写入时间，秒、分、时、星期、日、月、年
+   49          // 参数: 
+   50          // 返回:
+   51          // 版本: V1.0 2023.02.05
+   52          //========================================================================
+   53          
+   54          void INS5699_timeW(u8 *a)
+   55          {
+   56   1          u8 i = 0;
+   57   1          Start(); //发送起始命令
+   58   1          SendData(INS5699_W);                             //发送设备地址+写命令
+   59   1          RecvACK();
+C251 COMPILER V5.60.0,  INS5699S                                                           25/04/24  00:23:36  PAGE 2   
+
+   60   1          SendData(0x00);                             //发送设备地址+写命令
+   61   1          RecvACK();
+   62   1          for(i=0; i<7; i++)
+   63   1          {
+   64   2              SendData(a[i]);                             //发送设备地址+写命令
+   65   2              RecvACK();
+   66   2          }
+   67   1          Stop();
+   68   1      }
+   69          
+   70          
+   71          //========================================================================
+   72          // 函数: void INS5699_Initialization()
+   73          // 描述: 芯片初始化
+   74          // 参数: 
+   75          // 返回:
+   76          // 版本: V1.0 2023.02.05
+   77          //========================================================================
+   78          void INS5699_Initialization()
+   79          {
+   80   1          IIC_W2bit(0x64,0x21,0x80);//关闭芯片K2开关
+   81   1          Delay10us();
+   82   1          IIC_W2bit(0x64,0x0F,0x60);//配置开启1S时间更新 0x60
+   83   1          Delay10us();
+   84   1          IIC_W2bit(0x64,0x0D,0x0A);//FSEL 1Hz  定时器1Hz  时间更新：秒更新
+   85   1          Delay10us();
+   86   1          IIC_W2bit(0x64,0x0E,0x00);//清除警告
+   87   1      }
+   88          
+   89          
+   90          
+   91          
+   92          //========================================================================
+   93          // 函数: void Interrupt_Transmission(u8 position)
+   94          // 描述: RTC芯片中断时间切换
+   95          // 参数: 
+   96          // 返回:
+   97          // 版本: V1.0 2023.02.05
+   98          //========================================================================
+   99          void Interrupt_Transmission(u8 position)
+  100          {
+  101   1          if(position)
+  102   1          {
+  103   2              IIC_W2bit(0x64,0x0D,0x2A);//FSEL 1Hz  定时器1Hz  时间更新：分更新
+  104   2          }
+  105   1          else
+  106   1          {
+  107   2              IIC_W2bit(0x64,0x0D,0x0A);//FSEL 1Hz  定时器1Hz  时间更新：秒更新
+  108   2          }
+  109   1      }
+  110          
+  111          
+  112          
+  113          
+  114          
+  115          
+  116          
+  117          
+  118          
+  119          
+  120          
+  121          
+  122          
+  123          
+  124          
+  125          
+C251 COMPILER V5.60.0,  INS5699S                                                           25/04/24  00:23:36  PAGE 3   
+
+  126          
+  127          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       217     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------          1
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

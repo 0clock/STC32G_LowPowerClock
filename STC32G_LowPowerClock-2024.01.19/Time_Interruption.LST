@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  Time_Interruption                                                  24/01/24  00:35:54  PAGE 1   
+C251 COMPILER V5.60.0,  Time_Interruption                                                  24/04/24  23:59:21  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE Time_Interruption
-OBJECT MODULE PLACED IN Time_Interruption.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE Time_Interruption.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\Time_Interruption.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Time_Interruption.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJE
+                    -CT(..\firmware\Time_Interruption.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   2              if(i & 0x20)
    57   2              {
    58   3                  dat00[0x0004]  |= 0x0001;
-   59   3                  dat00[0x0005]  |= 0x0001;
-C251 COMPILER V5.60.0,  Time_Interruption                                                  24/01/24  00:35:54  PAGE 2   
+C251 COMPILER V5.60.0,  Time_Interruption                                                  24/04/24  23:59:21  PAGE 2   
 
+   59   3                  dat00[0x0005]  |= 0x0001;
    60   3                  INS5699_timeR();
    61   3                  if(dat00[0x0010] == 0x0020 | dat00[0x0010] == 0x0021 | dat00[0x0010] == 0x0022 | dat00[0x0010] == 0
              -x0005)
@@ -133,9 +134,9 @@ stmt  level    source
   121                
   122                
   123                
-  124                
-C251 COMPILER V5.60.0,  Time_Interruption                                                  24/01/24  00:35:54  PAGE 3   
+C251 COMPILER V5.60.0,  Time_Interruption                                                  24/04/24  23:59:21  PAGE 3   
 
+  124                
 
 
 Module Information          Static   Overlayable

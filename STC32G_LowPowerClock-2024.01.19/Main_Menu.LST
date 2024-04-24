@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  Main_Menu                                                          24/01/24  00:35:53  PAGE 1   
+C251 COMPILER V5.60.0,  Main_Menu                                                          24/04/24  23:59:19  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE Main_Menu
-OBJECT MODULE PLACED IN Main_Menu.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE Main_Menu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\Main_Menu.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Main_Menu.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\fi
+                    -rmware\Main_Menu.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1        {
    57   2          if(dat00[0x14] != dat00_low[0x14] && ((dat00[0x13] & 0x0004) == 0))//主菜单界面移动触发
    58   2          {
-   59   3            dat00[0x15] = dat00[0x14];
-C251 COMPILER V5.60.0,  Main_Menu                                                          24/01/24  00:35:53  PAGE 2   
+C251 COMPILER V5.60.0,  Main_Menu                                                          24/04/24  23:59:19  PAGE 2   
 
+   59   3            dat00[0x15] = dat00[0x14];
    60   3            dat00[0x13] |= 0x0004;
    61   3          }
    62   2          if(dat00[0x13] & 0x0004)//主菜单界面移动触发
@@ -133,9 +134,9 @@ stmt  level    source
   122   7                          data00_Change(0x14,1);
   123   7                        }
   124   6                        if(!P27)
-  125   6                        {
-C251 COMPILER V5.60.0,  Main_Menu                                                          24/01/24  00:35:53  PAGE 3   
+C251 COMPILER V5.60.0,  Main_Menu                                                          24/04/24  23:59:19  PAGE 3   
 
+  125   6                        {
   126   7                          data00_Change(0x14,0);
   127   7                        }  
   128   6                    }   

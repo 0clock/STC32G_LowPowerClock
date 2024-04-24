@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  flag                                                               24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  flag                                                               24/04/24  23:59:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE flag
-OBJECT MODULE PLACED IN flag.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE flag.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\flag.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE flag.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwar
+                    -e\flag.obj) 
 
 stmt  level    source
 

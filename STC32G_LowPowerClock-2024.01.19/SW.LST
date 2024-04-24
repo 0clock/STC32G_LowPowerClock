@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  SW                                                                 24/01/24  00:35:53  PAGE 1   
+C251 COMPILER V5.60.0,  SW                                                                 24/04/24  23:59:20  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SW
-OBJECT MODULE PLACED IN SW.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE SW.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\SW.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE SW.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmware\
+                    -SW.obj) 
 
 stmt  level    source
 

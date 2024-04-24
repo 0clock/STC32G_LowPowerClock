@@ -1,0 +1,126 @@
+C251 COMPILER V5.60.0,  flag                                                               25/04/24  00:23:35  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE flag
+OBJECT MODULE PLACED IN flag.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE flag.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "flag.h"
+    2          #include "OLED.h"
+    3          #include "IO.h"
+    4          #include "DATA.h"
+    5          #include "UI.h"
+    6          #include "time.h"
+    7          #include "UART1.h"
+    8          #include "INS5699S.h"
+    9          #include "SleepMode.h"
+   10          
+   11          
+   12          
+   13          
+   14          extern u16 dat00[System_data_num];
+   15          extern u16 dat00_low[System_data_num];
+   16          extern u8 xdata dat00_flag[System_data_num];
+   17          extern u16 xdata dat00_max[System_data_num];
+   18          
+   19          u8 OLED_InverseDisplay = 0;
+   20          
+   21          extern u8 Time_New[7];
+   22          extern u8 Time_Low[7];
+   23          extern u8 xdata Time_int[7];
+   24          
+   25          
+   26          
+   27          //========================================================================
+   28          // 函数: void flag_handle()
+   29          // 描述: 当检测到数据被修改了，判断是否要作出相应动作
+   30          // 参数: 
+   31          // 返回: 
+   32          // 版本: V1.0 2023.02.05
+   33          //========================================================================
+   34          void flag_handle()
+   35          {
+   36   1      
+   37   1          if((dat00[0x0053]) && (dat00_flag[0x14])&& (dat00[0x10] == 0x0000) && (dat00[0x1A] == 0)) SleepQueue_
+             -aheadW1(6,1,0);//好像是开了自动调光之后主菜单又是反应慢一点，这里直接在前面插入一个UI�
+             -�务缓解
+   38   1      
+   39   1          if(dat00_flag[0x14] == 0x01)//主菜单界面移动触发
+   40   1          {
+   41   2              dat00[0x11] = dat00[0x14] % 16;
+   42   2              dat00_flag[0x14]  = 0;
+   43   2          }
+   44   1          if(dat00_flag[0x17] == 0x01)//
+   45   1          {
+   46   2              dat00[GET_SC() + 0x000f] = dat00[0x17] % GET_SCdat();
+   47   2              dat00_flag[0x17]  = 0;
+   48   2          }
+   49   1      
+   50   1      
+   51   1          if(dat00[0] & 0x0200)//烧屏保护相关
+   52   1          {
+   53   2      
+   54   2              if(dat00_flag[0x0021])
+   55   2              {
+   56   3                  if((dat00[0x0021] == 0x00) && (OLED_InverseDisplay))
+   57   3                  {
+C251 COMPILER V5.60.0,  flag                                                               25/04/24  00:23:35  PAGE 2   
+
+   58   4                      OLED_WrCmd(0xa6);
+   59   4                      OLED_InverseDisplay = 0;
+   60   4                  }
+   61   3                  dat00_flag[0x0021]  = 0;
+   62   3              }
+   63   2      
+   64   2              if(dat00_flag[0x37] == 0x01)//休眠
+   65   2              {
+   66   3                  OLED_Fill(0x00); //初始清屏
+   67   3                  Sleep_Display_int();
+   68   3                  SleepMode_ON();
+   69   3                  dat00_flag[0x37] = 0;
+   70   3              }
+   71   2              dat00[0] &= ~0x0200;
+   72   2          }
+   73   1      
+   74   1          if(dat00_flag[0x0051])//调节屏幕亮度
+   75   1          {
+   76   2              OLED_WrCmd(0x81);//--set contrast control register   设置对比度控制寄存器
+   77   2              OLED_WrCmd((u8)dat00[0x0051]); // Set SEG Output Current Brightness 设置SEG输出电流亮度
+   78   2              dat00_flag[0x0051] = 0;
+   79   2          }
+   80   1          if(dat00_flag[0x0052])//调节电压
+   81   1          {
+   82   2      
+   83   2              OLED_POW((u8)dat00[0x0052]);
+   84   2              dat00_flag[0x0052] = 0;
+   85   2          }
+   86   1      }
+   87          
+   88          
+   89          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       221     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         1     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         5     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

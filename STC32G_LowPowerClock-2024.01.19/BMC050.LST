@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 1   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE BMC050
-OBJECT MODULE PLACED IN BMC050.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE BMC050.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\BMC050.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE BMC050.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmw
+                    -are\BMC050.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1          return  adc_dat;
    57   1      }
    58          
-   59          int convert_1(u16 dat1)
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 2   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 2   
 
+   59          int convert_1(u16 dat1)
    60          {
    61   1          int adc_dat=0;
    62   1      
@@ -133,9 +134,9 @@ stmt  level    source
   122          
   123          
   124          
-  125          
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 3   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 3   
 
+  125          
   126          
   127          
   128          void ggg(u8 addre,long num)
@@ -201,9 +202,9 @@ stmt  level    source
   188   3                  y_new = y + xx;
   189   3                  angleSum -= angle[i];
   190   3              }
-  191   2              x = x_new;
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 4   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 4   
 
+  191   2              x = x_new;
   192   2              y = y_new;
   193   2          }
   194   1      
@@ -269,9 +270,9 @@ stmt  level    source
   254   1      
   255   1      
   256   1      
-  257   1      
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 5   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 5   
 
+  257   1      
   258   1      
   259   1      
   260   1      }
@@ -337,9 +338,9 @@ stmt  level    source
   320   1          dat00[0x0060] = (u16)convert_1(dat00[0x0060]);
   321   1          dat00[0x0061] = (u16)convert_1(dat00[0x0061]);
   322   1      
-  323   1      
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 6   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 6   
 
+  323   1      
   324   1      
   325   1          dat00_low[0x0060] = (u16)Get_Magnetism_dat(Magnetism_X,dat00[0x0060],7);
   326   1          dat00_low[0x0060] = (u16)Get_Magnetism_dat(Magnetism_X1,dat00_low[0x0060],7);
@@ -405,9 +406,9 @@ stmt  level    source
   386          
   387          
   388          
-  389          
-C251 COMPILER V5.60.0,  BMC050                                                             24/01/24  00:35:51  PAGE 7   
+C251 COMPILER V5.60.0,  BMC050                                                             24/04/24  23:59:18  PAGE 7   
 
+  389          
   390          
   391          
   392          

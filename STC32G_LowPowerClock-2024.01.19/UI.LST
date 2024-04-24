@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  UI                                                                 24/01/24  00:35:54  PAGE 1   
+C251 COMPILER V5.60.0,  UI                                                                 24/04/24  23:59:22  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE UI
-OBJECT MODULE PLACED IN UI.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE UI.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\UI.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE UI.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmware\
+                    -UI.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    55   2          {
    56   3              OLED_Fill(0x00); //初始清屏
    57   3              IU_Main_Menu_Switch();
-   58   3              TVMode_int();
-C251 COMPILER V5.60.0,  UI                                                                 24/01/24  00:35:54  PAGE 2   
+C251 COMPILER V5.60.0,  UI                                                                 24/04/24  23:59:22  PAGE 2   
 
+   58   3              TVMode_int();
    59   3            
    60   3          } 
    61   2          else if(dat00[0x0010] == 0x0021 && dat00[0x1A] == 0)
@@ -134,9 +135,9 @@ Module Information          Static   Overlayable
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
-  pdata size           =    ------     ------
-C251 COMPILER V5.60.0,  UI                                                                 24/01/24  00:35:54  PAGE 3   
+C251 COMPILER V5.60.0,  UI                                                                 24/04/24  23:59:22  PAGE 3   
 
+  pdata size           =    ------     ------
   xdata size           =    ------     ------
   xdata-const size     =    ------     ------
   edata size           =    ------     ------

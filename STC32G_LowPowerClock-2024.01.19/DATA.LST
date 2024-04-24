@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE DATA
-OBJECT MODULE PLACED IN DATA.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE DATA.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\DATA.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE DATA.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwar
+                    -e\DATA.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56              0x0006,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
    57          
    58          //15系统设置寄存器组
-   59              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 2   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 2   
 
+   59              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
    60          
    61          //16系统信息寄存器组
    62              0x000C,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -133,9 +134,9 @@ stmt  level    source
   122              0x000C,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   123          
   124          //17工厂模式寄存器组
-  125              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 3   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 3   
 
+  125              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
   126          
   127          };
   128          
@@ -201,9 +202,9 @@ stmt  level    source
   188          //最大值寄存器：
   189          //0:0~0xffff
   190          //1:0~1
-  191          //2:0~10
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 4   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 4   
 
+  191          //2:0~10
   192          //3:0~100
   193          //4:0~1000
   194          //5:0~10000
@@ -269,9 +270,9 @@ stmt  level    source
   253          //u16 AlarmClock_SET[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
   254          u32 AlarmClock[16]={0x02100000,0x02100000,0x02100000,0x02100000,0x02100000,0x02100000,0x02100000,0x021000
              -00,0x02100000,0x02100000,0,0,0,0,0,0};
-  255          
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 5   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 5   
 
+  255          
   256          
   257          void Array_Initialization_8(u8 *array_name,u16 array_num)
   258          {
@@ -337,9 +338,9 @@ stmt  level    source
   318   2              {
   319   3                  a = i;
   320   3                  i = 200;
-  321   3              }
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 6   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 6   
 
+  321   3              }
   322   2          }
   323   1          return a;
   324   1      
@@ -405,9 +406,9 @@ stmt  level    source
   384   2              {
   385   3                  for(k= RFF(); k>i; k--)
   386   3                  {
-  387   4                      Sleep_Queue[k]=Sleep_Queue[k-1];
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 7   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 7   
 
+  387   4                      Sleep_Queue[k]=Sleep_Queue[k-1];
   388   4                      Sleep_Queue_task[k]  = Sleep_Queue_task[k-1];
   389   4                  }
   390   3                  Sleep_Queue[i] = time - ( j - Sleep_Queue[i+1]);
@@ -473,9 +474,9 @@ stmt  level    source
   450   2          case 0x00 :
   451   2              k=0xffff;
   452   2              break;
-  453   2          case 0x01 :
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 8   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 8   
 
+  453   2          case 0x01 :
   454   2              k=1;
   455   2              break;
   456   2          case 0x02 :
@@ -541,9 +542,9 @@ stmt  level    source
   516   2          default:
   517   2              k=0;
   518   2              break;
-  519   2      //**********************************************
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 9   
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 9   
 
+  519   2      //**********************************************
   520   2          }
   521   1          return k;
   522   1      }
@@ -609,9 +610,9 @@ stmt  level    source
   582          
   583          
   584          u16 GET_GBdat()   //获取目前是调用0x0?0组 的光标 的值
-  585          {
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 10  
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 10  
 
+  585          {
   586   1          return dat00[GET_SC() + 0x0f];
   587   1      }
   588          
@@ -677,9 +678,9 @@ stmt  level    source
   648          {
   649   1          u8 i=0;
   650   1          u8 b=0x01;
-  651   1          for(i=0; i<8; i++)
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 11  
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 11  
 
+  651   1          for(i=0; i<8; i++)
   652   1          {
   653   2              if(a == b) break;
   654   2              b = b <<1;
@@ -745,9 +746,9 @@ stmt  level    source
   714   1          {
   715   2            return 0; 
   716   2          }
-  717   1          else
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 12  
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 12  
 
+  717   1          else
   718   1          {
   719   2            return 1; 
   720   2          } 
@@ -813,9 +814,9 @@ stmt  level    source
   780   1      }
   781          
   782          
-  783          
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 13  
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 13  
 
+  783          
   784          void Alarm_conversion_32TO16(u8 a)
   785          {
   786   1          u32 dat = 0;
@@ -881,9 +882,9 @@ stmt  level    source
   846          
   847          
   848          
-  849          
-C251 COMPILER V5.60.0,  DATA                                                               24/01/24  00:35:52  PAGE 14  
+C251 COMPILER V5.60.0,  DATA                                                               24/04/24  23:59:18  PAGE 14  
 
+  849          
   850          
   851          
   852          

@@ -1,0 +1,411 @@
+C251 COMPILER V5.60.0,  main                                                               25/04/24  00:23:36  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE main.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "STC32F.h"
+    2          #include "stdio.h"
+    3          #include "intrins.h"
+    4          #include "time.h"
+    5          #include "IIC.h"
+    6          #include "UART1.h"
+    7          #include "SHT41.h"
+    8          #include "SPL06.h"
+    9          #include "IO.h"
+   10          #include "BH1745.h"
+   11          #include "OLED.h"
+   12          #include "UI.h"
+   13          #include "DATA.h"
+   14          #include "logic.h"
+   15          #include "SecondaryMenu.h"
+   16          #include "ThreeMenu.h"
+   17          #include "flag.h"
+   18          #include "TV_Mode.h"
+   19          #include "INS5699S.h"
+   20          #include "ADC.h"
+   21          #include "BMC050.h"
+   22          #include "Time_Interruption.h"
+   23          
+   24          #include "SleepMode.h"
+   25          
+   26          
+   27          
+   28          ////REMOVEUNUSED
+   29          
+   30          /****************************** 用户定义宏 ***********************************/
+   31          
+   32          
+   33          /*****************************************************************************/
+   34          
+   35          /*************  本地常量声明    **************/
+   36          //u16 xdata JCQ03_00[32];
+   37          u32 xdata JCQ06_00[5];
+   38          
+   39          //**************JCQ06_00***********************
+   40          //00 温度 ×100 ℃
+   41          //01 湿度 ×100 RH
+   42          //02 SPL06气压 原始值
+   43          //03 SPL06温度 原始值
+   44          //04 气压 ×1   Pa
+   45          //*************************************
+   46          
+   47          
+   48          
+   49          
+   50          extern u16 dat00[System_data_num];
+   51          extern u16 dat00_low[System_data_num];
+   52          extern u8 xdata dat00_flag[System_data_num];
+   53          
+   54          
+   55          
+   56          /*************  本地变量声明  功能寄存器  **************/
+   57          extern u8 xdata DMABuffer[96];
+   58          
+   59          
+C251 COMPILER V5.60.0,  main                                                               25/04/24  00:23:36  PAGE 2   
+
+   60          
+   61          
+   62          /****************************** 睡眠寄存器组 ***********************************/
+   63          extern u16 Sleep_Queue[Sleep_queue_num];
+   64          
+   65          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   66          
+   67          extern u16 Sleep_Queue_count;
+   68          extern u16 Sleep_Queue_count_target;
+   69          
+   70          
+   71          
+   72          extern u8 Time_New[7];
+   73          extern u8 Time_Low[7];
+   74          extern u8 xdata Time_int[7];
+   75          
+   76          
+   77          
+   78          /********************* 主函数 *************************/
+   79          u32 dat1 = 0;
+   80          u32 dat2 = 0;
+   81          u32 dat3 = 0;
+   82          u32 dat4 = 0;
+   83          u32 dat5 = 0;
+   84          
+   85          u32 dat6 = 0;
+   86          u32 dat7 = 0;
+   87          u8 uu=0;
+   88          u16 sleep_dat=0;
+   89          
+   90          u16 gg = 0;
+   91          
+   92          
+   93          
+   94          
+   95          //REMOVEUNUSED
+   96          
+   97          
+   98          
+   99          
+  100          
+  101          
+  102          
+  103          
+  104          
+  105          void main(void)
+  106          {
+  107   1          u8 i = 0;
+  108   1          u8 a = 0;
+  109   1          u8 b = 0;
+  110   1          u16 c = 0;
+  111   1          u32 d = 0;
+  112   1          u8 ii = 0;
+  113   1          u8 datac=0;
+  114   1          u16 kk=0;
+  115   1      
+  116   1      
+  117   1      
+  118   1      
+  119   1          EAXFR = 1;  //扩展SFR寄存器使能
+  120   1          WTST = 1;  //设置程序指令延时参数，赋值为0可将CPU执行指令的速度设置为最快
+  121   1          _nop_();
+  122   1          _nop_();
+  123   1          _nop_();
+  124   1          _nop_();
+  125   1          ELVD = 0;   //低压检测允许关闭
+C251 COMPILER V5.60.0,  main                                                               25/04/24  00:23:36  PAGE 3   
+
+  126   1          ENLVR = 0;   //低压复位关闭
+  127   1          WDT_FLAG = 0;//看门狗关闭
+  128   1      
+  129   1      
+  130   1      
+  131   1      //    USBCLK |= 0x60;//PLL输入时钟8分频  52/8=6.5M
+  132   1      //    HPLLCR = 0x80;
+  133   1      //    delay_ms(3);
+  134   1      
+  135   1      //    CLKSEL |= 0x40;                       //HSPWM/HSSPI选择PLL输出时钟为时钟源
+  136   1      //    HSCLKDIV = 4;
+  137   1      
+  138   1      
+  139   1      
+  140   1      
+  141   1      
+  142   1          _nop_();
+  143   1          _nop_();
+  144   1          _nop_();
+  145   1          _nop_();
+  146   1          NOP27();//重中之重
+  147   1          _nop_();
+  148   1          _nop_();
+  149   1          _nop_();
+  150   1          _nop_();
+  151   1      
+  152   1          IO_Init();          //IO初始化
+  153   1          OLED_POW(0);        //OLED5V！ ----- 启动！
+  154   1          RESET54();          //设置P54为复位脚
+  155   1      
+  156   1      
+  157   1          ADC_init();         //ADC初始化
+  158   1          Clock_INT();        //RTC中断
+  159   1          key_int();          //按键初始化
+  160   1          IIC_int();          //IIC初始化
+  161   1      
+  162   1      
+  163   1      //    UART1_config();
+  164   1      //    DMA_Config();
+  165   1      
+  166   1      
+  167   1          Array_Initialization_();    //寄存器初始化
+  168   1          INS5699_Initialization();   //时钟初始化
+  169   1          BH1745_Init();              //光强计初始化
+  170   1          delay_ms(1);
+  171   1          SHT41_Init();               //温度湿度计初始化
+  172   1          delay_ms(1);
+  173   1          SPL06_Init();               //气压计初始化
+  174   1          delay_ms(1);
+  175   1          SPI_init();                 //SPI初始化
+  176   1          SPI_DMA_Config();           //SPI DMA初始化
+  177   1          Magnetometer_initi();       //磁强计初始化
+  178   1      
+  179   1      
+  180   1          delay_ms(1);
+  181   1          IIC_W2bit(0x32,0x11,0x5E);  //加速度计初始化
+  182   1          delay_ms(1);
+  183   1          IIC_W2bit(0x32,0x11,0x9E);
+  184   1          delay_ms(1);
+  185   1      
+  186   1          INS5699_timeW(Time_int);    //设定RTC时间
+  187   1          delay_ms(1);
+  188   1          
+  189   1      
+  190   1      
+  191   1          OLED_Init();                //OLED初始化
+C251 COMPILER V5.60.0,  main                                                               25/04/24  00:23:36  PAGE 4   
+
+  192   1          OLED_Fill(0x00);            //清屏
+  193   1          INS5699_timeR();            //读取当前时间
+  194   1          dat00[0] |= 0x0002;
+  195   1          dat00[0x10]=0x0020;
+  196   1          dat00_flag[0x10]=1;
+  197   1          dat00[0x2D]=0xFFFF;
+  198   1          SleepQueue_aheadW1(5,1,0);
+  199   1      
+  200   1      
+  201   1          P0INTE |= 0x02;//允许端口中断
+  202   1          P0IM1 |=  0xFD;//下降沿中断
+  203   1          P0IM0 &=  0xFD;
+  204   1          P0WKUE |= 0x02;//允许掉电唤醒
+  205   1          ICacheOn();//打开ICACHE功能
+  206   1      
+  207   1      
+  208   1          
+  209   1      
+  210   1          
+  211   1      
+  212   1      
+  213   1      
+  214   1          EA = 1;
+  215   1      
+  216   1      
+  217   1          while (1)
+  218   1          {
+  219   2      
+  220   2              Time_Interruption_1S();
+  221   2              flag_handle();
+  222   2      
+  223   2              IU_Thread();
+  224   2              OLED_Frames();      
+  225   2              Sleep_task();
+  226   2              key_thread1_new();
+  227   2              
+  228   2              if(Sleep_Queue_task[0] == 0)
+  229   2              {
+  230   3                  SleepQueue_MoveLeft(1);      //任务执行完了任务队列左移1
+  231   3              }
+  232   2      
+  233   2              
+  234   2              SPI_DMA_delay();              //等待SPI DMA 发送完数据
+  235   2              
+  236   2              
+  237   2              Sleep_Thread();               //休眠
+  238   2      
+  239   2      
+  240   2              UI_switch();                  //1号任务
+  241   2              SHT41_falg_0004();            //3号任务
+  242   2              SPL06_PR_R_flag0008();        //4号任务
+  243   2              SPL06_PR_P_flag0010();        //5号任务
+  244   2              BH1745R_flag0002();           //2号任务
+  245   2              Buzzer_falg_0020();           //6号任务
+  246   2              ADC_falg_0040();              //7号任务
+  247   2              Magnetometer_falg_0080();     //8号任务
+  248   2              key_falg_0100();              //9号任务
+  249   2          }
+  250   1      }
+  251          
+  252          
+  253          
+  254          void KZ_isr() interrupt 13
+  255          {
+  256   1          u8 intf = 0;
+  257   1      
+C251 COMPILER V5.60.0,  main                                                               25/04/24  00:23:36  PAGE 5   
+
+  258   1      
+  259   1      
+  260   1      
+  261   1      
+  262   1          intf = P3INTF;
+  263   1          if(intf)                    //振动传感器触发
+  264   1          {
+  265   2              P3INTF = 0;
+  266   2              if(intf & 0x10)
+  267   2              {
+  268   3                  dat00[0] |= 0x0010;
+  269   3              }
+  270   2      
+  271   2          }
+  272   1      
+  273   1      
+  274   1          intf = P0INTF;
+  275   1          if(intf)                          //检测有无电池
+  276   1          {
+  277   2              //dat00[0] |= 0x0001;
+  278   2              P0INTF = 0;
+  279   2              if(intf & 0x02)
+  280   2              {
+  281   3                  dat00_low[0x00E2]++;
+  282   3                  if(dat00_low[0x00E2]>=2)
+  283   3                  {
+  284   4                      P0INTE &= ~0x02;//允许端口中断
+  285   4                      P0WKUE &= ~0x02;//允许掉电唤醒
+  286   4                  }
+  287   3      
+  288   3              }
+  289   2          }
+  290   1      
+  291   1      
+  292   1      
+  293   1      
+  294   1      
+  295   1      
+  296   1      
+  297   1      
+  298   1      
+  299   1      
+  300   1      
+  301   1          intf = P4INTF;
+  302   1          if(intf)
+  303   1          {
+  304   2              //dat00[0] |= 0x0001;
+  305   2              P4INTF = 0;
+  306   2              if(intf & 0x20)             //按+
+  307   2              {
+  308   3                  dat00[0] |= 0x0001;
+  309   3                  dat00[2] |= 0x0001;
+  310   3                  //Delay10us();
+  311   3                  Add_key(1);
+  312   3                  dat00[1] &= 0x0001;
+  313   3              }
+  314   2              if(intf & 0x40)
+  315   2              {
+  316   3                  dat00[0] |= 0x0001;
+  317   3                  dat00[2] |= 0x0001;
+  318   3                  //Delay10us();
+  319   3                  SET_key();             //主菜单 按下确认件
+  320   3                  dat00[1] = 0;
+  321   3              }
+  322   2          }
+  323   1      
+C251 COMPILER V5.60.0,  main                                                               25/04/24  00:23:36  PAGE 6   
+
+  324   1          intf = P2INTF;
+  325   1          if(intf)
+  326   1          {
+  327   2              P2INTF = 0;
+  328   2              if(intf & 0x80)           //按-
+  329   2              {
+  330   3      
+  331   3                  dat00[0] |= 0x0001;
+  332   3                  dat00[2] |= 0x0001;
+  333   3                  Add_key(0);
+  334   3                  dat00[1] &= 0x0002;
+  335   3              }
+  336   2              if(intf & 0x40)
+  337   2              {
+  338   3                  dat00[0] |= 0x0001;
+  339   3                  dat00[2] |= 0x0001;
+  340   3                  ESC_key();     //二级菜单 按下退出
+  341   3                  dat00[1] = 0;
+  342   3              }
+  343   2          }
+  344   1          intf = P5INTF;
+  345   1          if(intf)
+  346   1          {
+  347   2              P5INTF = 0;
+  348   2              if(intf & 0x01)
+  349   2              {
+  350   3                  dat00[0] |= 0x0002;
+  351   3              }
+  352   2          }
+  353   1          P2INTF=0;
+  354   1          P4INTF=0;
+  355   1          P5INTF=0;
+  356   1          P0INTF=0;
+  357   1          P1INTF=0;
+  358   1          P3INTF=0;
+  359   1          P6INTF=0;
+  360   1          P7INTF=0;
+  361   1      
+  362   1          SPI_DMA();//SPI DMA 中断处理
+  363   1      //  UART1_DMA();
+  364   1      //  nian(gg++,6);
+  365   1          
+  366   1          
+  367   1      }
+  368          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       795     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        20     ------
+  xdata-const size     =    ------     ------
+  edata size           =        33     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        73     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

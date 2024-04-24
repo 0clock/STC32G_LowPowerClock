@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  SPL06                                                              24/01/24  00:35:53  PAGE 1   
+C251 COMPILER V5.60.0,  SPL06                                                              24/04/24  23:59:20  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SPL06
-OBJECT MODULE PLACED IN SPL06.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE SPL06.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\SPL06.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE SPL06.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwa
+                    -re\SPL06.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    55   1          u32 dat1 = 0;
    56   1          IIC_W2bit(SPL06_W,0x08,cmd);//测量温度
    57   1          delay_ms(6);
-   58   1          Start(); //发送起始命令
-C251 COMPILER V5.60.0,  SPL06                                                              24/01/24  00:35:53  PAGE 2   
+C251 COMPILER V5.60.0,  SPL06                                                              24/04/24  23:59:20  PAGE 2   
 
+   58   1          Start(); //发送起始命令
    59   1          SendData(SPL06_W);                             //发送设备地址+写命令
    60   1          RecvACK();
    61   1          SendData(dat);                             //发送设备地址+写命令
@@ -133,9 +134,9 @@ stmt  level    source
   120          
   121          
   122          //      SPL06_PR(0x02,0x03);
-  123          //      delay_ms(20);
-C251 COMPILER V5.60.0,  SPL06                                                              24/01/24  00:35:53  PAGE 3   
+C251 COMPILER V5.60.0,  SPL06                                                              24/04/24  23:59:20  PAGE 3   
 
+  123          //      delay_ms(20);
   124          //      SPL06_PR(0x01,0x00);
   125          //      SPL06_Math_P(JCQ06_00[2],JCQ06_00[3]);
   126          
@@ -201,9 +202,9 @@ stmt  level    source
   186   2            Sleep_Queue_task[0] &=~0x0010;
   187   2           } 
   188   1      }
-  189          
-C251 COMPILER V5.60.0,  SPL06                                                              24/01/24  00:35:53  PAGE 4   
+C251 COMPILER V5.60.0,  SPL06                                                              24/04/24  23:59:20  PAGE 4   
 
+  189          
   190          
   191          
   192          

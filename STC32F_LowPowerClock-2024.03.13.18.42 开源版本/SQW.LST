@@ -1,0 +1,103 @@
+C251 COMPILER V5.57.0,  SQW                                                                03/01/24  18:00:42  PAGE 1   
+
+
+C251 COMPILER V5.57.0, COMPILATION OF MODULE SQW
+OBJECT MODULE PLACED IN SQW.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE SQW.c XSMALL WARNINGLEVEL(0) OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "SQW.h"
+    2          #include "time.h"
+*** ERROR C25 IN LINE 379 OF STC32F.h: syntax error near '0x08'
+*** ERROR C48 IN LINE 670 OF STC32F.h: 'TAG_PWM_STRUCT': struct/union type redefinition
+*** ERROR C48 IN LINE 670 OF STC32F.h: 'PWM_STRUCT': struct/union type redefinition
+*** ERROR C48 IN LINE 1380 OF STC32F.h: 'u8': struct/union type redefinition
+*** ERROR C48 IN LINE 1381 OF STC32F.h: 'u16': struct/union type redefinition
+*** ERROR C48 IN LINE 1382 OF STC32F.h: 'u32': struct/union type redefinition
+    3          #include "IIC.h"
+    4          #include "UART1.h"
+    5          #include "SHT41.h"
+    6          #include "SPL06.h"
+    7          #include "IO.h"
+    8          #include "BH1745.h"
+    9          #include "OLED.h"
+   10          #include "UI.h"
+   11          #include "DATA.h"
+   12          #include "logic.h"
+   13          #include "SecondaryMenu.h"
+   14          #include "ThreeMenu.h"
+   15          #include "flag.h"
+   16          #include "TV_Mode.h"
+   17          #include "INS5699S.h"
+   18          #include "ADC.h"
+   19          
+   20          
+   21          extern u16 xdata dat00[System_data_num];
+   22          extern u16 xdata dat00_low[System_data_num];
+   23          extern u8 xdata dat00_flag[System_data_num];
+   24          
+   25          /****************************** 睡眠寄存器组 ***********************************/
+   26          extern u16 Sleep_Queue[Sleep_queue_num];
+   27          
+   28          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   29          
+   30          extern u16 Sleep_Queue_count;
+   31          extern u16 Sleep_Queue_count_target;
+   32          
+   33          extern u32 xdata JCQ06_00[10];
+   34          
+   35          
+   36          
+   37          
+   38          void SQW_flag()
+   39          {
+   40   1              u8 i = 0;
+   41   1               if(dat00[0] & 0x0002)
+   42   1              {
+   43   2                  i = IIC_R1bit(0x64,0x0e);
+   44   2                  if(i & 0x20)
+   45   2                  {
+   46   3                      INS5699_timeR();
+   47   3                      if(dat00[0x0010] == 0x0020 | dat00[0x0010] == 0x0021)
+   48   3                      {
+   49   4                          dat00[0x002E]  |= 0x0001;//秒 刷新标志位
+   50   4                          dat00[0x0004]  |= 0x0001;
+   51   4                      }
+   52   3                  }
+   53   2                  i = i & 0xdf;
+C251 COMPILER V5.57.0,  SQW                                                                03/01/24  18:00:42  PAGE 2   
+
+   54   2                  IIC_W2bit(0x64,0x0e,i);
+   55   2      
+   56   2                  if((dat00[0x0010] == 3 && Sleep_Queue_task[0] != 1) | dat00[0x0010] == 0x0021)//
+   57   2                  {
+   58   3                      SHT41_R_High();
+   59   3                      dat00[0x0041] = JCQ06_00[0];
+   60   3                      dat00[0x0042] = JCQ06_00[1];
+   61   3                      SPL06_PR_R();
+   62   3                      dat00[0x0043] = JCQ06_00[4]/100;
+   63   3                      IIC_W2bit(BH1745_W,0x42,0x10);
+   64   3                      SleepQueue_aheadW1(380,2,0);
+   65   3      
+   66   3                      if(dat00[0x0010] == 3)
+   67   3                      {
+   68   4                          UI_SecondaryMenu_G();
+   69   4                      }
+   70   3                  }
+   71   2                  if((dat00[0x0010] == 0x000D && Sleep_Queue_task[0] != 1) | dat00[0x0010] == 0x0022)
+   72   2                  {
+   73   3      
+   74   3                      ADC_Get_V1();
+   75   3                      UI_SecondaryMenu_G();
+   76   3                  }
+   77   2                  SleepQueue_aheadW1(6,1,0);
+   78   2                  dat00[0] &= ~0x0002;
+   79   2                  //aaa();
+   80   2              }
+   81   1      }
+   82          
+   83          
+   84          
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  6 ERROR(S)

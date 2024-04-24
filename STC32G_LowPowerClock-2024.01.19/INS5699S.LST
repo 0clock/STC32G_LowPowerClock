@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  INS5699S                                                           24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  INS5699S                                                           24/04/24  23:59:19  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE INS5699S
-OBJECT MODULE PLACED IN INS5699S.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE INS5699S.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\INS5699S.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE INS5699S.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\fir
+                    -mware\INS5699S.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1      }
    57          
    58          
-   59          
-C251 COMPILER V5.60.0,  INS5699S                                                           24/01/24  00:35:52  PAGE 2   
+C251 COMPILER V5.60.0,  INS5699S                                                           24/04/24  23:59:19  PAGE 2   
 
+   59          
    60          
    61          
    62          void INS5699_timer_clean()

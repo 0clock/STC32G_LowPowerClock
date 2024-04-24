@@ -1,0 +1,70 @@
+C251 COMPILER V5.60.0,  FlashLight                                                         25/04/24  00:23:39  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE FlashLight
+OBJECT MODULE PLACED IN FlashLight.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE FlashLight.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "FlashLight.h"
+    2          #include "OLED.h"
+    3          #include "IIC.h"
+    4          #include "DATA.h"
+    5          #include "IO.h"
+    6          #include "INS5699S.h"
+    7          
+    8          extern u16 dat00[System_data_num];
+    9          extern u16 dat00_low[System_data_num];
+   10          extern u8 xdata dat00_flag[System_data_num];
+   11          
+   12          extern u8 Time_New[7];
+   13          extern u8 Time_Low[7];
+   14          
+   15          
+   16          
+   17          
+   18          
+   19          //========================================================================
+   20          // 函数: FlashLight_int()
+   21          // 描述: 手电筒控制器
+   22          // 参数:
+   23          // 返回:
+   24          // 版本: V1.0 2024.03.08
+   25          //========================================================================
+   26          void FlashLight_int()
+   27          {
+   28   1         OLED_Fill(0xFF);//屏幕全亮
+   29   1         dat00_low[0x0051] = dat00[0x0051];//保存进入前的亮度
+   30   1         dat00_low[0x0052] = dat00[0x0052];//保存进入前的电压档位
+   31   1         
+   32   1         dat00[0x0051] = 255;//亮度255
+   33   1         dat00_flag[0x0051] = 1;//变更标志位
+   34   1      }
+   35          
+   36          
+   37          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        36     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

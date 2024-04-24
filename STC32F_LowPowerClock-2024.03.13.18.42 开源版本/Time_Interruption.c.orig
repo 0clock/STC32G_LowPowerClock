@@ -1,0 +1,222 @@
+#include "Time_Interruption.h"
+#include "IIC.h"
+#include "SHT41.h"
+#include "SPL06.h"
+#include "BH1745.h"
+#include "time.h"
+#include "DATA.h"
+#include "OLED.h"
+#include "INS5699S.h"
+#include "ADC.h"
+#include "SecondaryMenu.h"
+#include "AlarmClock.h"
+#include "SleepMode.h"
+#include "UART1.h"
+
+
+extern u8 xdata DMABuffer[96];
+extern u16 xdata dat00[System_data_num];
+extern u16 xdata dat00_low[System_data_num];
+extern u8 xdata dat00_flag[System_data_num];
+
+
+
+/*************  本地变量声明  功能寄存器  **************/
+extern u8 xdata DMABuffer[96];
+
+/****************************** 睡眠寄存器组 ***********************************/
+extern u16 Sleep_Queue[Sleep_queue_num];
+
+extern u16 Sleep_Queue_task[Sleep_queue_num];
+
+extern u16 Sleep_Queue_count;
+extern u16 Sleep_Queue_count_target;
+
+extern u8 xdata Time_New[7];
+extern u8 xdata Time_Low[7];
+extern u8 xdata Time_int[7];
+
+extern u32 xdata JCQ06_00[5];
+
+u8 yya=0;
+
+
+extern u16 AlarmClock_timelong;
+
+
+extern u8 AlarmClock_num_Re;
+
+
+extern u8 AlarmClock_EFF;
+
+
+extern u8 Time_AlarmClock[3];
+
+extern u8 AlarmClock_num;
+
+extern u16 Sleep36;
+
+void Time_Interruption_1S()
+{
+    u8 i = 0;
+	  u8 UI_flag = 0;
+	  u8 ADC_flag = 0;
+	  u8 BH_flag = 0;
+
+    if(dat00[0] & 0x0002)
+    {
+        i = IIC_R1bit(INS5699_W,0x0e);//读标志位寄存器
+        if(i & 0x20)
+        {
+            INS5699_timeR();
+            if((dat00[0] & 0x0040) ||  (dat00[0x37] == 0))
+            {
+                dat00[0x0000]  |= 0x000C;
+                if(dat00[0x0010] == 0x0020 | dat00[0x0010] == 0x0021 | dat00[0x0010] == 0x0022 | dat00[0x0010] == 0x0005)
+                {
+                    dat00[0x002E]  |= 0x0001;//秒 刷新标志位
+									  ADC_flag = 1;
+                }
+
+                //IIC_W2bit(INS5699_W,0x0e,i);
+                if((dat00[0x0010] == 3 && Sleep_Queue_task[0] != 1) | dat00[0x0010] == 0x0021)//
+                {
+                    SHT41_R_High();
+                    dat00[0x0041] = JCQ06_00[0];
+                    dat00[0x0042] = JCQ06_00[1];
+                    SPL06_PR_R();
+                    dat00[0x0043] = JCQ06_00[4]/100;
+									  BH_flag = 1;
+                    if(dat00[0x0010] == 3)
+                    {
+                        UI_flag = 1;
+                    }
+                }
+
+                if((dat00[0x0010] == 0x000D && Sleep_Queue_task[0] != 1) | dat00[0x0010] == 0x0022)
+                {
+                    if(dat00[0x0010] == 0x000D)
+                    { 
+											  ADC_flag = 1;
+                        UI_flag = 1;
+                    }
+                }
+								if(dat00[0x0053]) BH_flag = 1;								
+                SleepQueue_aheadW1(6,1,0);
+
+            }
+            else if((dat00[0x37] == 1) && (dat00[0x36] == 1) && ((dat00[0] & 0x0040) == 0x00) )
+            {
+                Sleep_Display_UI();
+							  if(dat00[0x0053]) BH_flag = 1;
+            }
+						if(dat00[0x0010] == 12)	 BH_flag = 0;
+						
+						
+						if(BH_flag)
+						{
+								IIC_W2bit(BH1745_W,0x42,0x12);
+								SleepQueue_aheadW1(400,2,0);		
+						}
+						if(UI_flag)
+						{
+					   	UI_SecondaryMenu_G();
+						}
+						if(ADC_flag)
+						{
+					   	ADC_Get_V1();
+						}
+						
+						
+						
+						if((dat00[0x0010] == 0x0020 | dat00[0x0010] == 0x0021 | dat00[0x0010] == 0x0022) )
+						{
+						     dat00[0x0008] = 60;
+
+							
+						}
+						else
+						{
+								dat00[0x0008]--;
+							  if(dat00[0x0008] == 0)
+								{
+										if(dat00[0x26])
+										{
+												            dat00[0x10] = 0x0020;
+            dat00[0x002D] = 0;
+            dat00[0x37] = 0;
+            dat00[0x26] = 1;
+            dat00[0] &= ~0x0040;
+					  dat00[0] &= ~0x0080;
+            dat00_flag[0x10] = 1;
+										
+										}
+								
+								
+								
+								
+								}	
+						
+						}
+						
+						
+						
+						
+						
+						
+            i = i & 0xdf;
+            Renew_AlarmClockRe();
+            Detection_AlarmClock();
+            Buzzer_1S();
+            Switch_position();
+            IIC_W2bit(INS5699_W,0x0e,i);
+
+        }
+        dat00[0] &= ~0x0002;
+//		yya++;
+//     debug_8x8(IIC_Query(),0,7);
+
+//		debug_8x8(yya,64,7);
+//  		debug_8x8(AlarmClock_num_Re,0,7);
+
+
+//		debug_8x8(AlarmClock_num,0,7);
+//		debug_8x8(AlarmClock_num_Re,40,7);
+//		debug_8x8(AlarmClock_EFF,80,7);
+
+//		debug_8x8(Time_AlarmClock[2],0,7);
+//		debug_8x8(Time_AlarmClock[1],40,7);
+//		debug_8x8(Time_AlarmClock[0],80,7);
+				
+				
+//			debug_8x8(dat00[0x0045],0,7);
+//			debug_8x8(dat00[0x0006],40,7);
+//		  debug_8x8(dat00[0x0007],80,7);
+
+
+//		dat00[0x0005] =0;
+
+//		DMABuffer[0] = JCQ06_00[2]>>24;
+//		DMABuffer[1] = JCQ06_00[2]>>16;
+//		DMABuffer[2] = JCQ06_00[2]>>8;
+//		DMABuffer[3] = JCQ06_00[2];
+//
+//		DMABuffer[4] = JCQ06_00[3]>>24;
+//		DMABuffer[5] = JCQ06_00[3]>>16;
+//		DMABuffer[6] = JCQ06_00[3]>>8;
+//		DMABuffer[7] = JCQ06_00[3];
+//
+//		UART1_TX(8);
+//		delay_ms(30);
+
+
+    }
+}
+
+
+
+
+
+
+
+

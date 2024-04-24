@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 1   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE OLED
-OBJECT MODULE PLACED IN OLED.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE OLED.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\OLED.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE OLED.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwar
+                    -e\OLED.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
              -P2.5, 2: P5.4 P4.0 P4.1 P4.3, 3: P3.5 P3.4 P3.3 P3.2
    51   1          SCK = 1;    // set clock to low initial state
    52   1          SI = 1;
-   53   1          SPSTAT = 0x80 + 0x40;
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 2   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 2   
 
+   53   1          SPSTAT = 0x80 + 0x40;
    54   1          HSSPI_CFG2 |=0x20;
    55   1      
    56   1      }
@@ -133,9 +134,9 @@ stmt  level    source
   115   2          _nop_();    
   116   2          } 
   117   1        
-  118   1      }
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 3   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 3   
 
+  118   1      }
   119          
   120          void SPI_DMA_TX(u8 num)
   121          {
@@ -201,9 +202,9 @@ stmt  level    source
   181          
   182          
   183          void OLED_WrCmd(u8 dat1)
-  184          {
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 4   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 4   
 
+  184          {
   185   1          SPI_DMA_delay();  
   186   1          DC=0;//写命令
   187   1          LCD_Writ_Bus(dat1);
@@ -269,9 +270,9 @@ stmt  level    source
   242   1          OLED_WrCmd(0xda);//--set com pins hardware configuration  设置com引脚的硬件配置
   243   1          OLED_WrCmd(0x12);
   244   1          OLED_WrCmd(0xdb);//--set vcomh
-  245   1          OLED_WrCmd(0x40);//Set VCOM Deselect Level
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 5   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 5   
 
+  245   1          OLED_WrCmd(0x40);//Set VCOM Deselect Level
   246   1          OLED_WrCmd(0x20);//-Set Page Addressing Mode (0x00/0x01/0x02) 设置页面寻址模式
   247   1          OLED_WrCmd(0x02);//
   248   1          OLED_WrCmd(0x8d);//--set Charge Pump enable   设置电荷泵启用/禁用
@@ -337,9 +338,9 @@ stmt  level    source
   308   1          {
   309   2              SPI_dat = SPI_DmaTxBuffer2;           
   310   2          }
-  311   1          else
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 6   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 6   
 
+  311   1          else
   312   1          {
   313   2              SPI_dat = SPI_DmaTxBuffer; 
   314   2          }     
@@ -405,9 +406,9 @@ stmt  level    source
   374          void nian(u16 ee,u8 y)//
   375          {
   376   1          ZF_8X16(0,y,(u8)(ee / 1000));
-  377   1          ZF_8X16(8,y,(u8)((ee % 1000)/100));
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 7   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 7   
 
+  377   1          ZF_8X16(8,y,(u8)((ee % 1000)/100));
   378   1          ZF_8X16(16,y,(u8)((ee % 100)/10));
   379   1          ZF_8X16(24,y,(u8)(ee % 10));
   380   1          ZF_8X16(32,y,12);
@@ -473,9 +474,9 @@ stmt  level    source
   440   1      }
   441          
   442          
-  443          
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 8   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 8   
 
+  443          
   444          
   445          
   446          void OLED_8X8X3_MOV(u8 x,u8 y,u16 adde,u8 devia1,u8 devia2)
@@ -541,9 +542,9 @@ stmt  level    source
   506          
   507          
   508          
-  509          
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 9   
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 9   
 
+  509          
   510          void OLED_16X16_MOV(u8 x,u8 y,u8 adde,u8 devia1,u8 devia2)
   511          {
   512   1          unsigned char i = 0;
@@ -609,9 +610,9 @@ stmt  level    source
   572   1      }
   573          
   574          
-  575          
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 10  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 10  
 
+  575          
   576          void OLED_ED()
   577          {
   578   1          OLED_WrCmd(0xae);//--turn off oled panel  关闭oled面板
@@ -677,9 +678,9 @@ stmt  level    source
   638   1          if(k!=0)
   639   1          {
   640   2              ZF_8X8(82,5,k);
-  641   2          }
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 11  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 11  
 
+  641   2          }
   642   1          else
   643   1          {
   644   2              ZF_8X8(82,5,0x0A);
@@ -745,9 +746,9 @@ stmt  level    source
   704   1          u8 i = 0;
   705   1          OLED_Set_Pos(x,y);
   706   1          for(i=0; i<64; i++)
-  707   1          {
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 12  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 12  
 
+  707   1          {
   708   2              OLED_WrDat(0x00);
   709   2          }
   710   1      
@@ -813,9 +814,9 @@ stmt  level    source
   770   3                  for(i=0; i<16; i++)
   771   3                  {
   772   4                      if(!jj)
-  773   4                      {
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 13  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 13  
 
+  773   4                      {
   774   5                          t = dat[j+1][i]*256+dat[j][i];
   775   5                          OLED_WrDat((u8)(t >> c));
   776   5                      }
@@ -881,9 +882,9 @@ stmt  level    source
   836   1      //    u8 j = 0;
   837   1      //    u16 t = 0;
   838   1      //    u8 k=0; 
-  839   1      //    u8 *SPI_dat;
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 14  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 14  
 
+  839   1      //    u8 *SPI_dat;
   840   1      //    y = (u8)(y/8);
   841   1      //    j = adde;
   842   1      //    adde = adde + Number;
@@ -949,9 +950,9 @@ stmt  level    source
   902   1      //                }
   903   1      //                else
   904   1      //                {
-  905   1      //                    t = dat[j][i]*256+dat[j-1][i];
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 15  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 15  
 
+  905   1      //                    t = dat[j][i]*256+dat[j-1][i];
   906   1      //                    SPI_dat[k]=((u8)(t >> (8 - c)));
   907   1      //                }
   908   1      //                k++;
@@ -1017,9 +1018,9 @@ stmt  level    source
   968   2              break;    
   969   2          case 0x0002 :
   970   2              pp = Environment;//环境参数
-  971   2              break;
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 16  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 16  
 
+  971   2              break;
   972   2          case 0x0003 :
   973   2              pp = Brightness_setting;//亮度设置
   974   2              break;
@@ -1085,9 +1086,9 @@ stmt  level    source
  1034   1      
  1035   1      }
  1036          
- 1037          
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 17  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 17  
 
+ 1037          
  1038          void OLED_Mean2_fill(u8 p,u8 a)
  1039          {
  1040   1          u8 i;
@@ -1153,9 +1154,9 @@ stmt  level    source
  1100   1          
  1101   1          dat = dat>>1;
  1102   1          i = (u8)(dat & 0x00000003);
- 1103   1          k=0;
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 18  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 18  
 
+ 1103   1          k=0;
  1104   1          if(i == 0)
  1105   1          {
  1106   2              k=4;
@@ -1221,9 +1222,9 @@ stmt  level    source
  1166          
  1167          void OLED_AlarmClock_ZH(u8 a)
  1168          {
- 1169   1          u32 dat = 0;
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 19  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 19  
 
+ 1169   1          u32 dat = 0;
  1170   1          u8 k=0;
  1171   1      
  1172   1          dat = AlarmClock[a];
@@ -1289,9 +1290,9 @@ stmt  level    source
  1232   1          {
  1233   2              UI_dat[j][i+c] = dat[b][i];
  1234   2      
- 1235   2          }
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 20  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 20  
 
+ 1235   2          }
  1236   1          j = j + 1;
  1237   1          for(i = 0; i <8 ; i++)
  1238   1          {
@@ -1357,9 +1358,9 @@ stmt  level    source
  1298   1          {
  1299   2              if(i == xsd && xsd != 0)
  1300   2              {
- 1301   3                  OLED_Mean2_fill_num(adde,0x0B,F8x16);
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 21  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 21  
 
+ 1301   3                  OLED_Mean2_fill_num(adde,0x0B,F8x16);
  1302   3                  adde--;
  1303   3              }
  1304   2              else
@@ -1425,9 +1426,9 @@ stmt  level    source
  1362   1      
  1363   1          k = (u8)(dat00[0x00E5] /1000);
  1364   1          if(k!=0)
- 1365   1          {
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 22  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 22  
 
+ 1365   1          {
  1366   2              ZF_8X8((u8)(x+24),y,k);
  1367   2          }
  1368   1          else
@@ -1493,9 +1494,9 @@ stmt  level    source
  1428   4                  }
  1429   3                  else
  1430   3                  {
- 1431   4                      OLED_WrDat(0x81);
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 23  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 23  
 
+ 1431   4                      OLED_WrDat(0x81);
  1432   4                  }
  1433   3              }
  1434   2              else if(i <= 14)
@@ -1561,9 +1562,9 @@ stmt  level    source
  1494   1          ZF_8X8(96,6,21);
  1495   1          ZF_8X8(120,6,20);
  1496   1      
- 1497   1      
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 24  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 24  
 
+ 1497   1      
  1498   1      
  1499   1          ZF_8X16(80,5,25);
  1500   1          ZF_8X16(88,5,26);
@@ -1629,9 +1630,9 @@ stmt  level    source
  1560   2              IU_Battery_cheek_renovate_count(a,104,5,0);
  1561   2      
  1562   2          }
- 1563   1          else
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 25  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 25  
 
+ 1563   1          else
  1564   1          {
  1565   2              IU_16x8_Fill(104,2,0);
  1566   2              IU_16x8_Fill(104,5,0);
@@ -1697,9 +1698,9 @@ stmt  level    source
  1626   1          ZF_8X16(20,5,(u8)((dat00[0x00E3]%100)/10));
  1627   1      
  1628   1          IU_Battery_Icon_S_1(76,7);
- 1629   1      }
-C251 COMPILER V5.60.0,  OLED                                                               24/01/24  00:35:53  PAGE 26  
+C251 COMPILER V5.60.0,  OLED                                                               24/04/24  23:59:19  PAGE 26  
 
+ 1629   1      }
  1630          
  1631          void OLED_16_16V2a()
  1632          {

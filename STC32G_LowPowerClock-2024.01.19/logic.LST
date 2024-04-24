@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  logic                                                              24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  logic                                                              24/04/24  23:59:19  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE logic
-OBJECT MODULE PLACED IN logic.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE logic.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\logic.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE logic.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwa
+                    -re\logic.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1      //*     主菜单下，且不在三级菜单，按下确定，进入相应的二级菜单
    57   1      //*
    58   1      //******************************************************************************
-   59   1          if((dat00[0x10] == 0x0000 | (dat00[0x11]==0x0007 && dat00[0x009E]<2)) && dat00[0x1A] == 0 )
-C251 COMPILER V5.60.0,  logic                                                              24/01/24  00:35:52  PAGE 2   
+C251 COMPILER V5.60.0,  logic                                                              24/04/24  23:59:19  PAGE 2   
 
+   59   1          if((dat00[0x10] == 0x0000 | (dat00[0x11]==0x0007 && dat00[0x009E]<2)) && dat00[0x1A] == 0 )
    60   1          {
    61   2              if(dat00[0x11]==0x0007)  // dat00[0x009E]标志进入诱导闹钟菜单
    62   2              {
@@ -133,9 +134,9 @@ stmt  level    source
   122   1      //******************************************************************************
   123   1      //*
   124   1      //*     在三级菜单（非指南针菜单）按下确定，回到二级菜单
-  125   1      //*
-C251 COMPILER V5.60.0,  logic                                                              24/01/24  00:35:52  PAGE 3   
+C251 COMPILER V5.60.0,  logic                                                              24/04/24  23:59:19  PAGE 3   
 
+  125   1      //*
   126   1      //******************************************************************************
   127   1          else if(dat00[0x10] >= 0x0001 && dat00[0x10] <= 0x0010 && dat00[0x1A] == 1 && dat00[0x10] != 0x0005)
   128   1          {
@@ -201,9 +202,9 @@ stmt  level    source
   187   2          }
   188   1          else if(dat00[0x10] >= 0x0001 && dat00[0x10] <= 0x0010 && dat00[0x1A] == 1)
   189   1          {
-  190   2              dat00[0x1A] = 0;
-C251 COMPILER V5.60.0,  logic                                                              24/01/24  00:35:52  PAGE 4   
+C251 COMPILER V5.60.0,  logic                                                              24/04/24  23:59:19  PAGE 4   
 
+  190   2              dat00[0x1A] = 0;
   191   2              dat00_flag[0x10] = 1;
   192   2              dat00[GET_SCdat3()] = dat00_low[GET_SCdat3()];
   193   2              dat00_flag[GET_SCdat3()] = 1;
@@ -269,9 +270,9 @@ stmt  level    source
   253   1          
   254   1          
   255   1          
-  256   1          
-C251 COMPILER V5.60.0,  logic                                                              24/01/24  00:35:52  PAGE 5   
+C251 COMPILER V5.60.0,  logic                                                              24/04/24  23:59:19  PAGE 5   
 
+  256   1          
   257   1      }
   258          
   259          

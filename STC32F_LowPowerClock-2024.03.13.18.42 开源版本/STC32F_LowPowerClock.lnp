@@ -1,0 +1,32 @@
+"ADC.obj",
+"BH1745.obj",
+"BMC050.obj",
+"CompassMenu.obj",
+"DATA.obj",
+"flag.obj",
+"IIC.obj",
+"INS5699S.obj",
+"IO.obj",
+"logic.obj",
+"main.obj",
+"Main_Menu.obj",
+"OLED.obj",
+"SecondaryMenu.obj",
+"SHT41.obj",
+"SPL06.obj",
+"ThreeMenu.obj",
+"time.obj",
+"Time_Interruption.obj",
+"TV_Mode.obj",
+"UART1.obj",
+"UI.obj",
+"isr.obj",
+".\STC32_FPMU_LARGE_V1.0.LIB",
+".\STC32_MDU32_LARGE_V1.1.LIB",
+"SleepMode.obj",
+"FlashLight.obj" 
+TO "STC32F_LowPowerClock" 
+WARNINGLEVEL (0) CASE 
+REMOVEUNUSED 
+CLASSES (EDATA (0x0-0x1FFF), 
+HDATA (0x0-0x1FFF)) 

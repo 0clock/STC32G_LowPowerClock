@@ -1,0 +1,123 @@
+C251 COMPILER V5.60.0,  SHT41                                                              25/04/24  00:23:37  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE SHT41
+OBJECT MODULE PLACED IN SHT41.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE SHT41.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          #include "SHT41.h"
+    3          #include "time.h"
+    4          #include "DATA.h"
+    5          #include "OLED.h"
+    6          #include "UART1.h"
+    7          
+    8          extern u8 xdata DMABuffer[32];
+    9          extern u32 xdata JCQ06_00[10];
+   10          
+   11          
+   12          extern u16 Sleep_Queue_task[Sleep_queue_num];
+   13          
+   14          u8 uuy = 0;
+   15          //========================================================================
+   16          // 函数: void SHT41_Init()
+   17          // 描述: 初始化传感器
+   18          // 参数: 
+   19          // 返回:
+   20          // 版本: V1.0 2023.02.05
+   21          //========================================================================
+   22          void SHT41_Init()
+   23          {
+   24   1          IIC_W1bit(SHT41_W,0x94);
+   25   1      }
+   26          //========================================================================
+   27          // 函数: u16 SHT41_R_16bit(bit k)
+   28          // 描述: 读16位数据并返回
+   29          // 参数:  k：是否ACK
+   30          // 返回:
+   31          // 版本: V1.0 2023.02.05
+   32          //========================================================================
+   33          u16 SHT41_R_16bit(bit k)
+   34          {
+   35   1          u16 dat = 0;
+   36   1          dat += RecvData();                            //读取数据2
+   37   1          SendACK();
+   38   1          dat = dat <<8;
+   39   1          dat += RecvData();                            //读取数据2
+   40   1          SendACK();
+   41   1          RecvData();                            //读取数据2
+   42   1          if(!k) SendACK();
+   43   1          if(k) SendNAK();
+   44   1          return dat;
+   45   1      }
+   46          //========================================================================
+   47          // 函数: void SHT41_R_High()
+   48          // 描述: 传感器测量
+   49          // 参数:  
+   50          // 返回:
+   51          // 版本: V1.0 2023.02.05
+   52          //========================================================================
+   53          void SHT41_R_High()
+   54          {
+   55   1          IIC_W1bit(SHT41_W,0xFD);
+   56   1          SleepQueue_aheadW1(28,4,0);
+   57   1      }
+   58          
+   59          //========================================================================
+C251 COMPILER V5.60.0,  SHT41                                                              25/04/24  00:23:37  PAGE 2   
+
+   60          // 函数: void SHT41_falg_0004()
+   61          // 描述: 读回温度湿度的值，并计算
+   62          // 参数:  
+   63          // 返回:
+   64          // 版本: V1.0 2023.02.05
+   65          //========================================================================
+   66          void SHT41_falg_0004()
+   67          {
+   68   1          u32 a = 0;
+   69   1          u32 b = 0;
+   70   1          if(Sleep_Queue_task[0] & 0x0004)
+   71   1          {
+   72   2              Start(); //发送起始命令
+   73   2              SendData(SHT41_R);                             //发送设备地址+写命令
+   74   2              RecvACK();
+   75   2              a = SHT41_R_16bit(0);
+   76   2              b = SHT41_R_16bit(1);
+   77   2              Stop();
+   78   2              a = a*17500/65535-4500;
+   79   2              b = b*12500/65535-600;
+   80   2              JCQ06_00[0] = a;
+   81   2              JCQ06_00[1] = b;
+   82   2              Sleep_Queue_task[0] &=~0x0004;
+   83   2          }
+   84   1      
+   85   1      
+   86   1      
+   87   1      
+   88   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       205     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         1          4
+  bit size             =    ------          1
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         5     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

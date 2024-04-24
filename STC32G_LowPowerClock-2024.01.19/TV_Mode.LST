@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 1   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE TV_Mode
-OBJECT MODULE PLACED IN TV_Mode.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE TV_Mode.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\TV_Mode.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE TV_Mode.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firm
+                    -ware\TV_Mode.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56   1          if(k)
    57   1          {
    58   2              ZF_8X8(84,5,(u8)(k));
-   59   2          }
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 2   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 2   
 
+   59   2          }
    60   1          else
    61   1          {
    62   2              ZF_8X8(84,5,10);
@@ -133,9 +134,9 @@ stmt  level    source
   122   2              if(Time_New[1]/16 != Time_Low[1]/16)  j |= 0x0008;
   123   2              if(Time_New[1]%16 != Time_Low[1]%16)  j |= 0x0004;
   124   2          }
-  125   1      
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 3   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 3   
 
+  125   1      
   126   1          if(Time_New[2] != Time_Low[2])
   127   1          {
   128   2              if(Time_New[2]/16 != Time_Low[2]/16)  j |= 0x0020;
@@ -201,9 +202,9 @@ stmt  level    source
   188          
   189          
   190          
-  191          void TVMode2_int()
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 4   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 4   
 
+  191          void TVMode2_int()
   192          {
   193   1          //ADC_Get_V1();
   194   1          IU_Battery_Icon_S(80,0);
@@ -269,9 +270,9 @@ stmt  level    source
   254          
   255          
   256          
-  257          
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 5   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 5   
 
+  257          
   258          
   259          
   260          
@@ -337,9 +338,9 @@ stmt  level    source
   320   1          {
   321   2              yue_ri(16,(u8)((Time_New[6]/16*10) + (Time_New[6]%16)),0);//
   322   2          }
-  323   1          //time_synchronization();
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 6   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 6   
 
+  323   1          //time_synchronization();
   324   1      }
   325          
   326          
@@ -405,9 +406,9 @@ stmt  level    source
   386   2          }
   387   1          //**************温湿度*****************************
   388   1      
-  389   1          UI_humidity();
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 7   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 7   
 
+  389   1          UI_humidity();
   390   1          UI_pressure();
   391   1      
   392   1          Low_wendu = dat00[0x0041];
@@ -473,9 +474,9 @@ stmt  level    source
   452   1          if(dat00[0x10] == 0x0020 && dat00[0x1A] == 0 && dat00[0x002E] > 0)//TV时钟模式
   453   1          {
   454   2              if((dat00[0x002E] & 0x0001) && !(dat00[0x002E] & 0x0002))
-  455   2              {
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 8   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 8   
 
+  455   2              {
   456   3                  dat00[0x002E] |= 0x0002;
   457   3              }
   458   2              if((dat00[0x002E] & 0x0001) && (dat00[0x002E] & 0x0002))
@@ -541,9 +542,9 @@ stmt  level    source
   517   2              {
   518   3                  if(dat00[0x002D] >= dat00[0x0023])
   519   3                  {
-  520   4                      if(dat00[0x0024] > 0)
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 9   
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 9   
 
+  520   4                      if(dat00[0x0024] > 0)
   521   4                      {
   522   5                          dat00[0x10]=0x0022;
   523   5                          dat00_flag[0x10]=1;
@@ -610,9 +611,9 @@ Module Information          Static   Overlayable
 ------------------------------------------------
   code size            =      3049     ------
   ecode size           =    ------     ------
-  data size            =    ------     ------
-C251 COMPILER V5.60.0,  TV_Mode                                                            24/01/24  00:35:54  PAGE 10  
+C251 COMPILER V5.60.0,  TV_Mode                                                            24/04/24  23:59:21  PAGE 10  
 
+  data size            =    ------     ------
   idata size           =    ------     ------
   pdata size           =    ------     ------
   xdata size           =    ------     ------

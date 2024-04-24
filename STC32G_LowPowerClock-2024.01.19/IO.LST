@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  IO                                                                 24/01/24  00:35:52  PAGE 1   
+C251 COMPILER V5.60.0,  IO                                                                 24/04/24  23:59:19  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE IO
-OBJECT MODULE PLACED IN IO.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE IO.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\IO.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE IO.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmware\
+                    -IO.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    56          
    57          
    58          
-   59          
-C251 COMPILER V5.60.0,  IO                                                                 24/01/24  00:35:52  PAGE 2   
+C251 COMPILER V5.60.0,  IO                                                                 24/04/24  23:59:19  PAGE 2   
 
+   59          
    60          
    61          
    62          
@@ -133,9 +134,9 @@ stmt  level    source
   122   1          P5M0 |= 0x04; //初始化电池电压检测MOS控制开关
   123   1          P5M1 |= 0x04; //
   124   1          P52 = 0;  
-  125   1      }
-C251 COMPILER V5.60.0,  IO                                                                 24/01/24  00:35:52  PAGE 3   
+C251 COMPILER V5.60.0,  IO                                                                 24/04/24  23:59:19  PAGE 3   
 
+  125   1      }
   126          
   127          
   128          
@@ -201,9 +202,9 @@ stmt  level    source
   181   1          P7M0 = 0xff; 
   182   1          P7M1 = 0xff; 
   183   1          
-  184   1          P2SR = 0xd7; 
-C251 COMPILER V5.60.0,  IO                                                                 24/01/24  00:35:52  PAGE 4   
+C251 COMPILER V5.60.0,  IO                                                                 24/04/24  23:59:19  PAGE 4   
 
+  184   1          P2SR = 0xd7; 
   185   1          P2DR = 0xd7; 
   186   1      
   187   1      

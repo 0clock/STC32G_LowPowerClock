@@ -1,9 +1,10 @@
-C251 COMPILER V5.60.0,  UART1                                                              24/01/24  00:35:54  PAGE 1   
+C251 COMPILER V5.60.0,  UART1                                                              24/04/24  23:59:22  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE UART1
-OBJECT MODULE PLACED IN UART1.OBJ
-COMPILER INVOKED BY: C:\Keil_v51\C251\BIN\C251.EXE UART1.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) 
+OBJECT MODULE PLACED IN ..\firmware\UART1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE UART1.c XSMALL OPTIMIZE(9,SPEED) BROWSE DEBUG TABS(2) OBJECT(..\firmwa
+                    -re\UART1.obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    55   1          P_SW1 |= 0x00; // UART1 switch to, 0x00: P3.0 P3.1, 0x40: P3.6 P3.7, 0x80: P1.6 P1.7, 0xC0: P4.3 P4.4
    56   1      }
    57          
-   58          
-C251 COMPILER V5.60.0,  UART1                                                              24/01/24  00:35:54  PAGE 2   
+C251 COMPILER V5.60.0,  UART1                                                              24/04/24  23:59:22  PAGE 2   
 
+   58          
    59          void UART1_TX(u8 num)
    60          {
    61   1          DMA_UR1T_AMT = num-1;
@@ -133,9 +134,9 @@ stmt  level    source
   121   1          DMABuffer[95]  = 0xBB;
   122   1          DMA_UR1T_CR = 0xc0;
   123   1          delay_ms(250);
-  124   1          delay_ms(250);
-C251 COMPILER V5.60.0,  UART1                                                              24/01/24  00:35:54  PAGE 3   
+C251 COMPILER V5.60.0,  UART1                                                              24/04/24  23:59:22  PAGE 3   
 
+  124   1          delay_ms(250);
   125   1      }
   126          
   127          
