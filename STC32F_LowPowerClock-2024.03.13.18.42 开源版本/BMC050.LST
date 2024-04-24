@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 1   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE BMC050
@@ -66,7 +66,7 @@ stmt  level    source
    57   2              dat1[i] = dat1[i+1];
    58   2          }
    59   1          dat1[num] = (int)dat;
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 2   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 2   
 
    60   1          num++;
    61   1          for(i=0; i<num; i++)
@@ -134,7 +134,7 @@ stmt  level    source
   123          // 函数: void  Magnetometer_OPEN()
   124          // 描述: 磁强计打开
   125          // 参数: 
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 3   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 3   
 
   126          // 返回: 
   127          // 版本: V1.0 2023.02.05
@@ -202,7 +202,7 @@ stmt  level    source
   188   3              }
   189   2              x = x_new;
   190   2              y = y_new;
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 4   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 4   
 
   191   2          }
   192   1      
@@ -270,7 +270,7 @@ stmt  level    source
   254   2      
   255   2          }
   256   1      
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 5   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 5   
 
   257   1          dat00[0x0068] = Angle;
   258   1      
@@ -338,7 +338,7 @@ stmt  level    source
   320   1          SendData(0x22);                         //发送设备地址+写命令
   321   1          DMABuffer[0] = RecvACK();
   322   1          SendData(0x42);                             //发送设备地址+写命令
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 6   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 6   
 
   323   1          RecvACK();
   324   1          // Stop();
@@ -406,7 +406,7 @@ stmt  level    source
   386          
   387          
   388          
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 7   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 7   
 
   389          
   390          
@@ -475,7 +475,7 @@ Module Information          Static   Overlayable
   xdata size           =    ------     ------
   xdata-const size     =    ------     ------
   edata size           =        79          8
-C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  00:23:35  PAGE 8   
+C251 COMPILER V5.60.0,  BMC050                                                             25/04/24  01:27:43  PAGE 8   
 
   bit size             =    ------          3
   ebit size            =    ------     ------

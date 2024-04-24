@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  flag                                                               25/04/24  00:23:35  PAGE 1   
+C251 COMPILER V5.60.0,  flag                                                               25/04/24  01:27:44  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE flag
@@ -66,7 +66,7 @@ stmt  level    source
    55   2              {
    56   3                  if((dat00[0x0021] == 0x00) && (OLED_InverseDisplay))
    57   3                  {
-C251 COMPILER V5.60.0,  flag                                                               25/04/24  00:23:35  PAGE 2   
+C251 COMPILER V5.60.0,  flag                                                               25/04/24  01:27:44  PAGE 2   
 
    58   4                      OLED_WrCmd(0xa6);
    59   4                      OLED_InverseDisplay = 0;

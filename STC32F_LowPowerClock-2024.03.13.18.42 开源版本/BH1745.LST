@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  BH1745                                                             25/04/24  00:23:34  PAGE 1   
+C251 COMPILER V5.60.0,  BH1745                                                             25/04/24  01:27:43  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE BH1745
@@ -66,7 +66,7 @@ stmt  level    source
    57   1          a = RecvData();                            //读取数据2
    58   1          SendACK();
    59   1          b = RecvData();                            //读取数据2
-C251 COMPILER V5.60.0,  BH1745                                                             25/04/24  00:23:34  PAGE 2   
+C251 COMPILER V5.60.0,  BH1745                                                             25/04/24  01:27:43  PAGE 2   
 
    60   1          SendACK();
    61   1          dat00[0x0045] = ((b<<8) + a);
@@ -134,7 +134,7 @@ stmt  level    source
   123          
   124          
   125          
-C251 COMPILER V5.60.0,  BH1745                                                             25/04/24  00:23:34  PAGE 3   
+C251 COMPILER V5.60.0,  BH1745                                                             25/04/24  01:27:43  PAGE 3   
 
   126          
   127          

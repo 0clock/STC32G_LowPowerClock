@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  00:23:36  PAGE 1   
+C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  01:27:45  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE Main_Menu
@@ -66,7 +66,7 @@ stmt  level    source
    57   2              OLED_16X16(80,5,(u8)(num+3));
    58   2          }
    59   1      }
-C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  00:23:36  PAGE 2   
+C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  01:27:45  PAGE 2   
 
    60          
    61          
@@ -134,7 +134,7 @@ stmt  level    source
   122   6                              if(dat00_low[0x14] > 0x8010 && dat00[0x14] > 0x8010)
   123   6                              {
   124   7                                  dat00_low[0x14]=(dat00_low[0x14] % 16) + 0x8000;
-C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  00:23:36  PAGE 3   
+C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  01:27:45  PAGE 3   
 
   125   7                                  dat00[0x14]=(dat00[0x14] % 16) + 0x8000;
   126   7                              }
@@ -203,7 +203,7 @@ Module Information          Static   Overlayable
   code size            =       782     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
-C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  00:23:36  PAGE 4   
+C251 COMPILER V5.60.0,  Main_Menu                                                          25/04/24  01:27:45  PAGE 4   
 
   idata size           =    ------     ------
   pdata size           =    ------     ------

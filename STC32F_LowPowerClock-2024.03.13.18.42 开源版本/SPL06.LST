@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  00:23:37  PAGE 1   
+C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  01:27:46  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SPL06
@@ -66,7 +66,7 @@ stmt  level    source
    56          
    57          //========================================================================
    58          // 函数: u16 ABS_12bit(u16 dat)
-C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  00:23:37  PAGE 2   
+C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  01:27:46  PAGE 2   
 
    59          // 描述: 把12位数据转换为16位正数
    60          // 参数: dat
@@ -134,7 +134,7 @@ stmt  level    source
   122   1          delay_ms(1);
   123   1          Start(); //发送起始命令
   124   1          SendData(SPL06_R);                             //发送设备地址+写命令
-C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  00:23:37  PAGE 3   
+C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  01:27:46  PAGE 3   
 
   125   1          RecvACK();
   126   1          for(i=0; i<18; i++)
@@ -202,7 +202,7 @@ stmt  level    source
   187   1          Start(); //发送起始命令
   188   1          SendData(SPL06_R);                             //发送设备地址+写命令
   189   1          RecvACK();
-C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  00:23:37  PAGE 4   
+C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  01:27:46  PAGE 4   
 
   190   1      
   191   1          dat1 = RecvData();                           //发送设备地址+写命令
@@ -270,7 +270,7 @@ stmt  level    source
   252   1          JCQ06_00[cmd] = dat1;
   253   1      }
   254          
-C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  00:23:37  PAGE 5   
+C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  01:27:46  PAGE 5   
 
   255          
   256          
@@ -338,7 +338,7 @@ stmt  level    source
   318          
   319          
   320          
-C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  00:23:37  PAGE 6   
+C251 COMPILER V5.60.0,  SPL06                                                              25/04/24  01:27:46  PAGE 6   
 
   321          
   322          

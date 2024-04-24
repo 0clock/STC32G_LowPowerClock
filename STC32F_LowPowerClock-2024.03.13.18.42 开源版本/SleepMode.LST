@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 1   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SleepMode
@@ -66,7 +66,7 @@ stmt  level    source
    57   1      //  （双向）P07 SPL06_INT        （开漏）P06 OLEDV1       （开漏）P05 OLEDV2    （高阻）P0
              -4 BATTERY（电池ADC采样脚）   （高阻）P03 ADC6（充电电流）   （开漏）PP02 EN（锂电池充电EN） 
              -  （高阻）P01 GHRG   （开漏）PP00 VIN/2
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 2   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 2   
 
    58   1      
    59   1          if(dat00[0x0036])//如果是休眠屏显模式，控制电压档位的两个脚不变
@@ -134,7 +134,7 @@ stmt  level    source
   118   1      //  （开漏）P57         （开漏）P56        （开漏）P55     （双向）P54 RSET   （开漏）
              -P53 5VEN    （开漏）P52 BATTERY_ON     （开漏）P51 TEXT  （双向）P50 SQW（1Hz）
   119   1          if(dat00[0x0036])
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 3   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 3   
 
   120   1          {
   121   2              P5=0xfB;
@@ -202,7 +202,7 @@ stmt  level    source
   182   1      
   183   1      
   184   1      
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 4   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 4   
 
   185   1      
   186   1          P6IE=0x00;
@@ -270,7 +270,7 @@ stmt  level    source
   248   1          P3WKUE &= ~0x10;
   249   1          P3INTE &= ~0x10;
   250   1          EA=0;
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 5   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 5   
 
   251   1          P54RST = 1;
   252   1          P0=0xff;
@@ -338,7 +338,7 @@ stmt  level    source
   314   1          if(dat00[0] & 0x0010)
   315   1          {
   316   2              SleepMode_OFF();
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 6   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 6   
 
   317   2              dat00[0] |= 0x0040;
   318   2              dat00[0] &= ~0x0010;
@@ -406,7 +406,7 @@ stmt  level    source
   380   1      
   381   1      }
   382          
-C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  00:23:39  PAGE 7   
+C251 COMPILER V5.60.0,  SleepMode                                                          25/04/24  01:27:49  PAGE 7   
 
   383          
   384          

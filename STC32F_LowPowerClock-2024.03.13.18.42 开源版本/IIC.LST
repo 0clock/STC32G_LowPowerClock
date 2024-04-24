@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 1   
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  01:27:44  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE IIC
@@ -66,7 +66,7 @@ stmt  level    source
    57          {
    58   1          I2CMSST = 0x00;                             //设置ACK信号
    59   1          I2CMSCR = 0x05;                             //发送ACK命令
-C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 2   
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  01:27:44  PAGE 2   
 
    60   1          Wait();
    61   1      }
@@ -134,7 +134,7 @@ stmt  level    source
   123   1          return a;
   124   1      
   125   1      }
-C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 3   
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  01:27:44  PAGE 3   
 
   126          
   127          //========================================================================
@@ -203,7 +203,7 @@ Module Information          Static   Overlayable
   ebitaddressable size =    ------     ------
   far data size        =    ------     ------
   huge data size       =    ------     ------
-C251 COMPILER V5.60.0,  IIC                                                                25/04/24  00:23:35  PAGE 4   
+C251 COMPILER V5.60.0,  IIC                                                                25/04/24  01:27:44  PAGE 4   
 
   const size           =    ------     ------
   hconst size          =    ------     ------

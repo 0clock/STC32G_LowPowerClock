@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  time                                                               25/04/24  00:23:37  PAGE 1   
+C251 COMPILER V5.60.0,  time                                                               25/04/24  01:27:47  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE time
@@ -66,7 +66,7 @@ stmt  level    source
    57          // 参数: 
    58          // 返回: 
    59          // 版本: 
-C251 COMPILER V5.60.0,  time                                                               25/04/24  00:23:37  PAGE 2   
+C251 COMPILER V5.60.0,  time                                                               25/04/24  01:27:47  PAGE 2   
 
    60          // 日期: 2013-4-1
    61          // 备注:
@@ -134,7 +134,7 @@ stmt  level    source
   123   2              _nop_();
   124   2              _nop_();
   125   2              WKTCH &= 0x7f;                    //掉电唤醒寄存器停止计时
-C251 COMPILER V5.60.0,  time                                                               25/04/24  00:23:37  PAGE 3   
+C251 COMPILER V5.60.0,  time                                                               25/04/24  01:27:47  PAGE 3   
 
   126   2              kk = WKTCH;                       //读取掉电唤醒寄存器内的 已经休眠的多久的值
   127   2              kk = kk*256;
@@ -202,7 +202,7 @@ stmt  level    source
   186          
   187          
   188          
-C251 COMPILER V5.60.0,  time                                                               25/04/24  00:23:37  PAGE 4   
+C251 COMPILER V5.60.0,  time                                                               25/04/24  01:27:47  PAGE 4   
 
   189          
   190          

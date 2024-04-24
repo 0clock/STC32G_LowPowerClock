@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  00:23:35  PAGE 1   
+C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  01:27:44  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE CompassMenu
@@ -66,7 +66,7 @@ stmt  level    source
    56   1          else
    57   1          {
    58   2              if((Compass_data[a] % 90) == 0)
-C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  00:23:35  PAGE 2   
+C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  01:27:44  PAGE 2   
 
    59   2              {
    60   3                  OLED_WrDat(0xFF);
@@ -134,7 +134,7 @@ stmt  level    source
   120   1      
   121   1          if(dat == 0) return;
   122   1          if(dat & 0x0001)//秒刷新
-C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  00:23:35  PAGE 3   
+C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  01:27:44  PAGE 3   
 
   123   1          {
   124   2              ZF_8X8(48,7,(u8)(Time_New[0]%16));
@@ -202,7 +202,7 @@ stmt  level    source
   186          
   187          
   188          //========================================================================
-C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  00:23:35  PAGE 4   
+C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  01:27:44  PAGE 4   
 
   189          // 函数: void UI_Compass_Animation()
   190          // 描述: 指南针UI进程
@@ -270,7 +270,7 @@ stmt  level    source
   251   2              i = i+1;
   252   2              b = i*30;
   253   2              for(i=0; i<5; i++)
-C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  00:23:35  PAGE 5   
+C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  01:27:44  PAGE 5   
 
   254   2              {
   255   3                  Compass_Scale[i] = b- start_X;
@@ -339,7 +339,7 @@ Module Information          Static   Overlayable
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
-C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  00:23:35  PAGE 6   
+C251 COMPILER V5.60.0,  CompassMenu                                                        25/04/24  01:27:44  PAGE 6   
 
   pdata size           =    ------     ------
   xdata size           =    ------     ------

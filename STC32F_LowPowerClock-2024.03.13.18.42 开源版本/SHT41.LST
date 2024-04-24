@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  SHT41                                                              25/04/24  00:23:37  PAGE 1   
+C251 COMPILER V5.60.0,  SHT41                                                              25/04/24  01:27:46  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SHT41
@@ -66,7 +66,7 @@ stmt  level    source
    57   1      }
    58          
    59          //========================================================================
-C251 COMPILER V5.60.0,  SHT41                                                              25/04/24  00:23:37  PAGE 2   
+C251 COMPILER V5.60.0,  SHT41                                                              25/04/24  01:27:46  PAGE 2   
 
    60          // 函数: void SHT41_falg_0004()
    61          // 描述: 读回温度湿度的值，并计算

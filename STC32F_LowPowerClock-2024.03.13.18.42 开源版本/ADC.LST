@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  ADC                                                                25/04/24  00:23:34  PAGE 1   
+C251 COMPILER V5.60.0,  ADC                                                                25/04/24  01:27:43  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE ADC
@@ -66,7 +66,7 @@ stmt  level    source
    57   1          for(i=0; i<4; i++)
    58   1          {
    59   2              adc_dat = Get_ADC12bitResult(0x0C);//读电池电压
-C251 COMPILER V5.60.0,  ADC                                                                25/04/24  00:23:34  PAGE 2   
+C251 COMPILER V5.60.0,  ADC                                                                25/04/24  01:27:43  PAGE 2   
 
    60   2          }
    61   1          Battery_ON_OFF();//MOS关闭
@@ -134,7 +134,7 @@ stmt  level    source
   122          
   123          
   124          //========================================================================
-C251 COMPILER V5.60.0,  ADC                                                                25/04/24  00:23:34  PAGE 3   
+C251 COMPILER V5.60.0,  ADC                                                                25/04/24  01:27:43  PAGE 3   
 
   125          // 函数: u16 Get_ADC12bitResult(u8 channel)
   126          // 描述: ADC测量
@@ -202,7 +202,7 @@ stmt  level    source
   188          20%-----3.74V
   189          10%-----3.68V
   190          5%------3.45V
-C251 COMPILER V5.60.0,  ADC                                                                25/04/24  00:23:34  PAGE 4   
+C251 COMPILER V5.60.0,  ADC                                                                25/04/24  01:27:43  PAGE 4   
 
   191          0%------3.00V
   192          */
@@ -270,7 +270,7 @@ stmt  level    source
   253   2              b = 50 + (a - 348000)/41;
   254   2          }
   255   1          else if(a >= 342600)
-C251 COMPILER V5.60.0,  ADC                                                                25/04/24  00:23:34  PAGE 5   
+C251 COMPILER V5.60.0,  ADC                                                                25/04/24  01:27:43  PAGE 5   
 
   256   1          {
   257   2              b = (a - 342600)/54;
@@ -338,7 +338,7 @@ stmt  level    source
   318   3                  adc_dat = (adc_dat<<16);
   319   3                  adc_dat = (((adc_dat/adc_rtf*ADC_CK)/25)*10)>>16;
   320   3                  dat00[0x00E4] = adc_dat;
-C251 COMPILER V5.60.0,  ADC                                                                25/04/24  00:23:34  PAGE 6   
+C251 COMPILER V5.60.0,  ADC                                                                25/04/24  01:27:43  PAGE 6   
 
   321   3              }
   322   2              else
