@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:27:45  PAGE 1   
+C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:57:58  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE IO
@@ -66,7 +66,7 @@ stmt  level    source
    57          // 函数: void Clock_INT()
    58          // 描述: RTC中断初始化
    59          // 参数: 
-C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:27:45  PAGE 2   
+C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:57:58  PAGE 2   
 
    60          // 返回:
    61          // 版本: V1.0 2023.02.05
@@ -134,7 +134,7 @@ stmt  level    source
   123          //========================================================================
   124          void Buzzer_Open()
   125          {
-C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:27:45  PAGE 3   
+C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:57:58  PAGE 3   
 
   126   1          P4M0 |= 0x01;
   127   1          P4M1 &= 0xFE;
@@ -202,7 +202,7 @@ stmt  level    source
   189          
   190          
   191          
-C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:27:45  PAGE 4   
+C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:57:58  PAGE 4   
 
   192          
   193          
@@ -270,7 +270,7 @@ stmt  level    source
   255          // 函数: IO_Init(void)
   256          // 描述: IO初始化
   257          // 参数: 
-C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:27:45  PAGE 5   
+C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:57:58  PAGE 5   
 
   258          // 返回:
   259          // 版本: V1.0 2023.02.05
@@ -338,7 +338,7 @@ stmt  level    source
   314   1          P7M0 = 0xff;
   315   1          P7M1 = 0xff;
   316   1      
-C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:27:45  PAGE 6   
+C251 COMPILER V5.60.0,  IO                                                                 25/04/24  01:57:58  PAGE 6   
 
   317   1          //输入寄存器使能
   318   1          P0IE=0x1b;

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:27:45  PAGE 1   
+C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:57:58  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE logic
@@ -66,7 +66,7 @@ stmt  level    source
    57   2              dat00[0x0086] = Date_restrictions1(dat00[0x0088] ,dat00[0x0087] ,dat00[0x0086],0x0086);
    58   2          }
    59   1      
-C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:27:45  PAGE 2   
+C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:57:58  PAGE 2   
 
    60   1      }
    61          
@@ -134,7 +134,7 @@ stmt  level    source
   123   1          else if((dat00_max[GET_SCdat3()] & 0x0080 ) && dat00[0x1A] == 0)
   124   1          {
   125   2              if(dat00[0x10] == 0x0001 && dat00[0x2F] == 0x0005)//进入标准TV模式
-C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:27:45  PAGE 3   
+C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:57:58  PAGE 3   
 
   126   2              {
   127   3                  dat00[0x10] = 0x0020;
@@ -202,7 +202,7 @@ stmt  level    source
   186          
   187          
   188          
-C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:27:45  PAGE 4   
+C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:57:58  PAGE 4   
 
   189          
   190          
@@ -270,7 +270,7 @@ stmt  level    source
   250   2              dat00_flag[0x0052] = 1;
   251   2          }
   252   1          else if(dat00[0x10] == 0x0000 && dat00[0x1A] == 0)//主菜单按下，加减主菜单光标
-C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:27:45  PAGE 5   
+C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:57:58  PAGE 5   
 
   253   1          {
   254   2              data00_Change(0x14,a);
@@ -338,7 +338,7 @@ stmt  level    source
   314   2          }
   315   1      }
   316          
-C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:27:45  PAGE 6   
+C251 COMPILER V5.60.0,  logic                                                              25/04/24  01:57:58  PAGE 6   
 
   317          
   318          

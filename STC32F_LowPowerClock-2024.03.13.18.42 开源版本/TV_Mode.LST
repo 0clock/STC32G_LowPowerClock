@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 1   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE TV_Mode
@@ -66,7 +66,7 @@ stmt  level    source
    57          // 描述: 初始化气压显示
    58          // 参数:
    59          // 返回:
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 2   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 2   
 
    60          // 版本: V1.0 2023.02.05
    61          //========================================================================
@@ -134,7 +134,7 @@ stmt  level    source
   123          
   124          //========================================================================
   125          // 函数: Time_comparison_GET1()
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 3   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 3   
 
   126          // 描述: 将秒分时的个位和十位拿出来
   127          // 参数:
@@ -202,7 +202,7 @@ stmt  level    source
   189          //========================================================================
   190          // 函数: time_synchronization()
   191          // 描述: 旧时间Time_Low[]更新
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 4   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 4   
 
   192          // 参数:
   193          // 返回:
@@ -270,7 +270,7 @@ stmt  level    source
   255          // 参数:
   256          // 返回:
   257          // 版本: V1.0 2023.02.05
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 5   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 5   
 
   258          //========================================================================
   259          void TVMode2_int()
@@ -338,7 +338,7 @@ stmt  level    source
   321   1          if (dat00[0x0009] & 0x0004)
   322   1          {
   323   2              shifen_dh(64, 3, (33 - dat00[0x12] + (Low_time_num[3]) * 32), 40);
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 6   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 6   
 
   324   2          }
   325   1          if (dat00[0x0009] & 0x0008)
@@ -406,7 +406,7 @@ stmt  level    source
   387   1          {
   388   2              ZF_8X16(24, 0, (u8)(New_time_num[2]));
   389   2          }
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 7   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 7   
 
   390   1      
   391   1          if (dat & 0x0010)
@@ -474,7 +474,7 @@ stmt  level    source
   453   1          IU_Battery_cheek_renovate();
   454   1          time_synchronization();
   455   1      }
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 8   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 8   
 
   456          
   457          //========================================================================
@@ -542,7 +542,7 @@ stmt  level    source
   511   2              time_synchronization();
   512   2          }
   513   1      
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 9   
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 9   
 
   514   1          a = (u8)P45 + (u8)P46 + (u8)P27; // 查询快速查询按键状态
   515   1          if ((dat00[0x0000] & 0x0008) && (a == 3) && (dat00[0x0010] >= 0x0020 && dat00[0x0010] <= 0x0022) && d
@@ -610,7 +610,7 @@ stmt  level    source
   576   4                          dat00[0] |= 0x0020;
   577   4                  }
   578   3              }
-C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:27:48  PAGE 10  
+C251 COMPILER V5.60.0,  TV_Mode                                                            25/04/24  01:58:01  PAGE 10  
 
   579   2      
   580   2              dat00[0x0000] &= ~0x0008;

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:27:46  PAGE 1   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:57:59  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE SecondaryMenu
@@ -66,7 +66,7 @@ stmt  level    source
    57          //========================================================================
    58          void UIData_fill(u16 a)
    59          {
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:27:46  PAGE 2   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:57:59  PAGE 2   
 
    60   1          if(dat00_max[a] & 0x0040)
    61   1          {
@@ -134,7 +134,7 @@ stmt  level    source
   122          
   123          //========================================================================
   124          // 函数: void UI_SeMenu_Cursor_num_2(char num,u8 yy1,u8 yy2,u8 a)
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:27:46  PAGE 3   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:57:59  PAGE 3   
 
   125          // 描述: 二级菜单显示一行
   126          // 参数: num：光标偏移 
@@ -202,7 +202,7 @@ stmt  level    source
   188          
   189          
   190          //========================================================================
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:27:46  PAGE 4   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:57:59  PAGE 4   
 
   191          // 函数: void UI_SecondaryMenu(u8 a)
   192          // 描述: 二级菜单滚动刷新函数
@@ -270,7 +270,7 @@ stmt  level    source
   254   2              if((dat00[0x13] == 0 || dat00[0x12] == 1) && (P45 && P27))
   255   2              {
   256   3                  dat1  = ((dat00[0x17] ) % GET_SCdat()) * 8;
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:27:46  PAGE 5   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:57:59  PAGE 5   
 
   257   3                  OLED_16_16V2(TVR((u8)(dat00[0x10]-1)),dat1,0,3,0);
   258   3              }
@@ -338,7 +338,7 @@ stmt  level    source
   320   6                              dat00_low[0x17]++;
   321   6      
   322   6                              if((dat00_low[0x17] > (dat00[GET_SC()] << 2)) && (dat00[0x17] > (dat00[GET_SC()] 
-C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:27:46  PAGE 6   
+C251 COMPILER V5.60.0,  SecondaryMenu                                                      25/04/24  01:57:59  PAGE 6   
 
              -<< 2)))
   323   6                              {
