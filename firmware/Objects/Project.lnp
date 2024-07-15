@@ -1,0 +1,7 @@
+".\Objects\time.obj",
+".\Objects\oled_ssd13063.obj",
+".\Objects\main.obj" 
+TO ".\Objects\Project" 
+PRINT(".\Listings\Project.map") CASE 
+CLASSES (EDATA (0x0-0x1FFF), 
+HDATA (0x0-0x1FFF)) 
