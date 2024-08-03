@@ -19,30 +19,16 @@ CPU DLL:         S251.DLL V3.129.0.0
 Dialog DLL:      DCORE51.DLL V2.81.6.0 
 <h2>Project:</h2>
 D:\MyProject\STC32G_LowPowerClock\firmware\Project.uvproj
-Project File Date:  07/15/2024
+Project File Date:  07/18/2024
 
 <h2>Output:</h2>
-Rebuild target 'Target 1'
-compiling time.c...
+Build target 'Target 1'
 compiling oled_ssd13063.c...
+device\oled\oled_ssd13063.c(318): warning C188: 'parameter 2': value truncated
+device\oled\oled_ssd13063.c(324): warning C188: 'parameter 2': value truncated
+device\oled\oled_ssd13063.c(335): error C144: 'array': initialization needs curly braces
 compiling main.c...
-linking...
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    Delay10us/time
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    Timer0Init/time
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    delay_ms/time
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    SPI_DMA_switch/oled_ssd13063
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    SPI_DMA/oled_ssd13063
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    SPI_DMA_TX/oled_ssd13063
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    SPI_DMA_Config/oled_ssd13063
-Program Size: data=10.0 edata+hdata=256 xdata=768 const=0 code=759
-".\Objects\Project" - 0 Error(s), 7 Warning(s).
+Target not created.
 Build Time Elapsed:  00:00:00
 </pre>
 </body>

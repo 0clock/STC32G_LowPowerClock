@@ -1,0 +1,1 @@
+"Code\u8g2\u8log.c" XSMALL FUNCTIONS (REENTRANT) OPTIMIZE (0,SPEED) BROWSE INCDIR(.\Code;.\DmxLibraries\DmxDevice;.\DmxLibraries\DmxDriver;.\User;.\DmxLibraries;.\Code\u8g2) DEBUG PRINT(.\Listings\u8log.lst) TABS (2) OBJECT(.\Objects\u8log.obj)

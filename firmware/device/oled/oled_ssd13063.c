@@ -2,13 +2,14 @@
  * @Author: 0clock
  * @Date: 2024-07-15 22:26:00
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-07-15 22:54:13
+ * @LastEditTime: 2024-08-03 00:23:29
  * @FilePath: \STC32G_LowPowerClock\firmware\device\oled\oled_ssd13063.c
  * @Description: oled显示屏驱动
- * 
- * Copyright (c) 2024 by 0clock, All Rights Reserved. 
+ *
+ * Copyright (c) 2024 by 0clock, All Rights Reserved.
  */
 #include "oled_ssd13063.h"
+#include "oled_font.h"
 
 u8 xdata SPI_DmaTxBuffer[256];  //_at_ DMA_TX_ADDR;
 u8 xdata SPI_DmaTxBuffer2[256]; //_at_ DMA_TX_ADDR;
@@ -17,7 +18,6 @@ u8 xdata SPI_DmaRxBuffer[256];  //_at_ DMA_RX_ADDR
 u8 SPI_DMA_USE = 0;
 
 u8 SPI_DMA_buy = 0;
-
 
 //========================================================================
 // 函数: void SPI_init(void)
@@ -62,8 +62,6 @@ void SPI_Init(void)
 // 返回: none.
 // 版本: V1.0, 2021-5-6
 //========================================================================
-
-
 
 void SPI_DMA_Config(void)
 {
@@ -244,8 +242,6 @@ void OLED_Set_Pos(u8 x, u8 y)
     OLED_WrCmd((x & 0x0f));
 }
 
-
-
 //========================================================================
 // 函数: void OLED_Init(void)
 // 描述: OLED初始化程序
@@ -281,10 +277,10 @@ void OLED_Init(void)
     OLED_WrCmd(0x00);       //-not offset		 不抵消
     OLED_WrCmd(0xd5);       //--set display clock divide ratio/oscillator frequency	设置显示时钟分频比/振荡器频率
     OLED_WrCmd(0x80);       //--set divide ratio, Set Clock as 100 Frames/Sec	  设置分频比，将时钟设置为100帧/秒   TV模式使用0x10或0xF1 其他用0x80 指南针0x50
-//    dat00[0x0007] = 0;
-    OLED_WrCmd(0xd9); //--set pre-charge period		   设定预充电时间
-    OLED_WrCmd(0xf1); // Set Pre-Charge as 15 Clocks & Discharge as 1 Clock	将预充电设置为15个时钟并将放电设置为1个时钟
-    OLED_WrCmd(0xda); //--set com pins hardware configuration	设置com引脚的硬件配置
+                            //    dat00[0x0007] = 0;
+    OLED_WrCmd(0xd9);       //--set pre-charge period		   设定预充电时间
+    OLED_WrCmd(0xf1);       // Set Pre-Charge as 15 Clocks & Discharge as 1 Clock	将预充电设置为15个时钟并将放电设置为1个时钟
+    OLED_WrCmd(0xda);       //--set com pins hardware configuration	设置com引脚的硬件配置
     OLED_WrCmd(0x12);
     OLED_WrCmd(0xdb); //--set vcomh
     OLED_WrCmd(0x40); // Set VCOM Deselect Level
@@ -295,7 +291,75 @@ void OLED_Init(void)
     OLED_WrCmd(0xa4); // Disable Entire Display On (0xa4/0xa5)禁用整个显示打开
     OLED_WrCmd(0xa6); // Disable Inverse Display On (0xa6/a7)禁用反向显示打开********
     OLED_WrCmd(0xaf); //--turn on oled panel
-//    OLED_InverseDisplay2();
-    OLED_Fill(0x00); // 初始清屏
+                      //    OLED_InverseDisplay2();
+    OLED_Fill(0x00);  // 初始清屏
     OLED_Set_Pos(0, 0);
+}
+
+// 在指定位置显示一个字符,包括部分字符
+// x:0~127
+// y:0~63
+// mode:0,反白显示;1,正常显示
+// size:选择字体 16/12
+void OLED_ShowChar(u8 x, u8 y, u8 chr, u8 size)
+{
+    unsigned char c = 0, i = 0;
+    c = chr - ' '; // 得到偏移后的值
+    if (x > Max_Column - 1)
+    {
+        x = 0;
+        y = y + 2;
+    }
+    if (size == 16)
+    {
+        OLED_Set_Pos(x, y);
+        for (i = 0; i < 8; i++)
+            OLED_WrDat(F8X16[c * 16 + i]);
+        OLED_Set_Pos(x, y + 1);
+        for (i = 0; i < 8; i++)
+            OLED_WrDat(F8X16[c * 16 + i + 8]);
+    }
+    else
+    {
+        OLED_Set_Pos(x, y + 1);
+        for (i = 0; i < 6; i++)
+            OLED_WrDat(F6x8[c][i]);
+    }
+}
+// 显示一个字符号串
+
+void OLED_ShowString(u8 x, u8 y, u8 str[5], u8 size)
+{
+    unsigned char j = 0;
+
+    unsigned char b[5] = str;
+
+    
+
+    for (j = 0; j < 5; j++)
+    {
+        OLED_ShowChar(x, y, b[j], size);
+        x += 8;
+    }
+
+    // while (a[j] != '\0')
+    // {
+    //     // if (chr[j] > 'z')
+    //     // {
+    //     //     chr[j] = 'z';
+    //     // }
+    //     // else if (chr[j] < '0')
+    //     // {
+    //     //     chr[j] = '0';
+    //     // }
+    //     // OLED_ShowChar(x, y, a[j], size);
+    //     // OLED_ShowChar(0, 0, chr[j], size);
+    //     x += 8; // 假设每个字符宽度是 8 个像素
+    //     if (x > 120)
+    //     {
+    //         x = 0;
+    //         y += 2; // 移到下一行，假设每行高度是 2 个单位
+    //     }
+    //     j++;
+    // }
 }

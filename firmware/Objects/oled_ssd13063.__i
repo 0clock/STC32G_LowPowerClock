@@ -1,0 +1,1 @@
+"device\oled\oled_ssd13063.c" INTR2 BROWSE INCDIR(.\src;.\lib;.\device\oled) DEBUG PRINT(.\Listings\oled_ssd13063.lst) TABS (2) OBJECT(.\Objects\oled_ssd13063.obj)

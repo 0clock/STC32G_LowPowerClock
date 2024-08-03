@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-07-15 22:26:14
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-07-15 22:45:07
+ * @LastEditTime: 2024-08-02 23:40:16
  * @FilePath: \STC32G_LowPowerClock\firmware\device\oled\oled_ssd13063.h
  * @Description:
  *
@@ -39,5 +39,6 @@ void OLED_WrCmd(u8 dat1);
 
 void OLED_Fill(u8 bmp_dat);
 
-
+void OLED_ShowChar(u8 x, u8 y, u8 chr,u8 size);
+void OLED_ShowString(u8 x, u8 y, u8 str[5], u8 size);
 #endif

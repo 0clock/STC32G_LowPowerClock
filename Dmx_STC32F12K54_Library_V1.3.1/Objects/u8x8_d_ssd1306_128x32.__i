@@ -1,0 +1,1 @@
+"Code\u8g2\u8x8_d_ssd1306_128x32.c" XSMALL FUNCTIONS (REENTRANT) OPTIMIZE (0,SPEED) BROWSE INCDIR(.\Code;.\DmxLibraries\DmxDevice;.\DmxLibraries\DmxDriver;.\User;.\DmxLibraries;.\Code\u8g2) DEBUG PRINT(.\Listings\u8x8_d_ssd1306_128x32.lst) TABS (2) OBJECT(.\Objects\u8x8_d_ssd1306_128x32.obj)
