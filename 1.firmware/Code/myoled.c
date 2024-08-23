@@ -2,8 +2,8 @@
  * @Author: 0clock
  * @Date: 2024-08-03 01:12:38
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-04 04:39:15
- * @FilePath: \Dmx_STC32F12K54_Library_V1.3.1\Code\myoled.c
+ * @LastEditTime: 2024-08-24 02:16:53
+ * @FilePath: \STC32_LowPowerClock\1.firmware\Code\myoled.c
  * @Description:
  *
  * Copyright (c) 2024 by 0clock, All Rights Reserved.
@@ -13,6 +13,7 @@
 #include "myoled.h"
 #include <math.h>
 #include "dmx_all.h"
+#include "dmx_function.h"
 
 unsigned char xdata oled_gram[128 * 8] = {0};
 bit oled_refresh_flag = 0;
@@ -90,7 +91,7 @@ void oled_drawpoint(unsigned char x, unsigned char y, unsigned char *buff, bit c
     }
     else
     {
-        buff[pos] &= 0x01 << (y - y0);
+        buff[pos] &= ~(0x01 << (y - y0 * 8));
     }
 }
 
@@ -120,7 +121,7 @@ void oled_drawline(unsigned char x0, unsigned char y0,
     int sy = y0 < y1 ? 1 : -1;
     int err = dx - dy;
     int e2;
-    int i, j;
+    unsigned int i, j;
 
     while (1)
     {
@@ -128,7 +129,7 @@ void oled_drawline(unsigned char x0, unsigned char y0,
         {
             for (j = 0; j < thickness; j++)
             {
-                oled_drawpoint(x0 + i, y0 + j, buff, color);
+                oled_drawpoint((unsigned int)(x0 + i), y0 + j, buff, color);
             }
         }
 
@@ -214,8 +215,8 @@ void oled_draw_round_rect(unsigned char x0, unsigned char y0,
                           unsigned char radius, unsigned char *buff, bit color,
                           unsigned char thickness)
 {
-    int x = radius;
-    int y = 0;
+    unsigned int x = radius;
+    unsigned int y = 0;
     int err = 0;
     // Draw the four sides of the rectangle, leaving space for the corners
     oled_drawline(x0 + radius, y0, x1 - radius, y0, buff, color, thickness); // Top
@@ -352,10 +353,10 @@ void test_draw_rect_animation(unsigned char *buff)
     bit growing = 1;               // 标志，表示矩形是变大还是变小
 
     // 计算左上角和右下角坐标
-    unsigned char x0 ;
-    unsigned char y0 ;
-    unsigned char x1 ;
-    unsigned char y1 ;
+    unsigned char x0;
+    unsigned char y0;
+    unsigned char x1;
+    unsigned char y1;
 
     while (1)
     {
@@ -390,5 +391,275 @@ void test_draw_rect_animation(unsigned char *buff)
                 growing = 1; // 开始变大
             }
         }
+    }
+}
+
+/**
+ *
+ * @brief    在指定位置绘制整数
+ * @param    x           起始x坐标
+ * @param    y           起始y坐标
+ * @param    number      需要绘制的整数
+ * @param    buff        图像刷新缓存
+ * @param    color       绘制颜色（1表示点亮，0表示熄灭）
+ * @return   void
+ * @notes    将整数转换为字符串，然后逐个字符绘制
+ * Example:  oled_draw_int(10, 10, 123, oled_gram, 1);
+ *
+ **/
+void oled_draw_int(unsigned char x, unsigned char y,
+                   const long dat, unsigned char num, unsigned char *gram,
+                   bit color, SHOW_size_enum fontsize)
+{
+    long multiple = 1;
+    long remainder = dat;
+    char buff[12] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+    if (num > 10)
+        num = 10;
+    if (num < 1)
+        num = 1;
+    buff[num + 1] = '\0';
+
+    if (num < 10)
+    {
+        while (num > 0)
+        {
+            num--;
+            multiple *= 10;
+        }
+        remainder %= multiple;
+    }
+
+    int_to_str_func(remainder, buff);
+    oled_draw_string(x, y, buff, gram, color, fontsize);
+}
+
+/**
+ *
+ * @brief    在指定位置绘制字符
+ * @param    x           起始x坐标
+ * @param    y           起始y坐标
+ * @param    ch          需要绘制的字符
+ * @param    buff        图像刷新缓存
+ * @param    color       绘制颜色（1表示点亮，0表示熄灭）
+ * @param    font_size   字体大小选择（6表示6x8字体，8表示8x16字体）
+ * @return   void
+ * @notes    从字体数据中取出字符点阵并绘制
+ * Example:  oled_draw_char(10, 10, 'A', oled_gram, 1, 6);
+ *
+ **/
+void oled_draw_char(unsigned char x, unsigned char y, char ch,
+                    unsigned char *buff, bit color,
+                    SHOW_size_enum fontsize)
+{
+    unsigned char i, j;
+    unsigned char c = ch - ' '; // Assume the font array starts with space character
+    unsigned char line;
+    if (fontsize == Show6x8)
+    {
+        for (i = 0; i < 6; i++) // Each character is 6x8 pixels
+        {
+            line = Char6x8[c][i]; // Get font data from Char6x8 array
+            for (j = 0; j < 8; j++)
+            {
+                if (line & 0x01)
+                {
+                    oled_drawpoint(x + i, y + j, buff, color);
+                }
+                else
+                {
+                    // oled_drawpoint(x + i, y + j, buff, !color);
+                }
+                line >>= 1;
+            }
+        }
+    }
+    else if (fontsize == Show8x16)
+    {
+        for (i = 0; i < 8; i++) // Each character is 8x16 pixels
+        {
+            unsigned char line1 = Char8x16[c][i];     // Get upper part of character data from Char8x16 array
+            unsigned char line2 = Char8x16[c][i + 8]; // Get lower part of character data from Char8x16 array
+
+            for (j = 0; j < 8; j++)
+            {
+                if (line1 & 0x01)
+                {
+                    oled_drawpoint(x + i, y + j, buff, color);
+                }
+                else
+                {
+                    // oled_drawpoint(x + i, y + j, buff, !color);
+                }
+                line1 >>= 1;
+            }
+
+            for (j = 0; j < 8; j++)
+            {
+                if (line2 & 0x01)
+                {
+                    oled_drawpoint(x + i, y + j + 8, buff, color);
+                }
+                else
+                {
+                    // oled_drawpoint(x + i, y + j + 8, buff, !color);
+                }
+                line2 >>= 1;
+            }
+        }
+    }
+    else
+    {
+        // Handle invalid font_size if necessary
+    }
+}
+
+/**
+ *
+ * @brief    在指定位置绘制字符串
+ * @param    x           起始x坐标
+ * @param    y           起始y坐标
+ * @param    str         需要绘制的字符串
+ * @param    buff        图像刷新缓存
+ * @param    color       绘制颜色（1表示点亮，0表示熄灭）
+ * @param    font_size   字体大小选择（6表示6x8字体，8表示8x16字体）
+ * @return   void
+ * @notes    逐字符调用oled_draw_char函数绘制字符串
+ * Example:  oled_draw_string(10, 10, "Hello", oled_gram, 1, 6);
+ *
+ **/
+void oled_draw_string(unsigned char x, unsigned char y, const char *str,
+                      unsigned char *buff, bit color, SHOW_size_enum font_size)
+{
+    unsigned char startX = x;
+
+    while (*str)
+    {
+        oled_draw_char(x, y, *str, buff, color, font_size);
+        if (font_size == Show6x8)
+        {
+            x += 6; // Move x position for the next character (6x8 font)
+        }
+        else if (font_size == Show8x16)
+        {
+            x += 8; // Move x position for the next character (8x16 font)
+        }
+
+        // Check if the x position exceeds the screen width and handle accordingly
+        // For example, you might want to wrap the text to a new line.
+
+        str++; // Move to the next character in the string
+    }
+}
+/**
+ *
+ * @brief    绘制图像
+ * @param    x            起始x坐标
+ * @param    y            起始y坐标
+ * @param    width        图像的宽度
+ * @param    height       图像的高度
+ * @param    image        图像数据数组
+ * @param    buff         图像刷新缓存
+ * @param    color        绘制颜色（1表示点亮，0表示熄灭）
+ * @return   void
+ * @notes    根据图像数据逐像素绘制图像
+ * Example:  oled_draw_image(0, 0, 16, 16, my_image, oled_gram, 1);
+ *
+ **/
+void oled_draw_image(unsigned char x, unsigned char y,
+                     unsigned char width, unsigned char height,
+                     const unsigned char *image, unsigned char *buff, bit color)
+{
+    unsigned char i, j, k, m=0, line;
+    if (height % 8 != 0)
+    {
+        height += (height % 8);
+    }
+    for (i = 0; i < height / 8; i++)
+    {
+        for (k = 0; k < width; k++)
+        {
+            line = image[m++];
+            for (j = 0; j < 8; j++)
+            {
+                if (line & 0x01)
+                {
+                    oled_drawpoint(x + k, y + j + 8*i, buff, color);
+                }
+                line >>= 1;
+            }
+        }
+    }
+
+#if 0 // 下面这个方法会导致y轴只会按照8行那种显示，不行没办法做到像素级控制坐标，淘汰
+    unsigned char y0, y1, i, j, k = 0;
+
+    unsigned int pos;
+
+    if (y % 8 == 0)
+        y0 = y / 8;
+    else
+        y0 = y / 8 + 1;
+
+    if (height % 8 == 0)
+        y1 = height / 8;
+    else
+        y1 = height / 8 + 1;
+
+    if (x >= OLED_WIDTH || y >= OLED_HEIGH)
+    {
+        return;
+    }
+
+    for (j = 0; j < y1; j++)
+    {
+        pos = x + ((y0 + j) * 128);
+        for (i = 1; i <= width; i++)
+        {
+            pos++;
+            buff[pos] = image[k++];
+        }
+    }
+#endif
+}
+
+void show_dig_num(unsigned char x, unsigned char y,
+                  const unsigned char num,
+                  const unsigned char *gram, bit color)
+{
+    switch (num)
+    {
+    case 0:
+        oled_draw_image(x, y, 14, 23, Num_0, gram, color);
+        break;
+    case 1:
+        oled_draw_image(x, y, 14, 23, Num_1, gram, color);
+        break;
+    case 2:
+        oled_draw_image(x, y, 14, 23, Num_2, gram, color);
+        break;
+    case 3:
+        oled_draw_image(x, y, 14, 23, Num_3, gram, color);
+        break;
+    case 4:
+        oled_draw_image(x, y, 14, 23, Num_4, gram, color);
+        break;
+    case 5:
+        oled_draw_image(x, y, 14, 23, Num_5, gram, color);
+        break;
+    case 6:
+        oled_draw_image(x, y, 14, 23, Num_6, gram, color);
+        break;
+    case 7:
+        oled_draw_image(x, y, 14, 23, Num_7, gram, color);
+        break;
+    case 8:
+        oled_draw_image(x, y, 14, 23, Num_8, gram, color);
+        break;
+    case 9:
+        oled_draw_image(x, y, 14, 23, Num_9, gram, color);
+        break;
+    default:
+        break;
     }
 }

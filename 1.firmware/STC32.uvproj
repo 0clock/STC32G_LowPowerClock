@@ -354,6 +354,31 @@
               <FileType>1</FileType>
               <FilePath>.\Code\BMP.c</FilePath>
             </File>
+            <File>
+              <FileName>bms.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\bms.c</FilePath>
+            </File>
+            <File>
+              <FileName>bms.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\bms.h</FilePath>
+            </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\iic.c</FilePath>
+            </File>
+            <File>
+              <FileName>ins5699s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\ins5699s.c</FilePath>
+            </File>
+            <File>
+              <FileName>task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

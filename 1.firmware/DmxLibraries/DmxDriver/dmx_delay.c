@@ -46,3 +46,21 @@ void delay_ms(int ms)
         while(--i);
     }
 }
+
+/**
+ * @brief    软件延时函数（微秒级）
+ * 
+ * @param    us 需要延时的时间，单位:微秒
+ * @return   void
+ * @notes    使用软件循环实现的微秒级延时，延时时间可能会因编译器优化或CPU频率变化有所误差。
+ * @example  delay_us(100);  // 软件延时100微秒
+ */
+void delay_us(int us)
+{
+    unsigned int i;
+    while(us--)
+    {
+        i = MAIN_FOSC / 6030 / 1000;  // 根据主频和目标延时计算循环次数
+        while(--i);
+    }
+}

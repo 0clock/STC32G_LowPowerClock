@@ -2,8 +2,8 @@
  * @Author: 0clock
  * @Date: 2024-08-03 00:48:43
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-03 22:29:38
- * @FilePath: \Dmx_STC32F12K54_Library_V1.3.1\DmxLibraries\DmxDevice\dmx_all.h
+ * @LastEditTime: 2024-08-24 00:48:15
+ * @FilePath: \STC32_LowPowerClock\1.firmware\DmxLibraries\DmxDevice\dmx_all.h
  * @Description: 
  * 
  * Copyright (c) 2024 by 0clock, All Rights Reserved. 
@@ -76,4 +76,9 @@
 #include "dmx_oled.h"
 #include "myoled.h"
 #include "BMP.h"
+#include "bms.h"
+#include "task.h"
+#include "ins5699s.h"
+#include "iic.h"
+
 #endif

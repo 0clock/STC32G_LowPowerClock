@@ -66,40 +66,65 @@ void INT4_ISR(void) interrupt 16
 {
     // 下降沿触发,P30作为RXD引脚时不可使用该中断
 }
-// 定时器0中断
+// 定时器0中断 1ms
 void TIME0_ISR(void) interrupt 1
 {
     static unsigned int time0_isr_count = 0;
     static unsigned char i = 1;
     time0_isr_count++;
-    if (time0_isr_count % 1 == 0 && oled_refresh_flag == 1)
+    if (time0_isr_count % 16 == 0 && oled_refresh_flag == 1)
     {
+#if 0 // 临时测试
+        oled_draw_int(0, 56, time0_isr_count, 5, oled_gram, 1, Show6x8);
+        oled_draw_string(0, 48, "voltage:", oled_gram, 1, Show6x8);
+        oled_draw_int(50, 48, battery.voltage, 5, oled_gram, 1, Show6x8);
+        oled_draw_string(0, 40, "current:", oled_gram, 1, Show6x8);
+        oled_draw_int(50, 40, battery.current, 5, oled_gram, 1, Show6x8);
+#endif
         oled_refresh(oled_gram);
         oled_refresh_flag = 0;
     }
-    
 
-    //蜂鸣器
-    // if (time0_isr_count % i == 0)
-    // {
-    //     Buzzer_Close();
-    // }
-    // else
-    // {
-    //     Buzzer_Open();
-    // }
-    // if (time0_isr_count % 1000 == 0)
-    // {
-    //     i++;
-    //     if (i >= 10)
-    //     {
-    //         i = 0;
-    //     }
-    // }
+    if (time0_isr_count % 500 == 0)
+    {
+    }
+
+    if (time0_isr_count % 1000 == 0)
+    {
+    }
+
+    // 蜂鸣器
+    //  if (time0_isr_count % i == 0)
+    //  {
+    //      Buzzer_Close();
+    //  }
+    //  else
+    //  {
+    //      Buzzer_Open();
+    //  }
+    //  if (time0_isr_count % 1000 == 0)
+    //  {
+    //      i++;
+    //      if (i >= 10)
+    //      {
+    //          i = 0;
+    //      }
+    //  }
 }
-// 定时器1中断
+// 定时器1中断 5ms
 void TIME1_ISR(void) interrupt 3
 {
+    static unsigned int time1_isr_count = 0;
+    time1_isr_count++;
+    if (time1_isr_count % 100 == 0)
+    {
+        bms_main_task_500ms();
+    }
+
+    if (time1_isr_count % 200 == 0)
+    {
+        test_time_update_1s();
+    }
 }
 
 // 定时器2中断

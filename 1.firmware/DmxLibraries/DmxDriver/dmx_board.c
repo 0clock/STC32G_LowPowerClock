@@ -251,7 +251,7 @@ void init_chip(void)
 
 	// ³õÊ¼»¯DEBUG´®¿Ú
 	init_uart(DEBUG_UART_N, DEBUG_UART_TIM, DEBUG_UART_PIN, 115200);
-	printf("Hello World!\r\n");
+	printf(">>>setup complete!\r\n");
 }
 
 /**
