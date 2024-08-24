@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-08-03 00:48:43
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-24 00:48:15
+ * @LastEditTime: 2024-08-24 15:59:52
  * @FilePath: \STC32_LowPowerClock\1.firmware\DmxLibraries\DmxDevice\dmx_all.h
  * @Description: 
  * 
@@ -80,5 +80,6 @@
 #include "task.h"
 #include "ins5699s.h"
 #include "iic.h"
+#include "gui.h"
 
 #endif

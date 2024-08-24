@@ -1,4 +1,4 @@
-L251 LINKER/LOCATER V4.66.93.0                                                          04/25/2024  02:12:24  PAGE 1
+L251 LINKER/LOCATER V4.66.93.0                                                          08/25/2024  00:58:42  PAGE 1
 
 
 L251 LINKER/LOCATER V4.66.93.0, INVOKED BY:
@@ -67,7 +67,7 @@ INPUT MODULES INCLUDED:
          COMMENT TYPE 0: C251 V5.60.0
   FlashLight.obj (FlashLight)
          COMMENT TYPE 0: C251 V5.60.0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 2
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 2
 
 
   C:\KEIL_V5\C251\LIB\C2SXS.LIB (?C_START)
@@ -135,7 +135,7 @@ FF006BH   FF006DH   000003H   ---    OFFS..   CODE           ?PR?IV?13
 FF006EH   FF0129H   0000BCH   BYTE   INSEG    CODE           ?PR?OLED_INIT?OLED
 FF012AH   FF012AH   000001H   ---    ---      **GAP**
 FF012BH   FF012DH   000003H   ---    OFFS..   CODE           ?CO?isr?1
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 3
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 3
 
 
 FF012EH   FF0131H   000004H   BYTE   UNIT     CODE           ?PR?LMUL?STC_MDU32
@@ -203,7 +203,7 @@ FF610FH   FF62BBH   0001ADH   BYTE   INSEG    CODE           ?PR?IU_MAIN_MENU?MA
 FF62BCH   FF6433H   000178H   BYTE   INSEG    CODE           ?PR?SPL06_C0R?SPL06
 FF6434H   FF6586H   000153H   BYTE   INSEG    CODE           ?PR?UI_SECONDARYMENU?SECONDARYMENU
 FF6587H   FF66D7H   000151H   BYTE   INSEG    CODE           ?PR?MAIN?MAIN
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 4
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 4
 
 
 FF66D8H   FF680CH   000135H   BYTE   INSEG    CODE           ?PR?TVMODE_INT?TV_MODE
@@ -271,7 +271,7 @@ FF8E2DH   FF8E7FH   000053H   BYTE   INSEG    CODE           ?PR?OLED_INVERSEDIS
 FF8E80H   FF8ECEH   00004FH   BYTE   INSEG    CODE           ?PR?GET_MAGNETISM_DAT?BMC050
 FF8ECFH   FF8F1DH   00004FH   BYTE   INSEG    CODE           ?PR?UI_THREEMENU?THREEMENU
 FF8F1EH   FF8F6BH   00004EH   BYTE   INSEG    CODE           ?PR?ADC_INIT?ADC
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 5
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 5
 
 
 FF8F6CH   FF8FB8H   00004DH   BYTE   INSEG    CODE           ?PR?WEEK_CONVERSION?TV_MODE
@@ -339,7 +339,7 @@ FF9B7EH   FF9B96H   000019H   BYTE   INSEG    CODE           ?PR?IIC_INT?IIC
 FF9B97H   FF9BAFH   000019H   BYTE   INSEG    CODE           ?PR?SENDNAK?IIC
 FF9BB0H   FF9BC8H   000019H   BYTE   INSEG    CODE           ?PR?SPI_DMA?OLED
 FF9BC9H   FF9BE1H   000019H   BYTE   INSEG    CODE           ?PR?ABS_20BIT?SPL06
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 6
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 6
 
 
 FF9BE2H   FF9BF9H   000018H   BYTE   INSEG    CODE           ?PR?SENDACK?IIC
@@ -407,7 +407,7 @@ FFA81DH   FFAB94H   000378H   BYTE   UNIT     HCONST         ?C_INITHDATA
    *DEL*:           0000F4H   BYTE   INSEG    CODE           ?PR?DEBUG_8X8?OLED
    *DEL*:           000002H   BYTE   UNIT     EDATA          ?ED?DEBUG_8X8?OLED
    *DEL*:           0000A9H   BYTE   INSEG    CODE           ?PR?SPL06_PR?SPL06
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 7
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 7
 
 
    *DEL*:           000004H   BYTE   UNIT     EDATA          ?ED?SPL06_PR?SPL06
@@ -475,7 +475,7 @@ GET_SCdat3/DATA                             ----- -----  ----- -----
 
 GET_GBdat/DATA                              ----- -----  ----- -----
   +--> GET_SC/DATA
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 8
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 8
 
 
 
@@ -543,7 +543,7 @@ main/main                                   ----- -----  ----- -----
   +--> Magnetometer_falg_0080/BMC050
   +--> key_falg_0100/ThreeMenu
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 9
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 9
 
 
 IO_Init/IO                                  ----- -----  ----- -----
@@ -611,7 +611,7 @@ Start/IIC                                   ----- -----  ----- -----
 Wait/IIC                                    20H.2 20H.2  ----- -----
 
 SendData/IIC                                ----- -----  ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 10
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 10
 
 
   +--> Wait/IIC
@@ -679,7 +679,7 @@ SPI_init/OLED                               ----- -----  ----- -----
 SPI_DMA_Config/OLED                         ----- -----  ----- -----
 
 Magnetometer_initi/BMC050                   ----- -----  ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 11
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 11
 
 
   +--> IIC_W2bit/IIC
@@ -747,7 +747,7 @@ Time_Interruption_1S/Time_Interruption      ----- -----  ----- -----
 
 IIC_R1bit/IIC                               ----- -----  ----- -----
   +--> Start/IIC
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 12
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 12
 
 
   +--> SendData/IIC
@@ -815,7 +815,7 @@ numlongGet/OLED                             ----- -----  ----- -----
 
 UI_S_F2/SecondaryMenu                       ----- -----  ----- -----
   +--> GET_SCdat/DATA
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 13
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 13
 
 
   +--> GET_SC/DATA
@@ -883,7 +883,7 @@ OLED_32X32/OLED                             ----- -----  08F5H 08FCH
   +--> SPI_DMA_switch/OLED
   +--> SPI_DMA_TX/OLED
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 14
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 14
 
 
 SPI_DMA_switch/OLED                         ----- -----  ----- -----
@@ -951,7 +951,7 @@ IU_Battery_Icon_S/OLED                      ----- -----  08F8H 08F8H
   +--> OLED_Set_Pos/OLED
   +--> OLED_WrDat/OLED
   +--> IU_Battery_Icon_S_1/OLED
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 15
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 15
 
 
   +--> ZF_8X8/OLED
@@ -1019,7 +1019,7 @@ UI_CompassMenu_time/CompassMenu             ----- -----  ----- -----
 UI_SecondaryMenu_G_1/SecondaryMenu          ----- -----  ----- -----
   +--> UI_SeMenu_Cursor_num/SecondaryMenu
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 16
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 16
 
 
 OLED_Frames/OLED                            ----- -----  ----- -----
@@ -1087,7 +1087,7 @@ OLED_Region_Fill/OLED                       ----- -----  ----- -----
   +--> OLED_Set_Pos/OLED
   +--> OLED_WrDat/OLED
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 17
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 17
 
 
 OLED_Progress_Bar/OLED                      ----- -----  08F5H 08F5H
@@ -1155,7 +1155,7 @@ UI_8x8time/CompassMenu                      ----- -----  ----- -----
 FlashLight_int/FlashLight                   ----- -----  ----- -----
   +--> OLED_Fill/OLED
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 18
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 18
 
 
 SHT41_falg_0004/SHT41                       ----- -----  08F5H 08F8H
@@ -1223,7 +1223,7 @@ ADC_falg_0040/ADC                           ----- -----  ----- -----
   +--> Battery_percentage/ADC
 
 Get_VB_Average/ADC                          ----- -----  ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 19
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 19
 
 
 
@@ -1291,7 +1291,7 @@ OLED_8X8X3_MOV/OLED                         ----- -----  08F7H 08F7H
   +--> OLED_Set_Pos/OLED
   +--> OLED_WrDat/OLED
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 20
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 20
 
 
 OLED_3Figures/OLED                          ----- -----  08F7H 08F8H
@@ -1359,7 +1359,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
 *SFR* 000000DEH   DATA     BYTE      ADCCFG
       00FF79BCH   CODE     ---       Add_key
       00000915H   EDATA    DWORD     AlarmClock_low_Memory
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 21
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 21
 
 
       00000912H   EDATA    BYTE      AlarmClock_SB_flag
@@ -1427,7 +1427,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9C87H   CODE     ---       delay_ms
 *DEL*:00000000H   CODE     ---       DMA_Config
       00010667H   XDATA    ---       DMABuffer
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 22
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 22
 
 
       000106C7H   XDATA    ---       DMABufferRX
@@ -1495,7 +1495,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF5642H   CODE     ---       IU_Battery_cheek_renovate
       00FF912EH   CODE     ---       IU_Battery_cheek_renovate_count
       00FF741AH   CODE     ---       IU_Battery_Icon_S
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 23
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 23
 
 
       00FF85D4H   CODE     ---       IU_Battery_Icon_S_1
@@ -1563,7 +1563,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF782BH   CODE     ---       OLED_Progress_Bar
       00FF8C16H   CODE     ---       OLED_Region_Fill
       00FF9A1FH   CODE     ---       OLED_Set_Pos
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 24
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 24
 
 
       00FF9D56H   CODE     ---       OLED_WrCmd
@@ -1631,7 +1631,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
 *SFR* 00000098H   DATA     BYTE      SCON
       00FF9BE2H   CODE     ---       SendACK
       00FF9C5AH   CODE     ---       SendData
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 25
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 25
 
 
       00FF9B97H   CODE     ---       SendNAK
@@ -1699,7 +1699,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
 *SFR* 000000DDH   DATA     BYTE      T4T3M
 *SFR* 000000AEH   DATA     BYTE      TA
 *SFR* 00000088H   DATA     BYTE      TCON
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 26
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 26
 
 
       00000019H   EDATA    BYTE      test1
@@ -1767,7 +1767,7 @@ PUBLIC SYMBOLS OF MODULE:  STC32F_LowPowerClock (ADC)
 *SFR* 000000C1H.7 DATA     BIT       WDT_FLAG
       00FF8F6CH   CODE     ---       Week_conversion
 *SFR* 000000ABH   DATA     BYTE      WKTCH
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 27
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 27
 
 
 *SFR* 000000AAH   DATA     BYTE      WKTCL
@@ -1835,7 +1835,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000B8H   SFRSYM    DATA     BYTE      IP
       0000008FH   SFRSYM    DATA     BYTE      INTCLKO
       000000EEH   SFRSYM    DATA     BYTE      IP3H
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 28
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 28
 
 
       000000B6H   SFRSYM    DATA     BYTE      IP2H
@@ -1903,7 +1903,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF958EH   LINE      CODE     ---       #78
       00FF9590H   LINE      CODE     ---       #79
       00FF9590H   LINE      CODE     ---       #80
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 29
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 29
 
 
       00FF9592H   LINE      CODE     ---       #81
@@ -1971,7 +1971,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
 
       00FF5840H   BLOCK     CODE     ---       LVL=0
       DR8         REGSYM    ---      DWORD     a
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 30
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 30
 
 
       WR6         REGSYM    ---      WORD      b
@@ -2039,7 +2039,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7F6AH   LINE      CODE     ---       #297
       00FF7F74H   LINE      CODE     ---       #299
       00FF7F7BH   LINE      CODE     ---       #303
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 31
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 31
 
 
       00FF7F97H   LINE      CODE     ---       #305
@@ -2107,7 +2107,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000E8H   SFRSYM    DATA     BYTE      P6
       000000C8H   SFRSYM    DATA     BYTE      P5
       000000C0H   SFRSYM    DATA     BYTE      P4
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 32
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 32
 
 
       000000B0H   SFRSYM    DATA     BYTE      P3
@@ -2175,7 +2175,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF6FA4H   LINE      CODE     ---       #98
       00FF6FB6H   LINE      CODE     ---       #99
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 33
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 33
 
 
 
@@ -2243,7 +2243,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000B6H   SFRSYM    DATA     BYTE      IP2H
       000000A8H   SFRSYM    DATA     BYTE      IE
       000000BBH   SFRSYM    DATA     BYTE      P_SW3
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 34
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 34
 
 
       000000BAH   SFRSYM    DATA     BYTE      P_SW2
@@ -2311,7 +2311,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9828H   LINE      CODE     ---       #119
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 35
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 35
 
 
       00FF9ABBH   BLOCK     CODE     ---       LVL=0
@@ -2379,7 +2379,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       WR6         REGSYM    ---      WORD      Angle
       ---         BLOCKEND  ---      ---       LVL=1
       00FF8654H   LINE      CODE     ---       #203
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 36
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 36
 
 
       00FF8656H   LINE      CODE     ---       #204
@@ -2447,7 +2447,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF680DH   BLOCK     CODE     ---       LVL=0
       00FF680DH   LINE      CODE     ---       #310
       00FF680DH   LINE      CODE     ---       #311
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 37
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 37
 
 
       00FF680DH   LINE      CODE     ---       #313
@@ -2515,7 +2515,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00000019H   PUBLIC    EDATA    BYTE      test1
       00000020H.0 PUBLIC    BIT      BIT       ?UI_Compass_Animation_1?BIT
       000000D0H   SFRSYM    DATA     BYTE      PSW
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 38
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 38
 
 
       0000009DH   SFRSYM    DATA     BYTE      IRCBAND
@@ -2583,7 +2583,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7593H   LINE      CODE     ---       #62
       00FF7595H   LINE      CODE     ---       #65
       00FF759AH   LINE      CODE     ---       #66
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 39
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 39
 
 
       00FF75BAH   LINE      CODE     ---       #67
@@ -2651,7 +2651,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF5F56H   LINE      CODE     ---       #197
       00FF5F56H   LINE      CODE     ---       #198
       00FF5F5CH   LINE      CODE     ---       #199
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 40
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 40
 
 
       00FF5F5CH   LINE      CODE     ---       #200
@@ -2719,7 +2719,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       DATA
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 41
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 41
 
 
       00FF9DF4H   PUBLIC    CODE     ---       GET_GBdat
@@ -2787,7 +2787,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       0000008FH   SFRSYM    DATA     BYTE      INTCLKO
       000000EEH   SFRSYM    DATA     BYTE      IP3H
       000000B6H   SFRSYM    DATA     BYTE      IP2H
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 42
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 42
 
 
       000000A8H   SFRSYM    DATA     BYTE      IE
@@ -2855,7 +2855,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9A46H   LINE      CODE     ---       #327
       00FF9A46H   LINE      CODE     ---       #328
       00FF9A46H   LINE      CODE     ---       #329
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 43
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 43
 
 
       00FF9A4CH   LINE      CODE     ---       #330
@@ -2923,7 +2923,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF6CCDH   LINE      CODE     ---       #441
       00FF6CD3H   LINE      CODE     ---       #442
       00FF6CD3H   LINE      CODE     ---       #443
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 44
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 44
 
 
       00FF6CD3H   LINE      CODE     ---       #444
@@ -2991,7 +2991,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF42B2H   LINE      CODE     ---       #520
       00FF42C3H   LINE      CODE     ---       #521
       00FF42C7H   LINE      CODE     ---       #522
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 45
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 45
 
 
       00FF45DEH   LINE      CODE     ---       #524
@@ -3059,7 +3059,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF4645H   LINE      CODE     ---       #586
       00FF464AH   LINE      CODE     ---       #587
       00FF464FH   LINE      CODE     ---       #588
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 46
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 46
 
 
       00FF4654H   LINE      CODE     ---       #592
@@ -3127,7 +3127,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9DF4H   LINE      CODE     ---       #673
       00FF9DF4H   LINE      CODE     ---       #675
       00FF9DFDH   LINE      CODE     ---       #676
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 47
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 47
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -3195,7 +3195,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       WR6         REGSYM    ---      WORD      num
       WR6         REGSYM    ---      WORD      add
       ---         BLOCKEND  ---      ---       LVL=1
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 48
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 48
 
 
       00FF80A3H   LINE      CODE     ---       #806
@@ -3263,7 +3263,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000BBH   SFRSYM    DATA     BYTE      P_SW3
       000000BAH   SFRSYM    DATA     BYTE      P_SW2
       000000A2H   SFRSYM    DATA     BYTE      P_SW1
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 49
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 49
 
 
       000000CEH   SFRSYM    DATA     BYTE      SPCTL
@@ -3331,7 +3331,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       0000009DH   SFRSYM    DATA     BYTE      IRCBAND
       00000097H   SFRSYM    DATA     BYTE      AUXR2
       000000EFH   SFRSYM    DATA     BYTE      AUXINTIF
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 50
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 50
 
 
       000000FDH   SFRSYM    DATA     BYTE      S4CON
@@ -3399,7 +3399,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF923AH   LINE      CODE     ---       #23
       00FF923AH   LINE      CODE     ---       #24
       00FF9242H   LINE      CODE     ---       #25
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 51
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 51
 
 
       00FF9244H   LINE      CODE     ---       #26
@@ -3467,7 +3467,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=1
       00FF930CH   LINE      CODE     ---       #81
       00FF9316H   LINE      CODE     ---       #82
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 52
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 52
 
 
       00FF9316H   LINE      CODE     ---       #83
@@ -3535,7 +3535,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000D0H   SFRSYM    DATA     BYTE      PSW
       0000009DH   SFRSYM    DATA     BYTE      IRCBAND
       00000097H   SFRSYM    DATA     BYTE      AUXR2
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 53
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 53
 
 
       000000EFH   SFRSYM    DATA     BYTE      AUXINTIF
@@ -3603,7 +3603,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9277H   LINE      CODE     ---       #36
       00FF9279H   LINE      CODE     ---       #39
       00FF927CH   LINE      CODE     ---       #40
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 54
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 54
 
 
       00FF927CH   LINE      CODE     ---       #41
@@ -3671,7 +3671,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00000087H   SFRSYM    DATA     BYTE      PCON
       000000BCH   SFRSYM    DATA     BYTE      ADC_CONTR
       000000F7H   SFRSYM    DATA     BYTE      ICHECR
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 55
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 55
 
 
       000000E7H   SFRSYM    DATA     BYTE      CMPCR2
@@ -3739,7 +3739,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9873H   LINE      CODE     ---       #69
       00FF987BH   LINE      CODE     ---       #70
       00FF9882H   LINE      CODE     ---       #71
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 56
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 56
 
 
       00FF988EH   LINE      CODE     ---       #79
@@ -3807,7 +3807,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF8A06H   LINE      CODE     ---       #207
       00FF8A0AH   LINE      CODE     ---       #208
       00FF8A0CH   LINE      CODE     ---       #209
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 57
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 57
 
 
       00FF8A0DH   LINE      CODE     ---       #210
@@ -3875,7 +3875,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       0000009AH   SFRSYM    DATA     BYTE      S2CON
       000000B7H   SFRSYM    DATA     BYTE      IPH
       000000CDH   SFRSYM    DATA     BYTE      SPSTAT
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 58
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 58
 
 
       000000DDH   SFRSYM    DATA     BYTE      T4T3M
@@ -3943,7 +3943,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF5004H   LINE      CODE     ---       #82
       00FF5007H   LINE      CODE     ---       #84
       00FF500AH   LINE      CODE     ---       #90
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 59
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 59
 
 
       00FF501CH   LINE      CODE     ---       #92
@@ -4011,7 +4011,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF8472H   LINE      CODE     ---       #208
       00FF8474H   LINE      CODE     ---       #209
       00FF848AH   LINE      CODE     ---       #211
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 60
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 60
 
 
       00FF8490H   LINE      CODE     ---       #212
@@ -4079,7 +4079,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9122H   LINE      CODE     ---       #313
       00FF912DH   LINE      CODE     ---       #314
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 61
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 61
 
 
 
@@ -4147,7 +4147,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000B0H   SFRSYM    DATA     BYTE      P3
       000000A0H   SFRSYM    DATA     BYTE      P2
       00000090H   SFRSYM    DATA     BYTE      P1
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 62
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 62
 
 
       00000080H   SFRSYM    DATA     BYTE      P0
@@ -4215,7 +4215,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF664EH   LINE      CODE     ---       #157
       00FF665BH   LINE      CODE     ---       #159
       00FF666BH   LINE      CODE     ---       #160
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 63
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 63
 
 
       00FF6677H   LINE      CODE     ---       #161
@@ -4283,7 +4283,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF5E64H   LINE      CODE     ---       #245
       00FF5E6FH   LINE      CODE     ---       #247
       00FF5E72H   LINE      CODE     ---       #248
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 64
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 64
 
 
       00FF5E78H   LINE      CODE     ---       #249
@@ -4351,7 +4351,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000F1H   SFRSYM    DATA     BYTE      CANICR
       00000087H   SFRSYM    DATA     BYTE      PCON
       000000BCH   SFRSYM    DATA     BYTE      ADC_CONTR
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 65
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 65
 
 
       000000E7H   SFRSYM    DATA     BYTE      CMPCR2
@@ -4419,7 +4419,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF6163H   LINE      CODE     ---       #83
       00FF6169H   LINE      CODE     ---       #85
       00FF6171H   LINE      CODE     ---       #87
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 66
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 66
 
 
       00FF617EH   LINE      CODE     ---       #89
@@ -4487,7 +4487,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF768EH   PUBLIC    CODE     ---       shifen_dh_z
       00FF7EA9H   PUBLIC    CODE     ---       OLED_16_16V
       00FF5642H   PUBLIC    CODE     ---       IU_Battery_cheek_renovate
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 67
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 67
 
 
       00FF85D4H   PUBLIC    CODE     ---       IU_Battery_Icon_S_1
@@ -4555,7 +4555,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       0000001EH   PUBLIC    EDATA    BYTE      SPI_DMA_buy
       0000001FH   PUBLIC    EDATA    BYTE      SPI_DMA_USE
       00000020H.0 PUBLIC    BIT      BIT       ?yue_ri?BIT
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 68
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 68
 
 
       00000020H.1 PUBLIC    BIT      BIT       ?OLED_16_16V?BIT
@@ -4623,7 +4623,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9443H   LINE      CODE     ---       #44
       00FF9446H   LINE      CODE     ---       #45
       00FF9449H   LINE      CODE     ---       #52
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 69
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 69
 
 
       00FF944CH   LINE      CODE     ---       #56
@@ -4691,7 +4691,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF949CH   LINE      CODE     ---       #152
       00FF94ACH   LINE      CODE     ---       #153
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 70
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 70
 
 
 
@@ -4759,7 +4759,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF9A1FH   BLOCK     CODE     ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 71
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 71
 
 
       R15         REGSYM    ---      BYTE      x
@@ -4827,7 +4827,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF8E5AH   LINE      CODE     ---       #348
       00FF8E5CH   LINE      CODE     ---       #349
       00FF8E5EH   LINE      CODE     ---       #350
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 72
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 72
 
 
       00FF8E73H   LINE      CODE     ---       #352
@@ -4895,7 +4895,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF8D41H   LINE      CODE     ---       #426
       00FF8D43H   LINE      CODE     ---       #429
       00FF8D4BH   LINE      CODE     ---       #430
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 73
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 73
 
 
       00FF8D4BH   LINE      CODE     ---       #431
@@ -4963,7 +4963,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF8ADBH   BLOCK     CODE     ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 74
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 74
 
 
       R15         REGSYM    ---      BYTE      t
@@ -5031,7 +5031,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF86FDH   LINE      CODE     ---       #632
       00FF871DH   LINE      CODE     ---       #633
       00FF8724H   LINE      CODE     ---       #634
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 75
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 75
 
 
       00FF872BH   LINE      CODE     ---       #635
@@ -5099,7 +5099,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF8142H   BLOCK     CODE     ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 76
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 76
 
 
       R12         REGSYM    ---      BYTE      x
@@ -5167,7 +5167,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF73D6H   LINE      CODE     ---       #779
       00FF73DFH   LINE      CODE     ---       #780
       00FF73EEH   LINE      CODE     ---       #781
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 77
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 77
 
 
       00FF73F7H   LINE      CODE     ---       #782
@@ -5235,7 +5235,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7831H   LINE      CODE     ---       #904
       00FF7838H   LINE      CODE     ---       #906
       00FF7844H   LINE      CODE     ---       #907
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 78
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 78
 
 
       00FF784CH   LINE      CODE     ---       #908
@@ -5303,7 +5303,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9CC9H   LINE      CODE     ---       #998
       00FF9CCCH   LINE      CODE     ---       #999
       00FF9CCEH   LINE      CODE     ---       #1001
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 79
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 79
 
 
       00FF9CD2H   LINE      CODE     ---       #1002
@@ -5371,7 +5371,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF4914H   LINE      CODE     ---       #1062
       00FF4914H   LINE      CODE     ---       #1064
       00FF4920H   LINE      CODE     ---       #1065
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 80
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 80
 
 
       00FF4928H   LINE      CODE     ---       #1066
@@ -5439,7 +5439,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7CDCH   LINE      CODE     ---       #1268
       00FF7CE4H   LINE      CODE     ---       #1269
       00FF7CE6H   LINE      CODE     ---       #1270
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 81
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 81
 
 
       00FF7CE6H   LINE      CODE     ---       #1271
@@ -5507,7 +5507,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9948H   LINE      CODE     ---       #1346
       00FF994AH   LINE      CODE     ---       #1348
       00FF9957H   LINE      CODE     ---       #1349
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 82
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 82
 
 
       00FF995DH   LINE      CODE     ---       #1350
@@ -5575,7 +5575,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF883AH   LINE      CODE     ---       #1449
       00FF883EH   LINE      CODE     ---       #1450
       00FF883EH   LINE      CODE     ---       #1453
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 83
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 83
 
 
       00FF883EH   LINE      CODE     ---       #1454
@@ -5643,7 +5643,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF768EH   BLOCK     CODE     ---       LVL=0
       R14         REGSYM    ---      BYTE      t
       R12         REGSYM    ---      BYTE      x
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 84
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 84
 
 
       R13         REGSYM    ---      BYTE      yy
@@ -5711,7 +5711,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF741AH   BLOCK     CODE     ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 85
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 85
 
 
       R14         REGSYM    ---      BYTE      x
@@ -5779,7 +5779,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7774H   LINE      CODE     ---       #1699
       00FF7777H   LINE      CODE     ---       #1701
       00FF7781H   LINE      CODE     ---       #1702
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 86
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 86
 
 
       00FF7788H   LINE      CODE     ---       #1704
@@ -5847,7 +5847,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9169H   LINE      CODE     ---       #1776
       00FF9172H   LINE      CODE     ---       #1777
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 87
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 87
 
 
 
@@ -5915,7 +5915,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         MODULE    ---      ---       SecondaryMenu
       00FF9005H   PUBLIC    CODE     ---       UIData_fill
       00FF9AD8H   PUBLIC    CODE     ---       UI_S_F2
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 88
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 88
 
 
       00FF4DB0H   PUBLIC    CODE     ---       IU_Secondary
@@ -5983,7 +5983,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9B68H   LINE      CODE     ---       #30
       00FF9B68H   LINE      CODE     ---       #31
       00FF9B68H   LINE      CODE     ---       #32
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 89
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 89
 
 
       00FF9B7BH   LINE      CODE     ---       #33
@@ -6051,7 +6051,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF764CH   LINE      CODE     ---       #110
       00FF7652H   LINE      CODE     ---       #111
       00FF7654H   LINE      CODE     ---       #112
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 90
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 90
 
 
       00FF765EH   LINE      CODE     ---       #114
@@ -6119,7 +6119,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF647EH   LINE      CODE     ---       #213
       00FF647EH   LINE      CODE     ---       #215
       00FF6484H   LINE      CODE     ---       #216
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 91
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 91
 
 
       00FF648FH   LINE      CODE     ---       #218
@@ -6187,7 +6187,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF4F19H   LINE      CODE     ---       #324
       00FF4F3BH   LINE      CODE     ---       #325
       00FF4F59H   LINE      CODE     ---       #326
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 92
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 92
 
 
       00FF4F5BH   LINE      CODE     ---       #328
@@ -6255,7 +6255,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000A2H   SFRSYM    DATA     BYTE      P_SW1
       000000CEH   SFRSYM    DATA     BYTE      SPCTL
       000000F8H   SFRSYM    DATA     BYTE      P7
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 93
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 93
 
 
       000000E8H   SFRSYM    DATA     BYTE      P6
@@ -6323,7 +6323,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
 
       ---         MODULE    ---      ---       SPL06
       00FF9C42H   PUBLIC    CODE     ---       SPL06_PR_R
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 94
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 94
 
 
       00FF8280H   PUBLIC    CODE     ---       SPL06_R2
@@ -6391,7 +6391,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00000090H   SFRSYM    DATA     BYTE      P1
       00000080H   SFRSYM    DATA     BYTE      P0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 95
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 95
 
 
       00FF9289H   BLOCK     CODE     ---       LVL=0
@@ -6459,7 +6459,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF62FEH   LINE      CODE     ---       #131
       00FF6305H   LINE      CODE     ---       #139
       00FF631DH   LINE      CODE     ---       #140
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 96
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 96
 
 
       00FF6324H   LINE      CODE     ---       #142
@@ -6527,7 +6527,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF82FDH   LINE      CODE     ---       #252
       00FF8317H   LINE      CODE     ---       #253
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 97
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 97
 
 
 
@@ -6595,7 +6595,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000B8H   SFRSYM    DATA     BYTE      IP
       0000008FH   SFRSYM    DATA     BYTE      INTCLKO
       000000EEH   SFRSYM    DATA     BYTE      IP3H
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 98
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 98
 
 
       000000B6H   SFRSYM    DATA     BYTE      IP2H
@@ -6663,7 +6663,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7EA6H   LINE      CODE     ---       #101
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 99
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 99
 
 
       ---         MODULE    ---      ---       time
@@ -6731,7 +6731,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9C89H   BLOCK     CODE     NEAR LAB  LVL=1
       WR8         REGSYM    ---      WORD      i
       ---         BLOCKEND  ---      ---       LVL=1
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 100
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 100
 
 
       00FF9C87H   LINE      CODE     ---       #43
@@ -6799,7 +6799,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF9A60H   BLOCK     CODE     ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 101
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 101
 
 
       00FF9A60H   LINE      CODE     ---       #156
@@ -6867,7 +6867,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000B0H   SFRSYM    DATA     BYTE      P3
       000000A0H   SFRSYM    DATA     BYTE      P2
       00000090H   SFRSYM    DATA     BYTE      P1
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 102
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 102
 
 
       00000080H   SFRSYM    DATA     BYTE      P0
@@ -6935,7 +6935,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF4D0AH   LINE      CODE     ---       #139
       00FF4D14H   LINE      CODE     ---       #140
       00FF4D1EH   LINE      CODE     ---       #142
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 103
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 103
 
 
       00FF4D24H   LINE      CODE     ---       #144
@@ -7003,7 +7003,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000F4H   SFRSYM    DATA     BYTE      USBCON
       000000B5H   SFRSYM    DATA     BYTE      IP2
       000000FFH   SFRSYM    DATA     BYTE      RSTCFG
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 104
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 104
 
 
       000000C7H   SFRSYM    DATA     BYTE      IAP_CONTR
@@ -7071,7 +7071,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF83D9H   LINE      CODE     ---       #69
       00FF83F3H   LINE      CODE     ---       #70
       00FF840DH   LINE      CODE     ---       #71
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 105
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 105
 
 
       00FF8427H   LINE      CODE     ---       #72
@@ -7139,7 +7139,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF7D7AH   LINE      CODE     ---       #159
       00FF7D7DH   LINE      CODE     ---       #160
       00FF7D7DH   LINE      CODE     ---       #162
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 106
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 106
 
 
       00FF7D87H   LINE      CODE     ---       #164
@@ -7207,7 +7207,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF70AFH   LINE      CODE     ---       #262
       00FF70B2H   LINE      CODE     ---       #263
       00FF70D3H   LINE      CODE     ---       #264
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 107
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 107
 
 
       00FF70FCH   LINE      CODE     ---       #265
@@ -7275,7 +7275,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF5BD3H   LINE      CODE     ---       #359
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 108
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 108
 
 
       00FF87C4H   BLOCK     CODE     ---       LVL=0
@@ -7343,7 +7343,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       WR14        REGSYM    ---      WORD      DC
       ---         BLOCKEND  ---      ---       LVL=1
       00FF465AH   LINE      CODE     ---       #464
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 109
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 109
 
 
       00FF465CH   LINE      CODE     ---       #465
@@ -7411,7 +7411,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF4873H   LINE      CODE     ---       #546
       00FF4873H   LINE      CODE     ---       #547
       00FF4875H   LINE      CODE     ---       #549
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 110
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 110
 
 
       00FF487BH   LINE      CODE     ---       #551
@@ -7479,7 +7479,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000B8H   SFRSYM    DATA     BYTE      IP
       0000008FH   SFRSYM    DATA     BYTE      INTCLKO
       000000EEH   SFRSYM    DATA     BYTE      IP3H
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 111
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 111
 
 
       000000B6H   SFRSYM    DATA     BYTE      IP2H
@@ -7547,7 +7547,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       000000C0H   SFRSYM    DATA     BYTE      P4
       000000B0H   SFRSYM    DATA     BYTE      P3
       000000A0H   SFRSYM    DATA     BYTE      P2
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 112
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 112
 
 
       00000090H   SFRSYM    DATA     BYTE      P1
@@ -7615,7 +7615,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF9557H   LINE      CODE     ---       #113
       00FF9569H   LINE      CODE     ---       #115
       00FF9573H   LINE      CODE     ---       #117
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 113
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 113
 
 
       00FF9576H   LINE      CODE     ---       #118
@@ -7683,7 +7683,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF0163H   BLOCK     CODE     NEAR LAB  LVL=0
       00FF0163H   LINE      CODE     ---       #17
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 114
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 114
 
 
 
@@ -7751,7 +7751,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       ---         MODULE    ---      ---       STC_MDU32
       00FF9E3EH   PUBLIC    CODE     ---       ?C?LIMUL
       00FF012EH   PUBLIC    CODE     ---       ?C?LMUL
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 115
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 115
 
 
       00FF0136H   PUBLIC    CODE     ---       ?C?ULDIV
@@ -7819,7 +7819,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00000087H   SFRSYM    DATA     BYTE      PCON
       000000BCH   SFRSYM    DATA     BYTE      ADC_CONTR
       00000080H.0 SFRSYM    DATA     BIT       P00
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 116
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 116
 
 
       000000E7H   SFRSYM    DATA     BYTE      CMPCR2
@@ -7887,7 +7887,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF52A0H   LINE      CODE     ---       #68
       00FF52A2H   LINE      CODE     ---       #71
       00FF52A5H   LINE      CODE     ---       #72
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 117
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 117
 
 
       00FF52A5H   LINE      CODE     ---       #73
@@ -7955,7 +7955,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF539EH   LINE      CODE     ---       #195
       00FF53A5H   LINE      CODE     ---       #197
       00FF53B1H   LINE      CODE     ---       #198
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 118
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 118
 
 
       00FF53BDH   LINE      CODE     ---       #199
@@ -8023,7 +8023,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF6B32H   LINE      CODE     ---       #281
       00FF6B35H   LINE      CODE     ---       #282
       00FF6B40H   LINE      CODE     ---       #283
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 119
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 119
 
 
       00FF6B48H   LINE      CODE     ---       #284
@@ -8091,7 +8091,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
       00FF827CH   LINE      CODE     ---       #377
       00FF827FH   LINE      CODE     ---       #378
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 120
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 120
 
 
 
@@ -8159,7 +8159,7 @@ SYMBOL TABLE OF MODULE:  STC32F_LowPowerClock (ADC)
 
       ---         MODULE    ---      ---       ?C?INITEDATA
       00FF89A2H   PUBLIC    CODE     ---       ?C?INITEDATA
-L251 LINKER/LOCATER V4.66.93.0                                                        04/25/2024  02:12:24  PAGE 121
+L251 LINKER/LOCATER V4.66.93.0                                                        08/25/2024  00:58:42  PAGE 121
 
 
 

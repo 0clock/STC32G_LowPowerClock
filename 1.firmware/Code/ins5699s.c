@@ -3,6 +3,7 @@
 #include "iic.h"
 #include "dmx_delay.h"
 #include "stdio.h"
+#include "task.h"
 // Function to initialize the INS5699S RTC
 
 void rtc_init()
@@ -14,6 +15,9 @@ void rtc_init()
     iic_write2bit(0x64, 0x0D, 0x0A); // FSEL 1Hz  定时器1Hz  时间更新：秒更新
     delay_us(10);
     iic_write2bit(0x64, 0x0E, 0x00); // 清除警告
+    delay_ms(1);
+
+    ins5699_read_time(&current_time);
 }
 
 /**

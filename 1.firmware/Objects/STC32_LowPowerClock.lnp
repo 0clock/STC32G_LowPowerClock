@@ -5,6 +5,7 @@
 ".\Objects\iic.obj",
 ".\Objects\ins5699s.obj",
 ".\Objects\task.obj",
+".\Objects\gui.obj",
 ".\Objects\dmx_font.obj",
 ".\Objects\dmx_function.obj",
 ".\Objects\dmx_icm20602.obj",
