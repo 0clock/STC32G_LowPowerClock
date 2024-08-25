@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-08-03 00:48:43
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-24 00:16:42
+ * @LastEditTime: 2024-08-25 23:52:42
  * @FilePath: \STC32_LowPowerClock\1.firmware\User\main.c
  * @Description:
  *
@@ -29,6 +29,7 @@ void main(void)
   bms_init();
   iic_init();
   rtc_init();
+  buttons_init();
 
   init_nvic(UART1_PRIORITY, 3);
   init_nvic(PIT0, 3);

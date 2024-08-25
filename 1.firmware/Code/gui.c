@@ -1,5 +1,6 @@
 #include "dmx_all.h"
-
+#include "gui.h"
+#include "ins5699s.h"
 // a->b
 int close_to(int a, int b)
 {
@@ -16,91 +17,104 @@ int close_to(int a, int b)
     return a;
 }
 
-void show_time()
+void show_time(const time_t *t)
 {
     // x,y为显示时间的起始坐标，也就是时间字符的左上角在屏幕上的位置
 
     static unsigned char x = 8, y = 20, last_sec = 0;
     static bit x_dir = 0, y_dir = 0; // 移动的方向，0为正，1为反
-    char pos = -3, x_range = 8 + 3, y_range = 20 + 5, x_range0 = 8 - 3, y_range0 = 20 - 5;
-
-    show_dig_num(x, y, current_time.hour / 10, oled_gram, 1);
-    show_dig_num(x + 16, y, current_time.hour % 10, oled_gram, 1);
-
-    show_dig_num(x + 39, y, current_time.min / 10, oled_gram, 1);
-    show_dig_num(x + 55, y, current_time.min % 10, oled_gram, 1);
-
-    show_dig_num(x + 79, y, current_time.sec / 10, oled_gram, 1);
-    show_dig_num(x + 95, y, current_time.sec % 10, oled_gram, 1);
-
-    if (current_time.sec % 2 == 0)
+    char pos = 0, x_range = 8 + 3, y_range = 20 + 5, x_range0 = 8 - 3, y_range0 = 20 - 5;
+    unsigned char x0 = x;
+    if (t->hour / 10 == 1)
     {
-        oled_draw_image(x + 33, y + 4, 2, 14, Pixel_Dot, oled_gram, 1);
-        oled_draw_image(x + 73, y + 4, 2, 14, Pixel_Dot, oled_gram, 1);
+        x0 = x - 6;
+    }
+    show_dig_num(x0, y, t->hour / 10, oled_gram, 1);
+    show_dig_num(x0 + 16, y, t->hour % 10, oled_gram, 1);
+
+    show_dig_num(x0 + 39, y, t->min / 10, oled_gram, 1);
+    show_dig_num(x0 + 55, y, t->min % 10, oled_gram, 1);
+
+    show_dig_num(x0 + 79, y, t->sec / 10, oled_gram, 1);
+    show_dig_num(x0 + 95, y, t->sec % 10, oled_gram, 1);
+
+    if (t->sec % 2 == 0)
+    {
+        oled_draw_image(x0 + 33, y + 4, 2, 14, Pixel_Dot, oled_gram, 1);
+        oled_draw_image(x0 + 73, y + 4, 2, 14, Pixel_Dot, oled_gram, 1);
     }
 
     // 显示年月日、星期
 
 #if 1 // 6x8字体，有点小
-    oled_draw_int(x, y + 27, current_time.year + 2000, 4, oled_gram, 1, Show6x8);
-    oled_draw_char(x + 24, y + 27, '/', oled_gram, 1, Show6x8);
-    oled_draw_int(x + 30, y + 27, current_time.month, 2, oled_gram, 1, Show6x8);
-    if (current_time.month < 10)
+    if (t->hour / 10 == 1)
     {
-        oled_draw_char(x + 36, y + 27, '/', oled_gram, 1, Show6x8);
-        oled_draw_int(x + 42, y + 27, current_time.day, 2, oled_gram, 1, Show6x8);
+        pos = 10;
     }
     else
     {
-        oled_draw_char(x + 42, y + 27, '/', oled_gram, 1, Show6x8);
-        oled_draw_int(x + 48, y + 27, current_time.day, 2, oled_gram, 1, Show6x8);
+        pos = 0;
+    }
+    oled_draw_int(x0 + pos, y + 27, t->year + 2000, 4, oled_gram, 1, Show6x8);
+    oled_draw_char(x0 + pos + 24, y + 27, '/', oled_gram, 1, Show6x8);
+    oled_draw_int(x0 + pos + 30, y + 27, t->month, 2, oled_gram, 1, Show6x8);
+    if (t->month < 10)
+    {
+        oled_draw_char(x0 + pos + 36, y + 27, '/', oled_gram, 1, Show6x8);
+        oled_draw_int(x0 + pos + 42, y + 27, t->day, 2, oled_gram, 1, Show6x8);
+    }
+    else
+    {
+        oled_draw_char(x0 + pos + 42, y + 27, '/', oled_gram, 1, Show6x8);
+        oled_draw_int(x0 + pos + 48, y + 27, t->day, 2, oled_gram, 1, Show6x8);
     }
 
-    switch (current_time.week)
+    switch (t->week)
     {
     case 1:
-        oled_draw_string(x + 91, y + 27, "Sun", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Sun", oled_gram, 1, Show6x8);
         break;
     case 2:
-        oled_draw_string(x + 91, y + 27, "Mon", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Mon", oled_gram, 1, Show6x8);
         break;
     case 3:
-        oled_draw_string(x + 91, y + 27, "Tue", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Tue", oled_gram, 1, Show6x8);
         break;
     case 4:
-        oled_draw_string(x + 91, y + 27, "Wed", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Wed", oled_gram, 1, Show6x8);
         break;
     case 5:
-        oled_draw_string(x + 91, y + 27, "Thu", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Thu", oled_gram, 1, Show6x8);
         break;
     case 6:
-        oled_draw_string(x + 91, y + 27, "Fri", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Fri", oled_gram, 1, Show6x8);
         break;
     case 7:
-        oled_draw_string(x + 91, y + 27, "Sat", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 91, y + 27, "Sat", oled_gram, 1, Show6x8);
         break;
     default:
-        oled_draw_string(x + 79, y + 27, "Oops!", oled_gram, 1, Show6x8);
+        oled_draw_string(x0 + 79, y + 27, "Oops!", oled_gram, 1, Show6x8);
         break;
     }
 
 #elif // 8x16字体，有点不协调
+    pos = -3;
 
-    oled_draw_int(x + pos, y + 27, current_time.year + 2000, 4, oled_gram, 1, Show8x16);
+    oled_draw_int(x + pos, y + 27, t->year + 2000, 4, oled_gram, 1, Show8x16);
     oled_draw_char(x + pos + 32, y + 27, '/', oled_gram, 1, Show8x16);
-    oled_draw_int(x + pos + 40, y + 27, current_time.month, 2, oled_gram, 1, Show8x16);
-    if (current_time.month < 10)
+    oled_draw_int(x + pos + 40, y + 27, t->month, 2, oled_gram, 1, Show8x16);
+    if (t->month < 10)
     {
         oled_draw_char(x + pos + 48, y + 27, '/', oled_gram, 1, Show8x16);
-        oled_draw_int(x + pos + 56, y + 27, current_time.day, 2, oled_gram, 1, Show8x16);
+        oled_draw_int(x + pos + 56, y + 27, t->day, 2, oled_gram, 1, Show8x16);
     }
     else
     {
         oled_draw_char(x + pos + 56, y + 27, '/', oled_gram, 1, Show8x16);
-        oled_draw_int(x + pos + 64, y + 27, current_time.day, 2, oled_gram, 1, Show8x16);
+        oled_draw_int(x + pos + 64, y + 27, t->day, 2, oled_gram, 1, Show8x16);
     }
 
-    switch (current_time.week)
+    switch (t->week)
     {
     case 1:
         oled_draw_string(x + 89, y + 27, "Sun", oled_gram, 1, Show8x16);
@@ -130,9 +144,9 @@ void show_time()
 #endif
     // 时间显示的宽占110个像素，所以x的范围为0~17，y的范围为0~40
     // 接下来实现一个时间在屏幕上移动的过程,以保护屏幕
-    if (last_sec != current_time.min ) // 控制变动的周期
+    if (last_sec != t->min) // 控制变动的周期
     {
-        last_sec = current_time.min;
+        last_sec = t->min;
 
         if (x_dir == 0)
         {

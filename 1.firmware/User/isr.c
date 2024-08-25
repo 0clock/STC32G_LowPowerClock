@@ -85,8 +85,9 @@ void TIME0_ISR(void) interrupt 1
         oled_refresh_flag = 0;
     }
 
-    if (time0_isr_count % 500 == 0)
+    if (time0_isr_count % 10 == 0)
     {
+        buttons_scan();
     }
 
     if (time0_isr_count % 1000 == 0)

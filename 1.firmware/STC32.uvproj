@@ -384,6 +384,16 @@
               <FileType>1</FileType>
               <FilePath>.\Code\gui.c</FilePath>
             </File>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\button.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

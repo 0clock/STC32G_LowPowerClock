@@ -42,12 +42,36 @@ void test_show_dig_num()
     if (oled_refresh_flag == 0)
     {
         static unsigned char i = 0;
+        static button_event last_event = BUTTON_EVENT_NONE;
+        button_event now_eventv = button_get_event(BUTTON_SET);
         oled_clear(oled_gram, 0);
-        show_time();
+
+        if (last_event != now_eventv && now_eventv != BUTTON_EVENT_NONE || last_event == BUTTON_EVENT_NONE)
+        {
+            last_event = now_eventv;
+        }
+
+        switch (last_event)
+        {
+        case BUTTON_EVENT_LONG_PRESS:
+            oled_draw_string(0, 0, "long_press", oled_gram, 1, Show6x8);
+            break;
+        case BUTTON_EVENT_NONE:
+            oled_draw_string(0, 0, "none_press", oled_gram, 1, Show6x8);
+            break;
+        case BUTTON_EVENT_CLICK:
+            oled_draw_string(0, 0, "single_click", oled_gram, 1, Show6x8);
+            break;
+        case BUTTON_EVENT_DOUBLE_CLICK:
+            oled_draw_string(0, 0, "double_click", oled_gram, 1, Show6x8);
+            break;
+
+        default:
+            break;
+        }
+        show_time(&current_time);
         // show_dig_num(10, 10, (i++) % 10, oled_gram, 1);
         oled_refresh_flag = 1;
         // delay_ms(100);
     }
 }
-
-

@@ -81,5 +81,6 @@
 #include "ins5699s.h"
 #include "iic.h"
 #include "gui.h"
+#include "button.h"
 
 #endif
