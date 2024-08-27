@@ -394,6 +394,11 @@
               <FileType>5</FileType>
               <FilePath>.\Code\button.h</FilePath>
             </File>
+            <File>
+              <FileName>sht41.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\sht41.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

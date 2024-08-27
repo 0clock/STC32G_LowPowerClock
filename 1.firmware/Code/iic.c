@@ -29,11 +29,11 @@ void iic_start()
     iic_wait();
 }
 
-void iic_senddata(char dat)
+bit iic_senddata(char dat)
 {
     I2CTXD = dat;   // 写数据到数据缓冲区
     I2CMSCR = 0x02; // 发送SEND命令
-    iic_wait();
+    return iic_wait();
 }
 
 void iic_stop()
@@ -56,6 +56,8 @@ u8 RecvData()
     iic_wait();
     return I2CRXD;
 }
+
+
 
 void SendACK()
 {
@@ -107,7 +109,7 @@ u8 iic_read1bit(u8 nam, u8 adds)
     iic_senddata(adds); // 发送设备地址+写命令
     RecvACK();
     iic_start();                 // 发送起始命令
-    iic_senddata((u8)(nam + 1)); // 发送设备地址+写命令
+    ((u8)(nam + 1)); // 发送设备地址+写命令
     RecvACK();
     a = RecvData(); // 读取数据2
     SendNAK();

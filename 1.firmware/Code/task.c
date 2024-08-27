@@ -1,6 +1,8 @@
 #include "dmx_all.h"
-
+#define TEST_BUTTON 0
+#define TEST_SHT41 1
 time_t current_time;
+sht41_data_t sht41;
 /**
  * @brief 打印time_t结构体中的时间信息
  *
@@ -36,16 +38,30 @@ void test_time_update_1s()
     PrintTime(&current_time);
     // home_page();
 }
-
+void test_update_sht41_500ms()
+{
+    static char count = 0;
+    if (count % 2 == 0)
+    {
+        sht41_start_measurement();
+    }
+    else
+    {
+        sht41_read_data(&sht41);
+    }
+    count++;
+}
 void test_show_dig_num()
 {
     if (oled_refresh_flag == 0)
     {
         static unsigned char i = 0;
+#if TEST_BUTTON
         static button_event last_event = BUTTON_EVENT_NONE;
         button_event now_eventv = button_get_event(BUTTON_SET);
+#endif
         oled_clear(oled_gram, 0);
-
+#if TEST_BUTTON
         if (last_event != now_eventv && now_eventv != BUTTON_EVENT_NONE || last_event == BUTTON_EVENT_NONE)
         {
             last_event = now_eventv;
@@ -69,6 +85,15 @@ void test_show_dig_num()
         default:
             break;
         }
+#endif
+
+#if TEST_SHT41
+        oled_draw_string(0, 0, "Temp:", oled_gram, 1, Show6x8);
+        oled_draw_int(30, 0, sht41.temperature, 5, oled_gram, 1, Show6x8);
+
+        oled_draw_string(0, 10, "Humi:", oled_gram, 1, Show6x8);
+        oled_draw_int(30, 10, sht41.humidity, 5, oled_gram, 1, Show6x8);
+#endif
         show_time(&current_time);
         // show_dig_num(10, 10, (i++) % 10, oled_gram, 1);
         oled_refresh_flag = 1;

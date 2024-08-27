@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-08-03 00:48:43
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-24 15:59:52
+ * @LastEditTime: 2024-08-28 00:36:40
  * @FilePath: \STC32_LowPowerClock\1.firmware\DmxLibraries\DmxDevice\dmx_all.h
  * @Description: 
  * 
@@ -82,5 +82,6 @@
 #include "iic.h"
 #include "gui.h"
 #include "button.h"
+#include "sht41.h"
 
 #endif

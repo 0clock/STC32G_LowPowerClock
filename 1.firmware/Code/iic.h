@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-08-21 22:08:41
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-21 22:47:42
+ * @LastEditTime: 2024-08-28 00:18:18
  * @FilePath: \STC32_LowPowerClock\1.firmware\Code\IIC.h
  * @Description:
  *
@@ -30,19 +30,18 @@
 sbit SDA = P1 ^ 4; // 定义SDA
 sbit SCL = P1 ^ 5; // 定义SCL
 
-typedef unsigned char u8;
-typedef unsigned int u16;
-typedef unsigned long u32;
+typedef 	unsigned char	u8;
+typedef 	unsigned int	u16;
+typedef 	unsigned long	u32;
 
 void iic_init();
 void iic_start();
-void iic_senddata(char dat);
 bit RecvACK();
 u8 RecvData();
 void SendACK();
 void SendNAK();
 void iic_stop();
-
+bit iic_senddata(char dat);
 bit iic_write2bit(u8 addre, u8 MSB, u8 LSB);
 bit iic_write1bit(u8 addre, u8 LSB);
 
