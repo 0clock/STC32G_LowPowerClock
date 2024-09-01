@@ -1,6 +1,6 @@
 #include "dmx_all.h"
 #define TEST_BUTTON 0
-#define TEST_SHT41 1
+#define TEST_SHT41 0
 time_t current_time;
 sht41_data_t sht41;
 /**

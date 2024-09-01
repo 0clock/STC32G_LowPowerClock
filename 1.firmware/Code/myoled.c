@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-08-03 01:12:38
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-24 02:16:53
+ * @LastEditTime: 2024-08-30 12:33:43
  * @FilePath: \STC32_LowPowerClock\1.firmware\Code\myoled.c
  * @Description:
  *
@@ -442,7 +442,7 @@ void oled_draw_int(unsigned char x, unsigned char y,
  * @param    ch          需要绘制的字符
  * @param    buff        图像刷新缓存
  * @param    color       绘制颜色（1表示点亮，0表示熄灭）
- * @param    font_size   字体大小选择（6表示6x8字体，8表示8x16字体）
+ * @param    fontsize    字体大小选择（6表示6x8字体，8表示8x16字体）
  * @return   void
  * @notes    从字体数据中取出字符点阵并绘制
  * Example:  oled_draw_char(10, 10, 'A', oled_gram, 1, 6);
@@ -453,8 +453,13 @@ void oled_draw_char(unsigned char x, unsigned char y, char ch,
                     SHOW_size_enum fontsize)
 {
     unsigned char i, j;
-    unsigned char c = ch - ' '; // Assume the font array starts with space character
+    unsigned char c;
     unsigned char line;
+
+   
+      c = ch - ' '; // Default mapping, assuming the font array starts with space character
+   
+
     if (fontsize == Show6x8)
     {
         for (i = 0; i < 6; i++) // Each character is 6x8 pixels
@@ -465,10 +470,6 @@ void oled_draw_char(unsigned char x, unsigned char y, char ch,
                 if (line & 0x01)
                 {
                     oled_drawpoint(x + i, y + j, buff, color);
-                }
-                else
-                {
-                    // oled_drawpoint(x + i, y + j, buff, !color);
                 }
                 line >>= 1;
             }
@@ -487,10 +488,6 @@ void oled_draw_char(unsigned char x, unsigned char y, char ch,
                 {
                     oled_drawpoint(x + i, y + j, buff, color);
                 }
-                else
-                {
-                    // oled_drawpoint(x + i, y + j, buff, !color);
-                }
                 line1 >>= 1;
             }
 
@@ -500,17 +497,13 @@ void oled_draw_char(unsigned char x, unsigned char y, char ch,
                 {
                     oled_drawpoint(x + i, y + j + 8, buff, color);
                 }
-                else
-                {
-                    // oled_drawpoint(x + i, y + j + 8, buff, !color);
-                }
                 line2 >>= 1;
             }
         }
     }
     else
     {
-        // Handle invalid font_size if necessary
+        // Handle invalid fontsize if necessary
     }
 }
 
@@ -551,6 +544,91 @@ void oled_draw_string(unsigned char x, unsigned char y, const char *str,
         str++; // Move to the next character in the string
     }
 }
+
+/**
+ * @brief 将浮点数转换为字符串
+ * @param num      需要转换的浮点数
+ * @param decimals 保留的小数位数
+ * @param buffer   用于存储转换后的字符串
+ * @return void
+ */
+void float_to_string(float num, int decimals, char *buffer)
+{
+    int int_part = (int)num;                 // 取整数部分
+    float frac_part = num - (float)int_part; // 取小数部分
+    int frac_as_int;
+    int i = 0, j;
+      int temp_int = int_part;
+    int int_digits = 0;
+
+    // 处理负数情况
+    if (num < 0)
+    {
+        buffer[i++] = '-';
+        int_part = -int_part;
+        frac_part = -frac_part;
+    }
+
+    // 将整数部分转换为字符串
+
+    do
+    {
+        int_digits++;
+        temp_int /= 10;
+    } while (temp_int);
+
+    for (j = int_digits - 1; j >= 0; j--)
+    {
+        buffer[i + j] = (int_part % 10) + '0';
+        int_part /= 10;
+    }
+    i += int_digits;
+
+    // 添加小数点
+    buffer[i++] = '.';
+
+    // 将小数部分转换为字符串
+    for (j = 0; j < decimals; j++)
+    {
+        frac_part *= 10;
+    }
+    frac_as_int = (int)(frac_part + 0.5f); // 四舍五入
+
+    for (j = decimals - 1; j >= 0; j--)
+    {
+        buffer[i + j] = (frac_as_int % 10) + '0';
+        frac_as_int /= 10;
+    }
+    i += decimals;
+
+    // 添加字符串结束符
+    buffer[i] = '\0';
+}
+
+/**
+ * @brief 在OLED屏幕上绘制浮点数
+ * @param x         起始x坐标
+ * @param y         起始y坐标
+ * @param num       需要显示的浮点数
+ * @param decimals  显示的小数位数
+ * @param buff      图像刷新缓存
+ * @param color     绘制颜色（1表示点亮，0表示熄灭）
+ * @param font_size 字体大小选择（6表示6x8字体，8表示8x16字体）
+ * @return void
+ */
+void oled_draw_float(unsigned char x, unsigned char y,
+                     float num, int decimals, unsigned char *buff,
+                     bit color, SHOW_size_enum font_size)
+{
+    char buffer[20]; // 用于存储转换后的浮点数字符串
+
+    // 手动将浮点数转换为字符串
+    float_to_string(num, decimals, buffer);
+
+    // 调用 oled_draw_string 函数来绘制格式化后的浮点数字符串
+    oled_draw_string(x, y, buffer, buff, color, font_size);
+}
+
 /**
  *
  * @brief    绘制图像
@@ -570,7 +648,7 @@ void oled_draw_image(unsigned char x, unsigned char y,
                      unsigned char width, unsigned char height,
                      const unsigned char *image, unsigned char *buff, bit color)
 {
-    unsigned char i, j, k, m=0, line;
+    unsigned char i, j, k, m = 0, line;
     if (height % 8 != 0)
     {
         height += (height % 8);
@@ -584,7 +662,7 @@ void oled_draw_image(unsigned char x, unsigned char y,
             {
                 if (line & 0x01)
                 {
-                    oled_drawpoint(x + k, y + j + 8*i, buff, color);
+                    oled_drawpoint(x + k, y + j + 8 * i, buff, color);
                 }
                 line >>= 1;
             }

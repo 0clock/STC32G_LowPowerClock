@@ -62,7 +62,7 @@ void sht41_start_measurement(void)
     iic_stop();
 #endif
 
-    iic_write1bit(SHT41_W,0xFD);
+    iic_write1bit(SHT41_W, 0xFD);
     sht41_state = SHT41_MEASURING;
 }
 unsigned char i2c_read(bit isSendACK)
@@ -96,7 +96,7 @@ int sht41_read_data(sht41_data_t *data_buff)
     iic_senddata((SHT41_I2C_ADDRESS << 1) | 0x01);
 
 #if 0
-    if (iic_senddata((SHT41_I2C_ADDRESS << 1) | 0x01) != 1) //不知道对不对是不是1 
+    if (iic_senddata((SHT41_I2C_ADDRESS << 1) | 0x01) != 1) //不知道是不是1 
     {
         iic_stop();
         printf("sht41: 读取地址失败\n");
@@ -126,10 +126,19 @@ int sht41_read_data(sht41_data_t *data_buff)
     RecvACK();
     raw_temperature = sht41_read_16bit(0);
     raw_humidity = sht41_read_16bit(1);
+    if (raw_humidity < 0)
+    {
+        raw_humidity = -raw_humidity;
+    }
     iic_stop();
 #endif
     data_buff->temperature = -45.0f + 175.0f * ((float)raw_temperature / 65535.0f);
     data_buff->humidity = 100.0f * ((float)raw_humidity / 65535.0f);
+
+    if (data_buff->humidity < 0)
+    {
+        data_buff->humidity = 100 + data_buff->humidity;
+    }
 
     data_buff->state = SHT41_DATA_READY;
     sht41_state = SHT41_IDLE;

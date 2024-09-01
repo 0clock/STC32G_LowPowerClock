@@ -44,4 +44,7 @@ void oled_draw_image(unsigned char x, unsigned char y,
 void show_dig_num(unsigned char x, unsigned char y,
                   const unsigned char num,
                   const unsigned char *image, bit color);
+void oled_draw_float(unsigned char x, unsigned char y,
+                     float num, int decimals, unsigned char *buff,
+                     bit color, SHOW_size_enum font_size);
 #endif

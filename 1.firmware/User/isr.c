@@ -120,6 +120,11 @@ void TIME1_ISR(void) interrupt 3
     if (time1_isr_count % 100 == 0)
     {
         bms_main_task_500ms();
+        
+    }
+
+    if (time1_isr_count % 200 == 0) //30s
+    {
         test_update_sht41_500ms();
     }
 

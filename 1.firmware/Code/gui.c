@@ -97,6 +97,14 @@ void show_time(const time_t *t)
         break;
     }
 
+    // 温湿度数据显示
+    // oled_draw_string(0, 0, "℃", oled_gram, 1, Show6x8);
+    // oled_draw_char(0,0,"℃", oled_gram, 1, Show6x8);
+    oled_draw_float(x0 + pos, y - 10, sht41.temperature, 2, oled_gram, 1, Show6x8);
+    // oled_draw_string(0, 10, "Humi:", oled_gram, 1, Show6x8);
+    oled_draw_float(x0 + 74, y - 10, sht41.humidity, 2, oled_gram, 1, Show6x8);
+    oled_draw_char(x0 + 104, y - 10, '%', oled_gram, 1, Show6x8);
+
 #elif // 8x16字体，有点不协调
     pos = -3;
 
