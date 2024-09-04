@@ -1,24 +1,14 @@
-/*
- * @Author: 0clock
- * @Date: 2024-08-25 23:26:57
- * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-25 23:50:30
- * @FilePath: \STC32_LowPowerClock\1.firmware\Code\button.h
- * @Description:
- *
- * Copyright (c) 2024 by 0clock, All Rights Reserved.
- */
 #ifndef BUTTON_H
 #define BUTTON_H
 
 #include "stc32g.h"
 
 // 定义按键对应的IO口，根据实际连接的IO口进行修改
-#define BUTTON_SET_PIN P46
-#define BUTTON_UP_PIN P45
-#define BUTTON_DOWN_PIN P27
 #define BUTTON_ESC_PIN P26
+#define BUTTON_UP_PIN P27
 
+#define BUTTON_SET_PIN P45
+#define BUTTON_DOWN_PIN P46
 // 按键标识符枚举
 typedef enum
 {
@@ -60,5 +50,5 @@ typedef struct
 void buttons_init();
 void buttons_scan();
 button_event button_get_event(button_id id);
-
+button_state button_get_state(button_id id);
 #endif // BUTTON_H

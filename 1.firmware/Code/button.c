@@ -128,3 +128,16 @@ button_event button_get_event(button_id id)
     buttons[id].event = BUTTON_EVENT_NONE; // 清除事件
     return event;
 }
+
+button_state button_get_state(button_id id)
+{
+    button_state state;
+    if (id >= BUTTON_COUNT)
+    {
+        return BUTTON_IDLE;
+    }
+
+    state = buttons[id].state;
+
+    return state;
+}
