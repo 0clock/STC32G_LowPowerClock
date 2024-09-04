@@ -71,25 +71,25 @@ void show_time(const time_t *t)
 
     switch (t->week)
     {
-    case 1:
+    case 0x01:
         oled_draw_string(x0 + 91, y + 27, "Sun", oled_gram, 1, Show6x8);
         break;
-    case 2:
+    case 0x02:
         oled_draw_string(x0 + 91, y + 27, "Mon", oled_gram, 1, Show6x8);
         break;
-    case 3:
+    case 0x04:
         oled_draw_string(x0 + 91, y + 27, "Tue", oled_gram, 1, Show6x8);
         break;
-    case 4:
+    case 0x08:
         oled_draw_string(x0 + 91, y + 27, "Wed", oled_gram, 1, Show6x8);
         break;
-    case 5:
+    case 0x10:
         oled_draw_string(x0 + 91, y + 27, "Thu", oled_gram, 1, Show6x8);
         break;
-    case 6:
+    case 0x20:
         oled_draw_string(x0 + 91, y + 27, "Fri", oled_gram, 1, Show6x8);
         break;
-    case 7:
+    case 0x40:
         oled_draw_string(x0 + 91, y + 27, "Sat", oled_gram, 1, Show6x8);
         break;
     default:
