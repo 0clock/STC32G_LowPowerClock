@@ -1,4 +1,5 @@
 .vscode
 *.OBJ
 *.LST
-
+1.firmware/Objects/
+1.firmware/STC32.uvopt

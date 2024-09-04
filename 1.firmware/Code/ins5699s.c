@@ -30,6 +30,15 @@ unsigned char bcd_to_dec(unsigned char bcd)
     return ((bcd >> 4) * 10) + (bcd & 0x0F);
 }
 
+/**
+ * @brief 十进制转BCD
+ * @param dec 需要转换的十进制数
+ * @return 返回转换后的BCD码
+ */
+unsigned char dec_to_bcd(unsigned char dec)
+{
+    return ((dec / 10) << 4) | (dec % 10);
+}
 
 
 //========================================================================
@@ -56,7 +65,7 @@ void ins5699_read_time(time_t *time)
     time->sec   = bcd_to_dec(RecvData()); SendACK(); // 秒
     time->min   = bcd_to_dec(RecvData()); SendACK(); // 分
     time->hour  = bcd_to_dec(RecvData()); SendACK(); // 时
-    time->week  = bcd_to_dec(RecvData()); SendACK(); // 星期
+    time->week  = RecvData(); SendACK(); // 星期
     time->day   = bcd_to_dec(RecvData()); SendACK(); // 日
     time->month = bcd_to_dec(RecvData()); SendACK(); // 月
     time->year  = bcd_to_dec(RecvData()); SendNAK(); // 年
@@ -65,7 +74,43 @@ void ins5699_read_time(time_t *time)
     iic_stop(); // 发送停止命令
 }
 
-
+//========================================================================
+// 函数: void ins5699_write_time(const time_t *time)
+// 描述: 将秒、分、时、星期、日、月、年写入到INS5699芯片
+// 参数: time - 指向time_t结构体的指针，其中包含需要写入的时间数据
+// 返回: void
+// 版本: V1.0 2024.09.04
+//========================================================================
+void ins5699_write_time(const time_t *time)
+{
+    // 开始I2C通信
+    iic_start();                  // 发送起始命令
+    iic_senddata(INS5699_W);      // 发送设备地址+写命令
+    RecvACK();
+    
+    // 发送寄存器地址
+    iic_senddata(0x00);           // 设置起始寄存器地址为0x00
+    RecvACK();
+    
+    // 发送7字节的时间数据
+    iic_senddata(dec_to_bcd(time->sec));   // 秒
+    RecvACK();
+    iic_senddata(dec_to_bcd(time->min));   // 分
+    RecvACK();
+    iic_senddata(dec_to_bcd(time->hour));  // 时
+    RecvACK();
+    iic_senddata(time->week);  // 星期
+    RecvACK();
+    iic_senddata(dec_to_bcd(time->day));   // 日
+    RecvACK();
+    iic_senddata(dec_to_bcd(time->month)); // 月
+    RecvACK();
+    iic_senddata(dec_to_bcd(time->year));  // 年
+    SendNAK();  // 不需要再等待ACK，直接发送NAK
+    
+    // 结束I2C通信
+    iic_stop();                   // 发送停止命令
+}
 
 #if 0
 #include "INS5699S.h"

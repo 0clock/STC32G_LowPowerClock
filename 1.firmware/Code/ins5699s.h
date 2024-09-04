@@ -20,7 +20,7 @@ typedef struct time
 
 void rtc_init();
 void ins5699_read_time(time_t *time);
-
+void ins5699_write_time(const time_t *time);
 #endif
 
 #if 0

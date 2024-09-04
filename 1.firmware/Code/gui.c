@@ -21,7 +21,7 @@ void show_time(const time_t *t)
 {
     // x,y为显示时间的起始坐标，也就是时间字符的左上角在屏幕上的位置
 
-    static unsigned char x = 8, y = 20, last_sec = 0;
+    static unsigned char x = 8, y = 20, last_sec = 0, set_blink_count = 0;
     static bit x_dir = 0, y_dir = 0; // 移动的方向，0为正，1为反
     char pos = 0, x_range = 8 + 3, y_range = 20 + 5, x_range0 = 8 - 3, y_range0 = 20 - 5;
     unsigned char x0 = x;
@@ -150,6 +150,75 @@ void show_time(const time_t *t)
         break;
     }
 #endif
+
+    // 如果是设置时间模式，显示闪烁效果
+    set_blink_count++;
+    if (task_id == TASKID_SET_TIME && set_blink_count % 32 < 16)
+    {
+        switch (which_time_set)
+        {
+        case SET_HOUR:
+            show_dig_num(x0, y, t->hour / 10, oled_gram, 0);
+            show_dig_num(x0 + 16, y, t->hour % 10, oled_gram, 0);
+            break;
+        case SET_MIN:
+            show_dig_num(x0 + 39, y, t->min / 10, oled_gram, 0);
+            show_dig_num(x0 + 55, y, t->min % 10, oled_gram, 0);
+            break;
+        case SET_SEC:
+            show_dig_num(x0 + 79, y, t->sec / 10, oled_gram, 0);
+            show_dig_num(x0 + 95, y, t->sec % 10, oled_gram, 0);
+            break;
+        case SET_YEAR:
+            oled_draw_int(x0 + pos, y + 27, t->year + 2000, 4, oled_gram, 0, Show6x8);
+            break;
+        case SET_MON:
+            oled_draw_int(x0 + pos + 30, y + 27, t->month, 2, oled_gram, 0, Show6x8);
+            break;
+        case SET_DAY:
+            if (t->month < 10)
+            {
+                oled_draw_int(x0 + pos + 42, y + 27, t->day, 2, oled_gram, 0, Show6x8);
+            }
+            else
+            {
+                oled_draw_int(x0 + pos + 48, y + 27, t->day, 2, oled_gram, 0, Show6x8);
+            }
+            break;
+        case SET_WEEK:
+            switch (t->week)
+            {
+            case 0x01:
+                oled_draw_string(x0 + 91, y + 27, "Sun", oled_gram, 0, Show6x8);
+                break;
+            case 0x02:
+                oled_draw_string(x0 + 91, y + 27, "Mon", oled_gram, 0, Show6x8);
+                break;
+            case 0x04:
+                oled_draw_string(x0 + 91, y + 27, "Tue", oled_gram, 0, Show6x8);
+                break;
+            case 0x08:
+                oled_draw_string(x0 + 91, y + 27, "Wed", oled_gram, 0, Show6x8);
+                break;
+            case 0x10:
+                oled_draw_string(x0 + 91, y + 27, "Thu", oled_gram, 0, Show6x8);
+                break;
+            case 0x20:
+                oled_draw_string(x0 + 91, y + 27, "Fri", oled_gram, 0, Show6x8);
+                break;
+            case 0x40:
+                oled_draw_string(x0 + 91, y + 27, "Sat", oled_gram, 0, Show6x8);
+                break;
+            default:
+                oled_draw_string(x0 + 79, y + 27, "Oops!", oled_gram, 0, Show6x8);
+                break;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
     // 时间显示的宽占110个像素，所以x的范围为0~17，y的范围为0~40
     // 接下来实现一个时间在屏幕上移动的过程,以保护屏幕
     if (last_sec != t->min) // 控制变动的周期

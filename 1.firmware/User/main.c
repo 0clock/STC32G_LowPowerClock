@@ -2,7 +2,7 @@
  * @Author: 0clock
  * @Date: 2024-08-03 00:48:43
  * @LastEditors: 0clock 3075814634@qq.com
- * @LastEditTime: 2024-08-28 00:37:17
+ * @LastEditTime: 2024-09-04 20:29:24
  * @FilePath: \STC32_LowPowerClock\1.firmware\User\main.c
  * @Description:
  *
@@ -108,7 +108,7 @@ void main(void)
 
   while (1)
   {
-    test_show_dig_num();
+    test_switch_module_task_main();
     // delay_ms(1000);
   }
 }
