@@ -1,1 +1,0 @@
-"Code\u8g2\u8g2_fonts.c" XSMALL FUNCTIONS (REENTRANT) OPTIMIZE (0,SPEED) BROWSE INCDIR(.\Code;.\DmxLibraries\DmxDevice;.\DmxLibraries\DmxDriver;.\User;.\DmxLibraries;.\Code\u8g2) DEBUG PRINT(.\Listings\u8g2_fonts.lst) TABS (2) OBJECT(.\Objects\u8g2_fonts.obj)
